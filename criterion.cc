@@ -1,0 +1,35 @@
+#include "criterion.h"
+using namespace std;
+
+Criterion::Criterion() {
+	// how are we initializing our criterion?
+}
+
+void Criterion::updateOccupant(unique_ptr<Student> newOccupant) {
+	occupiedBy = move(newOccupant);
+	this->upgrade();
+}
+
+string Criterion::getStudent() {
+	return occupiedBy->getStudent();	// verify getStudent or getPlayer and what happens if there's no student
+}
+
+void Criterion::upgrade() {
+	if (this->type == Completion::None) {
+		type = Completion::Assignment;
+	} else if (this->type == Completion::Assignment) {
+		type = Completion::Midterm;
+	} else if (this->type == Completion::Midterm) {
+		type = Completion::Exam;
+	}
+}
+
+State Criterion::getState() {
+	State state = State{occupiedBy->getStudent(), // verify getStudent or getPlayer
+											type, coordinate};
+	return state;	
+}
+
+int Criterion::getCoordinate() {
+	return coordinate;
+}
