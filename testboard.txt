@@ -1,0 +1,41 @@
+                                   |XX|--YY--|XX|
+                                   /            \
+                                 YY      AA     YY                                  .
+                                 /                \                                 .
+                    |XX|--YY--|XX|        BB       |XX|--YY--|XX|                   .
+                    /            \                /            \                    .
+                  YY      AA     YY             YY       AA    YY                   .
+                  /                \            /                \                  .
+     |XX|--YY--|XX|       BB       |XX|--YY--|XX|        BB      |XX|--11--|XX|     .
+     /            \                /            \                /            \     .
+   XX      AA     XX             YY      AA     YY             YY      AA     YY    .
+   /                \            /                \            /                \   .
+|XX|        BB      |XX|--YY--|XX|       BB       |XX|--YY--|XX|       BB       |XX|.
+   \                /            \                /            \                /   .
+   YY             YY      AA     YY             YY      AA     YY             YY    .
+     \            /                \            /                \            /     .
+     |XX|--YY--|XX|       BB       |XX|--YY--|XX|       BB       |XX|--28--|XX|     .
+     /            \                /            \                /            \     .
+   YY      AA     YY              YY     AA     YY             YY      AA     YY    .
+   /                \            /                \            /                \   .
+|XX|       BB       |XX|--YY--|XX|       BB       |XX|--YY--|XX|       BB       |XX|.
+   \                /            \                /            \                /   .
+   YY             YY      AA     YY             YY      AA     YY             YY    .
+     \            /                \            /                \            /     .
+     |XX|--YY--|XX|       BB       |XX|--YY--|XX|       BB       |XX|--YY--|XX|     .
+     /            \                /            \                /            \     .
+   YY      AA     YY             YY      AA     YY             YY      AA     YY    .
+   /                \            /                \            /                \   .
+|XX|       BB       |XX|--YY--|XX|       BB       |XX|--YY--|XX|       BB       |XX|.
+   \                /            \                /            \                /   .
+   YY             YY      AA     YY             YY      AA     YY             YY    .
+     \            /                \            /                \            /     .
+     |XX|--YY--|XX|       BB       |XX|--YY--|XX|       BB       |XX|--YY--|XX|     .
+                  \                /            \                /                  .
+                  YY             YY      AA     YY             YY                   .
+                    \            /                \            /                    .
+                    |XX|--YY--|XX|       BB       |XX|--YY--|XX|                    .
+                                 \                /                                 .
+                                 YY             YY                                  .
+                                   \            /                                   .
+                                   |XX|--YY--|XX|

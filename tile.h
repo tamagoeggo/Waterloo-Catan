@@ -5,7 +5,7 @@ class Tile {
 	bool geeseHere = false; // true or false
 	int value; // value of tile needed to be rolled
 	Resource resource; // resource on tile
-	vector<Criterion *> criterion = [v1, v2, v3, v4, v5, v6]; // check which tiles are occupied
+	vector<Criterion *> criterion; // to check which tiles are occupied
 	public:
 	void getResource();
 	void getValue();
