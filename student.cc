@@ -141,3 +141,8 @@ void Student::stealResources(Student &student){
     return;
   }
 }
+
+
+void Student::loseResources(){
+  return;
+}
