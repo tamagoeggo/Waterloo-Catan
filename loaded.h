@@ -3,7 +3,7 @@
 
 class Loaded: public Dice {
 	int value;
-	Public: 
+	Public:
 	Loaded(int); //ctor
 	int roll();
 };
