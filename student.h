@@ -3,7 +3,7 @@
 
 class Student {
 	Player player; //enum
-	map<string, int> resources;
+	map<Resource, int> resources;
 	vector<Criterion*> criteria;
 	vector<Goal*> goals;
 	public:
@@ -14,7 +14,8 @@ class Student {
 	string printResources();
 	string printGoals();
 	string printCriteria();
-	void trade(Student, Resource); // trades between 2 students
+	void printStatus(); // calls printResources, printGoals, printCriteria
+	void trade(Student, Resource, Resource); // trades between 2 students
 	int getPoints();
 	void stealResources(Student &student);
 	void loseResources();
