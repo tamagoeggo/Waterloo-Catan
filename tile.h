@@ -7,6 +7,8 @@ class Tile {
 	Resource resource; // resource on tile
 	vector<Criterion *> criterion; // to check which tiles are occupied
 	public:
+	//ctor
+	Tile(int value, Resource res);
 	void getResource();
 	void getValue();
 	void toggleGeese(); // changes bool value to true or false if geese is on tile

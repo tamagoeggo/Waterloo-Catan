@@ -1,8 +1,8 @@
 #include "goal.h"
 using namespace std;
 
-Goal::Goal() {
-	// how are we initializing goal?
+Goal::Goal(int coordinate): coordinate{coordinate} {
+	// init neighbors here
 }
 
 void Goal::updateOccupant(unique_ptr<Student> newOccupant) {

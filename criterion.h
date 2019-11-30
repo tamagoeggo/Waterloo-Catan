@@ -16,7 +16,7 @@ class Criterion : public Subject { // Vertex
 	vector<unique_ptr<Goal>> goals;
 	vector<unique_ptr<Criterion>> neighbors;
 	public:
-	Criterion(); // ctor 
+	Criterion(int coordinate); // ctor
 	void updateOccupant(unique_ptr<Student>); // updates occupiedBy
 	std::string getStudent();
 	void upgrade(); // upgrades the completion of criterion

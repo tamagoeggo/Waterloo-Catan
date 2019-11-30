@@ -7,6 +7,8 @@ class Student {
 	vector<Criterion*> criteria;
 	vector<Goal*> goals;
 	public:
+	//ctor
+	Student(Player);
 	Player getPlayer();
 	void updateResources(Resource, int);
 	void updateCriterion(Criterion *);
