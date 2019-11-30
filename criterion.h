@@ -12,13 +12,13 @@ class Goal;
 
 class Criterion : public Subject { // Vertex
 	int coordinate;
-	unique_ptr<Student> occupiedBy;
-	Completion type;
-	vector<unique_ptr<Goal>> goals;
-	vector<unique_ptr<Criterion>> neigbors;
+	Student *occupiedBy;
+	Completion type = Completion::None; // default is none
+	vector<Goal *> goals;
+	vector<Criterion *> neigbors;
 	public:
 	Criterion(int coordinate); // ctor
-	void updateOccupant(unique_ptr<Student>); // updates occupiedBy
+	void updateOccupant(Student *); // updates occupiedBy
 	std::string getStudent();
 	void upgrade(); // upgrades the completion of criterion
 	State getState() override; // overrides subject function

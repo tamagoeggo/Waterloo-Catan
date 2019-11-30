@@ -20,19 +20,13 @@
 int main(int argc, char* argv[]) {
 	// Variable setting
 	int seed = 133436;
-	int turn_count = 0;
-//	shared_ptr<Grid> game(new Grid());
-	string save;
-	string board;
 
 	// Command Line Argument reading
+	// MAIN IS WRONG!!!!
+	// MAIN IS WRONG!!!!
 	for (int i = 0; i < argc; i++) {
-		string cd = argv[i];
+		string cmd = argv[i];
 		stringstream ss;
-		if (cd == "-graphic"){
-				game_graphic = true;
-				game->graphic(game_graphic);
-		}
 		if (i + 1 != argc) {
 			if (cd == "-seed") {
 				ss << argv[i + 1];

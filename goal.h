@@ -10,11 +10,11 @@ class Criterion;
 
 class Goal : public Subject { // Road
 	int coordinate;
-	unique_ptr<Student> occupiedBy;
-	vector<unique_ptr<Criterion>> neighbors;
+	Student *occupiedBy;
+	vector<Criterion *> neighbors;
 	public:
 	Goal(int coordinate); // ctor
-	void updateOccupant(unique_ptr<Student>); // updates occupiedBy
+	void updateOccupant(Student *); // updates occupiedBy
 	std::string getStudent();
 	State getState() override; // overrides subject function
 	int getCoordinate(); // can be used for printing
