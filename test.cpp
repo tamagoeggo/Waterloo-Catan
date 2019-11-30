@@ -29,6 +29,7 @@ string Criterion::getStudent() {
 
 int main () {
 	unique_ptr<Student> studentOne = make_unique<Student>(Student("one"));
+	// Auto p = make_unique<MyClass>();
 	Criterion *c = new Criterion();
 	c->updateOccupant(move(studentOne));
 	string toPrint = c->getStudent();

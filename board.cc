@@ -10,6 +10,7 @@
 #include <ctime>
 #include <algorithm>    // std::random_shuffle
 #include <cstdlib>      // std::rand, std::srand
+#include <memory>
 using namespace std;
 
 // ctor with randomized resources and value, init textdisplay
@@ -68,13 +69,14 @@ Board::Board(){
   students.emplace_back(newstud);
 
   // init TextDisplay
-  td = new TextDisplay(values, resourcetype);
+  td = make_unique<TextDisplay>(values, resourcetype);
+
 }
 
 
 /////////////////// ZACH'S OLD WORK /////////////////////////
 
-string printStudent(Student student) {
+string Board::printStudent(Student student) {
 	string studentData = "";
 	studentData += student.printResources() + " g "
 	+ student.printGoals() + " c "
@@ -116,6 +118,9 @@ void Board::loadGame() {
 
 /////////////////// RAFEL'S ALGORITHM /////////////////////////
 
+// fills in an empty vector of vector of criterion and
+// a vector of vector goals depending on how many layers there are
+// in the board
 void Board::rowSetup(const int n, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal) {
 	criterion.resize(8 * n + 5);
 	goal.resize(8 * n + 5);
@@ -142,8 +147,8 @@ void Board::rowSetup(const int n, vector<vector<Criterion *>> &criterion, vector
 			}
 			++k;
 		}
-	}				
-	
+	}
+
 	int secondPatternedRow = (6 * n) + 3;
 	int temp = n; // number of goal in patternedRow
 	for (int i = patternedRow; i < secondPatternedRow; ++i) {
@@ -189,12 +194,13 @@ void Board::rowSetup(const int n, vector<vector<Criterion *>> &criterion, vector
 	}
 }
 
-
+// updates all the criterion and goal vector of vectors with their
+// fields that require pointers to other criterion or goals
 void Board::update(const int n, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal) {
 	int patternedRow = (2 * n) + 2;
 
 	int goalCounter = 1;
-	for (int i = 0; i < patternedRow; ++i) {	
+	for (int i = 0; i < patternedRow; ++i) {
 		if (i % 2 == 0) {
 			int c = 0;
 			for (int g = 0; g < goalCounter; ++g) { // traversing through the goals in row i
@@ -214,7 +220,7 @@ void Board::update(const int n, vector<vector<Criterion *>> &criterion, vector<v
 				if (i == patternedRow - 1) {
 					goal[i][g]->addNeighbor(criterion[i + 1][g]);
 				}
-				else { 
+				else {
 					goal[i][g]->addNeighbor(criterion[i + 1][g + 1]);
 				}
 			}
@@ -252,7 +258,7 @@ void Board::update(const int n, vector<vector<Criterion *>> &criterion, vector<v
 			}
 		}
 	}
-	
+
 	int gCounter = n + 1;
 	for (int i = secondPatternedRow + 1; i < (8 * n) + 5; ++i) {
 		int size = goal[i].size();
@@ -274,4 +280,3 @@ void Board::update(const int n, vector<vector<Criterion *>> &criterion, vector<v
 		}
 	}
 }
-
