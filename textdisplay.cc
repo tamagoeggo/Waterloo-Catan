@@ -1,58 +1,82 @@
-// test hardcoded textdisplay
-#include <iostream>
-#include <string>
-#include <vector>
+#include "textdisplay.h"
 using namespace std;
 
-class TextDisplay/*: public Observer*/ {
-	int geeseAt = -1;
-	vector<string> criteriaString = {" 0", " 1", " 2", " 3", " 4",
-		" 5", " 6", " 7", " 8", " 9", "10",
-		"11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-		"21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
-		"31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
-		"41", "42", "43", "44", "45", "46", "47", "48", "49", "50",
-		"51", "52", "53"};
-	vector<string> goalsString = {" 0", " 1", " 2", " 3", " 4", 
-		" 5", " 6", " 7", " 8", " 9", "10",
-		"11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-		"21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
-		"31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
-		"41", "42", "43", "44", "45", "46", "47", "48", "49", "50",
-		"51", "52", "53", "54", "55", "56", "57", "58", "59", "60",
-		"61", "62", "63", "64", "65", "66", "67", "68", "69", "70",
-		"71"};
-	vector<string> resourcesString = {"    CAFFEINE    ", "       LAB      ", 
-		"      STUDY     ", "       LAB      ", "     NETFLIX    ",
-		"      STUDY     ", "     LECTURE    ", "    CAFFEINE    ",
-	  "      STUDY     ", "    CAFFEINE    ", "    CAFFEINE    ", 
-	  "       LAB      ", "    TUTORIAL    ", "       LAB      ", 
-	  "    TUTORIAL    ", "     LECTURE    ", "    TUTORIAL    ", 
-	  "     LECTURE    ", "     LECTURE    "};
-	vector<string> valuesString = {"        3       ", "       10       ",
-		"        5       ", "        4       ", "                ",
-		"       10       ", "       11       ", "        3       ", 
-		"        8       ", "        2       ", "        6       ", 
-		"        8       ", "       12       ", "        5       ", 
-		"       11       ", "        4       ", "        6       ", 
-		"        9       ", "        9       "};
-	vector<string> tileNumberString = {"       0     ", "       1     ",
-		"       2     ", "       3     ", "       4     ",
-		"       5     ", "       6     ", "       7     ", 
-		"       8     ", "       9     ", "      10     ", 
-		"      11     ", "      12     ", "      13     ", 
-		"      14     ", "      15     ", "      16     ", 
-		"      17     ", "      18     "};
-	public:
-	TextDisplay();
-	//void notify(Criterion &) override;
-	//void notify(Goal &) override;
-	friend ostream &operator<<(std::ostream &out, const TextDisplay &td);
-};
+TextDisplay::TextDisplay(vector<int> values, vector<Resource> resources) {
+	vector<string> newValuesString;
+	vector<string> newResourcesString;
+	for(auto value: values) {
+		if (value < 10) {
+			string toEmplace = "        " + str(value) + "       ";
+		} else {
+			string toEmplace = "       " + str(value) + "       ";
+		}
+		newValuesString.emplace_back(toEmplace);
+	}
+	for(auto resource: resources) {
+		if (resource == Resource::Caffeine) {
+			string toEmplace = "    CAFFEINE    ";
+		} else if (resource == Resource::Lab) {
+			string toEmplace = "       LAB      ";
+		} else if (resource == Resource::Lecture) {
+			string toEmplace = "     LECTURE    ";
+		} else if (resource == Resource::Study) {
+			string toEmplace = "      STUDY     ";
+		} else if (resource == Resource::Tutorial) {
+			string toEmplace = "    TUTORIAL    ";
+		} else if (resource == Resource::Netflix) {
+			string toEmplace = "     NETFLIX    ";
+		} else if (resource == Resource::None) {
+			string toEmplace = "                ";
+		}
+		newResourcesString.emplace_back(toEmplace);
+	}
+	this->valuesString = newValuesString;	// not sure if this actually uses the copy constructor
+	this->newResourcesString = newResourcesString;
+}
 
-//vector<string> TextDisplay::criteriaString
+void TextDisplay::notify(Criterion & criterion) {
+	State state = criterion.getState();
+	string toReplace = "";
+	if (state.player == Player::Blue) {
+		toReplace += "B";
+	} else if (state.player == Player::Red) {
+		toReplace += "R";
+	} else if (state.player == Player::Orange) {
+		toReplace += "O";
+	} else if (state.player == Player::Yellow) {
+		toReplace += "Y";
+	}
+	if (state.type == Type::Assignment) {
+		toReplace += "A";
+	} else if (state.type == Type::Midterm) {
+		toReplace += "M";
+	} else if (state.type == Type::Exam) {
+		toReplace += "E";
+	}
+	this->criteriaString[state.coordinate] = toReplace;
+}
 
-//std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
+void TextDisplay::notify(Goal & goal) {
+	State state = criterion.getState();
+	string toReplace = "";
+	if (state.player == Player::Blue) {
+		toReplace += "B";
+	} else if (state.player == Player::Red) {
+		toReplace += "R";
+	} else if (state.player == Player::Orange) {
+		toReplace += "O";
+	} else if (state.player == Player::Yellow) {
+		toReplace += "Y";
+	}
+	if (state.type == Type::Achievement) {
+		toReplace += "A";
+	}
+	this->goalString[state.coordinate] = toReplace;
+}
+
+void TextDisplay::notify(int geeseAt) {
+	this->geeseAt = geeseAt;
+}
 
 ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 	// when size is two, we increment twice, when size is one, we increment once
@@ -349,12 +373,3 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 	}
 	return out;
 }
-
-int main() {
-	TextDisplay *td = new TextDisplay();
-	cout << *td;
-	delete td;
-}
-
-
-
