@@ -9,7 +9,7 @@
 class Goal : public Subject { // Road
 	int coordinate;
 	unique_ptr<Student> occupiedBy;
-	vector<unique_ptr<Criterion>> neighbours;
+	vector<unique_ptr<Criterion>> neighbors;
 	public:
 	Goal(int coordinate); // ctor
 	void updateOccupant(unique_ptr<Student>); // updates occupiedBy

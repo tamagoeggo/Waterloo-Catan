@@ -14,7 +14,7 @@ class Criterion : public Subject { // Vertex
 	unique_ptr<Student> occupiedBy;
 	Completion type;
 	vector<unique_ptr<Goal>> goals;
-	vector<unique_ptr<Criterion>> neighbors;
+	vector<unique_ptr<Criterion>> neigbors;
 	public:
 	Criterion(int coordinate); // ctor
 	void updateOccupant(unique_ptr<Student>); // updates occupiedBy
