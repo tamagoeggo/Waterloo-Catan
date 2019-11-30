@@ -1,44 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <array>
+#include "g.h"
+#include "crit.h"
 
 using namespace std;
 
-class Goal;
-
-class Criterion { // Vertex
-	int coordinate;
-	vector<Goal *> goals;
-	vector<Criterion *> neighbors;
-	public:
-	Criterion(int coordinate) : coordinate{coordinate} {}
-	~Criterion() {}
-
-	int getCoordinate() { return coordinate; }
-	void addGoal(Goal *g) {
-		goals.emplace_back(g);
-	}
-	void addNeighbor(Criterion *c) {
-		neighbors.emplace_back(c);
-	}
-};
-
-class Goal { // Road
-	int coordinate;
-	vector<Criterion *> neighbors; 
-	public:
-	Goal(int coordinate) : coordinate{coordinate} {}
-	~Goal() {}
-
-	int getCoordinate() { return coordinate; }
-	void addNeighbor(Criterion *c) {
-		cout << "Adding neighbor to Goal" << endl;
-		neighbors.emplace_back(c);
-		c->addGoal(this);
-	}
-};
-
-void rowSetup(const int n, vector<vector<Criterion *>> criterion, vector<vector<Goal *>> goal) {
+void rowSetup(const int n, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal) {
 	criterion.resize(8 * n + 5);
 	goal.resize(8 * n + 5);
 	int patternedRow = (2 * n) + 2;
@@ -114,34 +82,29 @@ void rowSetup(const int n, vector<vector<Criterion *>> criterion, vector<vector<
 		}
 	}
 
-	for (int i = 0; i < (8 * n) + 5; ++i) {
-		cout << "Goals at " << i << ": ";
-		int size = goal[i].size();
-		for (auto j = 0; j < size; ++j) {
-			cout << goal[i][j]->getCoordinate() << " ";
-		}
-		cout << endl;
-	}
+	// for (int i = 0; i < (8 * n) + 5; ++i) {
+	// 	cout << "Goals at " << i << ": ";
+	// 	int size = goal[i].size();
+	// 	for (auto j = 0; j < size; ++j) {
+	// 		cout << goal[i][j]->getCoordinate() << " ";
+	// 	}
+	// 	cout << endl;
+	// }
 
-	for (int i = 0; i < (8 * n) + 5; ++i) {
-		cout << "Criterions at " << i << ": ";
-		int size = criterion[i].size();
-		for (auto j = 0; j < size; ++j) {
-			cout << criterion[i][j]->getCoordinate() << " ";
-		}
-		cout << endl;
-	}
+	// for (int i = 0; i < (8 * n) + 5; ++i) {
+	// 	cout << "Criterions at " << i << ": ";
+	// 	int size = criterion[i].size();
+	// 	for (auto j = 0; j < size; ++j) {
+	// 		cout << criterion[i][j]->getCoordinate() << " ";
+	// 	}
+	// 	cout << endl;
+	// }
 }
 
-void update(const int n, vector<vector<Criterion *>> criterion, vector<vector<Goal *>> goal) {
-	//int size = goal.size();
-	//for (int j = 0; j < size; ++j) {
+void update(const int n, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal) {
 	int patternedRow = (2 * n) + 2;
 
-	cout << "It's in update" << endl;
-
 	int goalCounter = 1;
-	//int cCounter = 0;
 	for (int i = 0; i < patternedRow; ++i) {	
 		if (i % 2 == 0) {
 			int c = 0;
@@ -150,12 +113,99 @@ void update(const int n, vector<vector<Criterion *>> criterion, vector<vector<Go
 				++c;
 				goal[i][g]->addNeighbor(criterion[i][c]);
 				++c;
-				//++goalCounter;
 			}
 			++goalCounter;
 		}
-		else {}
-	}	
+		else {
+			//adding the first criterion to goal
+			int size = goal[i].size();
+			for (int g = 0; g < size; ++g) {
+				goal[i][g]->addNeighbor(criterion[i - 1][g]);
+				//cout << criterion[i + 1][g + 1]->getCoordinate() << endl;
+				if (i == patternedRow - 1) {
+					goal[i][g]->addNeighbor(criterion[i + 1][g]);
+				}
+				else { 
+					goal[i][g]->addNeighbor(criterion[i + 1][g + 1]);
+				}
+			}
+		}
+	}
+
+	// entering patternedRow
+	int secondPatternedRow = (6 * n) + 3;
+	for (int i = patternedRow; i <= secondPatternedRow; ++i) {
+		int size = goal[i].size();
+		if (i % 2 == 0) {
+			if (size == n) {
+				int cCounter = 1;
+				for (int g = 0; g < size; ++g) {
+					goal[i][g]->addNeighbor(criterion[i][cCounter]);
+					++cCounter;
+					goal[i][g]->addNeighbor(criterion[i][cCounter]);
+					++cCounter;
+				}
+			}
+			else {
+				int cCounter = 0;
+				for (int g = 0; g < size; ++g) {
+					goal[i][g]->addNeighbor(criterion[i][cCounter]);
+					++cCounter;
+					goal[i][g]->addNeighbor(criterion[i][cCounter]);
+					++cCounter;
+				}
+			}
+		}
+		else {
+			for (int g = 0; g < size; ++g) {
+				goal[i][g]->addNeighbor(criterion[i - 1][g]);
+				goal[i][g]->addNeighbor(criterion[i + 1][g]);
+			}
+		}
+	}
+	
+	int gCounter = n + 1;
+	for (int i = secondPatternedRow + 1; i < (8 * n) + 5; ++i) {
+		int size = goal[i].size();
+		if (i % 2 == 0) {
+			int c = 0;
+			for (int g = 0; g < gCounter; ++g) {
+				goal[i][g]->addNeighbor(criterion[i][c]);
+				++c;
+				goal[i][g]->addNeighbor(criterion[i][c]);
+				++c;
+			}
+			--gCounter;
+		}
+		else {
+			for (int g = 0; g < size; ++g) {
+				goal[i][g]->addNeighbor(criterion[i - 1][g + 1]);
+				goal[i][g]->addNeighbor(criterion[i + 1][g]);
+			}
+		}
+	}
+
+	// for (int i = 0; i < (8 * n) + 5; ++i) { // for printing
+	// 	cout << "At Row " << i << ": " << endl;
+	// 	int size = goal[i].size();
+	// 	for (int j = 0; j < size; ++j) {
+	// 		cout << "Criterion " << goal[i][j]->getCoordinate() << " has goal: ";
+	// 		criterion[i][j]->getGoals();
+	// 		cout << endl;
+	// 	}
+	// 	cout << endl;
+	// }
+
+	// for (int i = 0; i < (8 * n) + 5; ++i) { // for printing
+	// 	cout << "At Row " << i << ": " << endl;
+	// 	int size = goal[i].size();
+	// 	for (int j = 0; j < size; ++j) {
+	// 		cout << "Goal " << goal[i][j]->getCoordinate() << " has criterion: ";
+	// 		goal[i][j]->getNeighbors();
+	// 		cout << endl;
+	// 	}
+	// 	cout << endl;
+	// }
 }
 
 int main() {
@@ -166,5 +216,16 @@ int main() {
 	cin >> n;
 	rowSetup(n, criterion, goal);
 	update(n, criterion, goal);
+	criterion[0][0]->upgradeCompletion();
+	for (int i = 0; i < (8 * n) + 5; ++i) { // for printing
+		cout << "At Row " << i << ": " << endl;
+		int size = goal[i].size();
+		for (int j = 0; j < size; ++j) {
+			cout << "Goal " << goal[i][j]->getCoordinate() << " has criterion: ";
+			goal[i][j]->printCompletion();
+			cout << endl;
+		}
+		cout << endl;
+	}
 	return 1;
 }
