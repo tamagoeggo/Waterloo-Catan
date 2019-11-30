@@ -15,7 +15,6 @@ using namespace std;
 // ctor with randomized resources and value, init textdisplay
 Board::Board(){
   srand(time(NULL)); // seed
-  int x;
   // num = (rand() % (upper – lower + 1)) + lower
   // The board will consist of the following values: one 2, one 12, two 3-6, and two 8-11.
 	vector<int> values ={2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12};
@@ -74,6 +73,7 @@ Board::Board(){
 
 
 /////////////////// ZACH'S OLD WORK /////////////////////////
+
 string printStudent(Student student) {
 	string studentData = "";
 	studentData += student.printResources() + " g "
@@ -82,9 +82,13 @@ string printStudent(Student student) {
 	return studentData;
 }
 
-void save() {
-	ofstream saveFile("example.txt"); // change this to date and time
-	if (myfile.is_open()) {
+
+void Board::saveGame(Player curTurn) {
+  cout << "Please name your save file:" << endl;
+  string name;
+  cin >> name;
+  ofstream saveFile(name + "txt"); // change this to date and time
+	if (saveFile.is_open()) {
 		saveFile << curTurn << endl;
 		saveFile << printStudent(/*blue student*/) << endl;
 		saveFile << printStudent(/*red student*/) << endl;
@@ -99,7 +103,7 @@ void save() {
 // 0 3 1 10 3 5 1 4 5 7 3 10 2 11 0 3 3 8 0 2 0 6 1 8 4 12 1 5 4 11 2 4 4 6 2 9 2 9
 //  0 representing CAFFEINE, 1 representing LAB, 2 representing LECTURE, 3 representing STUDY, 4 representing TUTORIAL, and 5 representing NETFLIX
 
-void load() {
+void Board::loadGame() {
 	string line;
 	ifstream saveFile("example.txt");
 	if (saveFile.is_open()) {
