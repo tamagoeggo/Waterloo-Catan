@@ -7,7 +7,8 @@
 #include "completion.h"
 #include "state.h"
 #include "student.h"
-#include "goal.h"
+
+class Goal;
 
 class Criterion : public Subject { // Vertex
 	int coordinate;
@@ -22,6 +23,8 @@ class Criterion : public Subject { // Vertex
 	void upgrade(); // upgrades the completion of criterion
 	State getState() override; // overrides subject function
 	int getCoordinate(); // can be used for printing
+	void addGoal(Goal *g);
+	void addNeighbor(Criterion *c);
 };
 
 

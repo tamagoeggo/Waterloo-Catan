@@ -1,4 +1,5 @@
 #include "goal.h"
+#include "criterion.h"
 using namespace std;
 
 Goal::Goal(int coordinate): coordinate{coordinate} {
@@ -21,4 +22,9 @@ State Goal::getState() {
 
 int Goal::getCoordinate() {
 	return coordinate;
+}
+
+void Goal::addNeighbor(Criterion *c) {
+	neighbors.emplace_back(c);
+	c->addGoal(this);
 }

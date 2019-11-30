@@ -18,6 +18,9 @@ class Board {
 	string printStudent(Student); // method used for save and load
 	void saveGame(Player curTurn); // takes in current player turn to save for next time
 	void loadGame();
+	void rowSetup(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal);
+	void update(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal);
+
 };
 
 
