@@ -38,6 +38,7 @@ class Goal { // Road
 		}
 	}
 	void addNeighbor(Criterion *c) {
+		cout << "Adding neighbor to Goal" << endl;
 		neighbors.emplace_back(c);
 		c->addGoal(this);
 	}
@@ -153,18 +154,7 @@ void update(const int n, vector<vector<Criterion *>> &criterion, vector<vector<G
 			}
 			++goalCounter;
 		}
-		else {
-			int size = goal[i].size();
-			for (int g = 0; g < size; ++g) {
-				goal[i][g]->addNeighbor(criterion[i - 1][g]);
-				if (i == patternedRow - 1) {
-					goal[i][g]->addNeighbor(criterion[i + 1][g]);
-				}
-				else {
-					goal[i][g]->addNeighbor(criterion[i + 1][g + 1]);
-				}
-			}
-		}
+		else {}
 	}
 	for (int i = 0; i < patternedRow; ++i) {
 		cout << "At Row " << i << ": " << endl;

@@ -1,4 +1,5 @@
 #include "criterion.h"
+#include "goal.h"
 using namespace std;
 
 Criterion::Criterion(int coordinate):coordinate{coordinate} {
@@ -33,4 +34,12 @@ State Criterion::getState() {
 
 int Criterion::getCoordinate() {
 	return coordinate;
+}
+
+void Criterion::addGoal(Goal *g) {
+	goals.emplace_back(g);
+}
+
+void Criterion::addNeighbor(Criterion *c) {
+	neighbors.emplace_back(c);
 }
