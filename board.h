@@ -23,7 +23,9 @@ class Board {
 
 	void loadGame(string loadFile);
 
+	// constructs goals and criterions (coordinates) in vec of vec
 	void rowSetup(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal); // DONE
+	// adds goals to criterion and adds neighbors to goals
 	void update(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal); // DONE
 
 	void setDice(string type); // DONE
@@ -32,10 +34,10 @@ class Board {
 	void status(); // DONE
 	void criteria(Player player); // DONE
 	void trade(Player tradeFrom, Player tradeWith, Resource give, Resource take); // DONE
-	
+
 	void criterionAdderHelper(int &iter, const int tileNo); 	// helper function for addCriterion
 	void updateCriterionsInTile(const int n); 			// adding the Criterions for a board with n layer(s)i
-	void updateCriterionsNeighbor();
+	void updateCriterionsNeighbor(); // adds neighbors to the criterions (takes in normal vector)
 
 };
 

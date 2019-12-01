@@ -22,10 +22,6 @@ Board::Board(int layer){
   update(layer, criterionv, goalv);
 
   // init Criterion
-  /*for(int i = 0; i <= 53; i++){
-    Criterion *crit = new Criterion(i);
-    criterion.emplace_back(crit);
-  }*/
   size_t total_size{ 0 };
   for (auto const& row: criterionv){
       total_size += row.size();
@@ -40,10 +36,6 @@ Board::Board(int layer){
   updateCriterionsNeighbor();
 
   // init  goals
-  /*for(int i = 0; i <= 71; i++){
-    Goal *newgoal = new Goal(i);
-    goals.emplace_back(newgoal);
-  }*/
   size_t total_size{ 0 };
   for (auto const& row: goalv){
       total_size += row.size();
@@ -73,10 +65,10 @@ Board::Board(int layer){
   // init tiles
   for(int i = 0; i < 19; i++){
     if(resourcetype.front() == Resource::Netflix`){
-      Tile *newtile = new Tile(0, resourcetype.front());
+      unique_ptr<Tile> newtile = make_unique<Tile>(7, resourcetype.front());
     }
     else{
-      Tile *newtile = new Tile(values.front(), resourcetype.front());
+      unique_ptr<Tile> newtile = make_unique<Tile>(values.front(), resourcetype.front());
       values.pop_front();
     }
     resourcetype.pop_front();
@@ -86,13 +78,13 @@ Board::Board(int layer){
   // The assignments will be chosen by students in the order Blue, Red, Orange, Yellow, Yellow, Orange, Red, Blue.
   // 4.1
   // init students
-  Student *newstud = new Student(Player::Blue);
+  unique_ptr<Student> newstud = make_unique<Student>(Player::Blue);
   students.emplace_back(newstud);
-  Student *newstud = new Student(Player::Red);
+  unique_ptr<Student> newstud = make_unique<Student>(Player::Red);
   students.emplace_back(newstud);
-  Student *newstud = new Student(Player::Orange);
+  unique_ptr<Student> newstud = make_unique<Student>(Player::Orange);
   students.emplace_back(newstud);
-  Student *newstud = new Student(Player::Yellow);
+  unique_ptr<Student> newstud = make_unique<Student>(Player::Yellow);
   students.emplace_back(newstud);
 
   // init TextDisplay
@@ -102,8 +94,6 @@ Board::Board(int layer){
   dice = Fair();
 
 }
-
-/////////////////// ZACH'S OLD WORK /////////////////////////
 
 string Board::printStudent(Student student) {
 	string studentData = "";
@@ -144,8 +134,6 @@ void Board::loadGame() {
 		saveFile.close();
 	}
 }
-
-/////////////////// RAFEL'S ALGORITHM /////////////////////////
 
 // fills in an empty vector of vector of criterion and
 // a vector of vector goals depending on how many layers there are
@@ -389,7 +377,7 @@ void Board::criterionAdderHelper(int &iter, const int tileNo) {
 
 void Board::updateCriterionsInTile(const int n) {
 	int totalTiles = (3 * n * n) + (3 * n) + 1;
-	
+
 	int patternStartsAt = (n * (n + 1)) / 2;	// Tile No.
 	double secondPattern = ((n * n) / (double)2) + ((3 * n) / (double)2) + 1;
 	int two_n = 2 * patternStartsAt;    		// counter
@@ -419,7 +407,7 @@ void Board::updateCriterionsInTile(const int n) {
 	}
 
 	// FIRST END CASE
-	
+
 	vector<vector<int>> row; // helper top row
 	row.resize(n + 1);
 	int tileNo = 0;
@@ -477,7 +465,7 @@ void Board::updateCriterionsInTile(const int n) {
 
 	vector<vector<int>> bottomRow; // helper bottom row
 	bottomRow.resize(n);
-	
+
 	int secondEndCase = start + n + 1;
 	int counter = n;
 	int start2 = two_n + 1;
@@ -489,7 +477,7 @@ void Board::updateCriterionsInTile(const int n) {
 		}
 		--counter;
 	}
-	
+
 	int temp = two_n - (2 * n) - 1;
 	for (auto j = bottomRow[n - 1].begin(); j != bottomRow[n - 1].end(); ++j) { // for special end case
 		criterionAdderHelper(temp, *j);
@@ -497,18 +485,18 @@ void Board::updateCriterionsInTile(const int n) {
 	}
 
 	if (n - 2 >= 0) {
-		for (auto j = bottomRow[n - 2].begin(); j != bottomRow[n - 2].end(); ++j) { 
+		for (auto j = bottomRow[n - 2].begin(); j != bottomRow[n - 2].end(); ++j) {
 			criterionAdderHelper(start3, *j);
 		}
 	}
 	++start2;
-	
+
 	int temp2 = start2 + 1; // for k - 1
 	for (int k = n - 1; k >= 0; --k) {
 		int temp3 = temp2 + 1; // for  k - 2
 		for (auto j = bottomRow[k].begin(); j != bottomRow[k].end(); ++j) {
 			criterionAdderHelper(start2, *j);
-		}		
+		}
 		if (k - 1 >= 0) {
 			for (auto j = bottomRow[k - 1].begin(); j != bottomRow[k - 1].end(); ++j) {
 				criterionAdderHelper(temp2, *j);
