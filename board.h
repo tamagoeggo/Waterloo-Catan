@@ -13,6 +13,7 @@ class Board {
 
 	Board(/*int seed, string board, */int layer = 2); // ctor with randomized resources and value, init textdisplay
 
+	void firstCriterion(int coordinate, Player player);
 	void completeCriterion(int coordinate, Player player); // places criteria(similar to setPiece in a4q4) second turn onward
 	void placeGoal(int coordinate, Player player); // places goals(similar to setPiece in a4q4)
 	void upgradeCriterion(int coordinate, Player player);
@@ -30,7 +31,7 @@ class Board {
 	// adds goals to criterion and adds neighbors to goals
 	void update(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal); // DONE
 	void setDice(string type); // DONE
-	void roll(); 
+	void roll();
 	void print(); // DONE
 	void status(); // DONE
 	void criteria(Player player); // DONE
