@@ -38,8 +38,8 @@ TextDisplay::TextDisplay(vector<int> values, vector<Resource> resources) {
 	this->newResourcesString = newResourcesString;
 }
 
-void TextDisplay::notify(Criterion & criterion) {
-	State state = criterion.getState();
+void TextDisplay::notify(Criterion *criterion) {
+	State state = criterion->getState();
 	string toReplace = "";
 	if (state.player == Player::Blue) {
 		toReplace += "B";
@@ -60,8 +60,8 @@ void TextDisplay::notify(Criterion & criterion) {
 	this->criteriaString[state.coordinate] = toReplace;
 }
 
-void TextDisplay::notify(Goal & goal) {
-	State state = criterion.getState();
+void TextDisplay::notify(Goal *goal) {
+	State state = goal->getState();
 	string toReplace = "";
 	if (state.player == Player::Blue) {
 		toReplace += "B";
