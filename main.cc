@@ -66,10 +66,10 @@ int main(int argc, char* argv[]) {
 		}
 		int placeCriterionAt;
 		cin >> placeCriterionAt;
-		b.firstCriterion(placeCriterionAt);
+		b.firstCriterion(placeCriterionAt, whoseTurn);
 		int placeGoalAt;
 		cin >> placeGoalAt;
-		b.firstGoal(placeGoalAt);
+		b.firstGoal(placeGoalAt, whoseTurn);
 		if (firstAssignment) {
 			if (whoseTurn == Player::Blue) {
 				whoseTurn = Player::Red;
