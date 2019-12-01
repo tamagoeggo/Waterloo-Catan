@@ -1,6 +1,13 @@
 #ifndef _STUDENT_H_
 #define _STUDENT_H_
 
+#include "player.h"
+#include "resource.h"
+#include <map>
+
+class Criterion;
+class Goal;
+
 class Student {
 	Player player; //enum
 	map<Resource, int> resources;
