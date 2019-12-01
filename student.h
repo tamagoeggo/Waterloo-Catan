@@ -12,8 +12,8 @@ class Goal;
 class Student {
 	Player player; //enum
 	map<Resource, int> resources;
-	vector<Criterion*> criteria;
-	vector<Goal*> goals;
+	std::vector<Criterion*> criteria;
+	std::vector<Goal*> goals;
 	public:
 	//ctor
 	Student(Player);

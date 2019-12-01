@@ -97,7 +97,7 @@ Board::Board(/*int seed, string board, */int layer = 2){
 
 }
 
-void Board::completeCriterion(const int coordinate, const Player player) {
+void Board::completeCriterion(const int coordinate, Player player) {
 	int iter;
 	for (int i = 0; i < 4; ++i) {
 		if (students[i]->getPlayer() == player) {
@@ -119,10 +119,35 @@ void Board::completeCriterion(const int coordinate, const Player player) {
 	}
 	else {
 		criterion[coordinate]->updateOccupant(students[iter].get());
-		criterion[coordinate]->upgrade();
-		students[iter]->resourcesSpent(Type::Assignment);
+		criterion[coordinate]->upgrade(); 								// update the type of achievement at criterion
+		students[iter]->resourcesSpent(Type::Assignment); 				// decrease Player's resources
+		students[iter]->updateCriterion(criterion[coordinate].get());	// update Player's criterion owned list
 	}
 }
+
+void Board::firstCriterion(const int coordinate, Player player) {
+	int iter;
+	for (int i = 0; i < 4; ++i) {
+		if (students[i]->getPlayer() == player) {
+			iter = i;
+			break;
+		}
+	}
+	if (criterion[coordinate]->getStudent()) { // check if criterion is occupied
+		throw "You cannot build here because this Criterion is already completed.";
+	}
+	else {
+		criterion[coordinate]->updateOccupant(students[iter].get());
+		criterion[coordinate]->upgrade(); 
+		students[iter]->updateCriterion(criterion[coordinate].get());	
+	}
+}
+
+void Board::upgradeCriterion(const int coordinate, Player player) {}
+
+void Board::achieveGoal(const int coordinate, Player player) {}
+
+void Board::firstGoal(const int coordinate, Player player) {}
 
 // loops through students when a 7 is rolled and checks if
 // the student will lose half their resources

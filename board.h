@@ -14,13 +14,12 @@ class Board {
 	Board(/*int seed, string board, */int layer = 2); // ctor with randomized resources and value, init textdisplay
 
 
-	void completeCriterion(const int coordinate, const Player player); // places criteria(similar to setPiece in a4q4) second turn onward
+	void completeCriterion(const int coordinate, Player player); // places criteria(similar to setPiece in a4q4) second turn onward
+	void firstCriterion(const int coordinate, Player player);
+	void upgradeCriterion(const int coordinate, Player player);
 
-	void firstCriterion(int coordinate, Player player);
-	void completeCriterion(int coordinate, Player player); // places criteria(similar to setPiece in a4q4) second turn onward
-
-	void placeGoal(int coordinate, Player player); // places goals(similar to setPiece in a4q4)
-	void upgradeCriterion(int coordinate, Player player);
+	void achieveGoal(const int coordinate, Player player); // places goals(similar to setPiece in a4q4)
+	void firstGoal(const int coordinate, Player player);
 
 	void loseResourcesGeese(); // function called if 7 is rolled
 	void moveGeese(int coordinates); // moves geese to new tile
