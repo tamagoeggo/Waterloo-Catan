@@ -18,7 +18,7 @@
 using namespace std;
 
 // ctor with randomized resources and value, init textdisplay
-Board::Board(/*int seed, */string board = "default", int layer = 2){
+Board::Board(string board, int layer) {
 	if (board != "default") {
 			stringstream lineStream;
 			lineStream << board;
