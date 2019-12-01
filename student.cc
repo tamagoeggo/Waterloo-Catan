@@ -1,4 +1,7 @@
 #include "student.h"
+#include "resource.h"
+#include "type.h"
+#include "state.h"
 #include <iostream>   // std::cout
 #include <string>     // std::string, std::to_string
 #include <vector>
@@ -192,6 +195,7 @@ int Student::getPoints(){
 
 // student steals resources from another student
 // only called if there is a student to steal from
+// checking happens elsewhere
 void Student::stealResources(Student &student){
   // Student <colour1> steals <resource> from student <colour2>.
   cout << "Student " << player << " steals " << "resource" << " from student " << student.player << endl;
