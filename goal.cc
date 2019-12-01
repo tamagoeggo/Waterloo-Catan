@@ -30,3 +30,9 @@ void Goal::addNeighbor(Criterion *c) {
 	neighbors.emplace_back(c);
 	c->addGoal(this);
 }
+
+bool Goal::canPlayerAchieveGoal(Student *s) {
+	if (neighbors[0]->getStudent() == s) { return true; }
+	else if (neighbors[1]->getStudent() == s) { return true; }
+	else { return false; }
+}
