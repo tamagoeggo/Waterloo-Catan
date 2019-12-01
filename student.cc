@@ -4,6 +4,9 @@
 #include <string>     // std::string, std::to_string
 #include <vector>
 
+// ctor
+Student::Student(Player player): player{player}{}
+
 // gets player color
 // can be either {Blue, Red, Orange, Yellow, None}
 Player Student::getPlayer(){
@@ -140,4 +143,9 @@ void Student::stealResources(Student &student){
     student.resources[steal] -= 1;
     return;
   }
+}
+
+
+void Student::loseResources(){
+  return;
 }

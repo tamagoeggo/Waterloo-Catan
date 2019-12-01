@@ -1,8 +1,9 @@
 #include "goal.h"
+#include "criterion.h"
 using namespace std;
 
-Goal::Goal() {
-	// how are we initializing goal?
+Goal::Goal(int coordinate): coordinate{coordinate} {
+	// init neighbors here
 }
 
 void Goal::updateOccupant(unique_ptr<Student> newOccupant) {
@@ -21,4 +22,9 @@ State Goal::getState() {
 
 int Goal::getCoordinate() {
 	return coordinate;
+}
+
+void Goal::addNeighbor(Criterion *c) {
+	neighbors.emplace_back(c);
+	c->addGoal(this);
 }

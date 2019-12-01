@@ -1,8 +1,10 @@
 #include "criterion.h"
+#include "goal.h"
 using namespace std;
 
-Criterion::Criterion() {
-	// how are we initializing our criterion?
+Criterion::Criterion(int coordinate):coordinate{coordinate} {
+	// init goals
+	// init neighbors
 }
 
 void Criterion::updateOccupant(unique_ptr<Student> newOccupant) {
@@ -27,9 +29,17 @@ void Criterion::upgrade() {
 State Criterion::getState() {
 	State state = State{occupiedBy->getStudent(), // verify getStudent or getPlayer
 											type, coordinate};
-	return state;	
+	return state;
 }
 
 int Criterion::getCoordinate() {
 	return coordinate;
+}
+
+void Criterion::addGoal(Goal *g) {
+	goals.emplace_back(g);
+}
+
+void Criterion::addNeighbor(Criterion *c) {
+	neighbors.emplace_back(c);
 }

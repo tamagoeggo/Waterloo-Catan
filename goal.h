@@ -6,16 +6,19 @@
 #include "state.h"
 #include "student.h"
 
+class Criterion;
+
 class Goal : public Subject { // Road
 	int coordinate;
-	unique_ptr<Student> occupiedBy;
-	vector<unique_ptr<Criterion>> neighbours; 
+	Student *occupiedBy;
+	vector<Criterion *> neighbors;
 	public:
-	Goal(); // ctor
-	void updateOccupant(unique_ptr<Student>); // updates occupiedBy
-	std::string getStudent(); 
+	Goal(int coordinate); // ctor
+	void updateOccupant(Student *); // updates occupiedBy
+	std::string getStudent();
 	State getState() override; // overrides subject function
 	int getCoordinate(); // can be used for printing
+	void addNeighbor(Criterion *c);
 };
 
 
