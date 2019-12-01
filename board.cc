@@ -32,7 +32,9 @@ Board::Board(int layer){
   }
   criterion.reserve(total_size);
   for (auto const& row: criterionv){
-      criterion.insert(end(criterion), begin(row), end(row));
+      for (auto const& crit: row){
+        criterion.emplace_back(move(crit));
+      }
   }
 
   // init  goals
@@ -46,7 +48,9 @@ Board::Board(int layer){
   }
   goals.reserve(total_size);
   for (auto const& row: goalv){
-      goals.insert(end(goals), begin(row), end(row));
+    for(auto const& goal: row){
+      goals.emplace_back(move(goal));
+    }
   }
 
   // num = (rand() % (upper – lower + 1)) + lower
