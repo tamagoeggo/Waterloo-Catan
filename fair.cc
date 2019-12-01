@@ -4,7 +4,7 @@
 // 2.8
 // ctor for a randomly generated fair dice
 Fair::Fair(){
-  std::srand(std::time(NULL));
+  // std::srand(std::time(NULL));
   dice1 = 0;
   dice2 = 0;
 }

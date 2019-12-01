@@ -45,7 +45,7 @@ Board::Board(/*int seed, */string board = "default", int layer = 2){
 			}
 	}
 
-  srand(time(NULL)); // seed
+  //srand(time(NULL)); // seed
   vector<vector<Criterion *>> criterionv;
   vector<vector<Goal *>> goalv;
   rowSetup(layer, criterionv, goalv);
@@ -355,7 +355,7 @@ void Board::loadGame(string loadFile, Player &whoseTurn) {
     			} else if (inputType == "criterion") {
       			student[3]->updateCriterion(this->criterion[int(num)]);
     			}
-  			}			
+  			}
   		} else if (lineNumber == 6) {
 				stringstream lineStream;
 				lineStream << line;
