@@ -28,6 +28,8 @@ void Student::updateGoal(Goal *goal) {
   goals.emplace_back(goal);
 }
 
+
+
 // A student’s data is printed out as follows:
 // <numCaffeines> <numLabs> <numLectures> <numStudies> <numTutorials> g <goals> c <criteria>
 // returns number of each resource in the order spsecified as s string separated by spaces
@@ -84,7 +86,6 @@ string Student::returnCriteria(){
   output += num;
   return output;
 }
-
 
 // prints the resource status of the student
 // reference assignment section 2.7

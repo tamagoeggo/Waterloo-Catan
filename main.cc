@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
     }
 	}
 	Player whoseTurn = Player::Blue;
-	b = Board(seed, board);
+	b = Board(/*seed, board*/);
 	b.loadGame(load, &whoseTurn);
 	bool rolled = false;
 	while (true) {
