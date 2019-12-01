@@ -122,9 +122,6 @@ Board::Board(/*int seed, */string board = "default", int layer = 2){
   // init TextDisplay
   td = make_unique<TextDisplay>(values, resourcetype);
 
-  // init dice
-  dice = Fair();
-
 }
 
 void Board::completeCriterion(const int coordinate, const Player player) {
@@ -667,7 +664,14 @@ void Board::update(const int n, vector<vector<Criterion *>> &criterion, vector<v
 }
 
 Board::setDice(string type) {
-	if (type == "load") {
+	dice = type;
+}
+
+Board::roll() {
+	if (dice == "fair") {
+		Fair die = Fair();
+		die.roll();
+	} else if (dice == "load") {
 		int toLoad;
 		while (true) {
 			cout << "Input a roll between 2 and 12:" << endl;
@@ -678,14 +682,9 @@ Board::setDice(string type) {
 			}
 			break;
 		}
-		this->dice = Loaded(toLoad);
-	} else if (type == "fair") {
-		this->dice = Fair();
+		Loaded die = Loaded(toLoad);
+		die.roll();
 	}
-}
-
-Board::roll() {
-	dice.roll();
 }
 
 Board::print() {
