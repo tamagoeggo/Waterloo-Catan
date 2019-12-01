@@ -98,6 +98,9 @@ Board::Board(int layer){
   // init TextDisplay
   td = make_unique<TextDisplay>(values, resourcetype);
 
+  // init dice
+  dice = Fair();
+
 }
 
 /////////////////// ZACH'S OLD WORK /////////////////////////
@@ -305,6 +308,76 @@ void Board::update(const int n, vector<vector<Criterion *>> &criterion, vector<v
 			}
 		}
 	}
+}
+
+Board::setDice(string type) {
+	if (type == "load") {
+		int toLoad;
+		while (true) {
+			cout << "Input a roll between 2 and 12:" << endl;
+			cin >> toLoad;
+			if (toLoad < 2 || toLoad > 12) {
+				cout << "Invalid roll." << endl;
+				continue;
+			}
+			break;
+		}
+		this->dice = Loaded(toLoad);
+	} else if (type == "fair") {
+		this->dice = Fair();
+	}
+}
+
+Board::roll() {
+	dice.roll();
+}
+
+Board::print() {
+	cout << *td;
+}
+
+Board::status() {
+	for (auto student: students) {
+		student.printStatus(); // check with student class
+	}
+}
+
+Board::criteria(Player player) {
+	int toPrint;
+	if (player == Player::Blue) {
+		toPrint = 0;
+	} else if (player == Player::Red) {
+		toPrint = 1;
+	} else if (player == Player::Orange) {
+		toPrint = 2;
+	} else { // player == Player::Yellow
+		toPrint = 3;
+	}
+	this->students[toPrint].printCriteria(); // check with student class
+}
+
+Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource take) {
+	Student *player1;
+	Student *player2;
+	if (tradeFrom == Player::Blue) {
+		player1 = this->students[0];
+	} else if (tradeFrom == Player::Red) {
+		player1 = this->students[1];
+	} else if (tradeFrom == Player::Orange) {
+		player1 = this->students[2];
+	} else { // player == Player::Yellow
+		player1 = this->students[3];
+	}
+	if (tradeWith == Player::Blue) {
+		player2 = this->students[0];
+	} else if (tradeWith == Player::Red) {
+		player2 = this->students[1];
+	} else if (tradeWith == Player::Orange) {
+		player2 = this->students[2];
+	} else { // player == Player::Yellow
+		player2 = this->students[3];
+	}
+	player1->trade(player2, give, take);
 }
 
 void Board::criterionAdderHelper(int &iter, const int tileNo) {
