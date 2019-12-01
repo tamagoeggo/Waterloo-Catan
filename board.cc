@@ -303,13 +303,13 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
 		while (getline(saveFile, line)) {
 			if (lineNumber == 1) {
 				if (line == "blue") {
-					whoseTurn = Player::*Blue;
+					whoseTurn = &Player::Blue;
 				} else if (line == "red") {
-					whoseTurn = Player::*Red;
+					whoseTurn = &Player::Red;
 				} else if (line == "orange") {
-					whoseTurn = Player::*Orange;
+					whoseTurn = &Player::Orange;
 				} else { // line == "yellow"
-					whoseTurn = Player::*Yellow;
+					whoseTurn = &Player::Yellow;
 				}
 			} else if (lineNumber == 2) {
   			stringstream lineStream;
