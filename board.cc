@@ -303,13 +303,13 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
 		while (getline(saveFile, line)) {
 			if (lineNumber == 1) {
 				if (line == "blue") {
-					whoseTurn = Player::Blue;
+					whoseTurn = *Player::Blue;
 				} else if (line == "red") {
-					whoseTurn = Player::Red;
+					whoseTurn = *Player::Red;
 				} else if (line == "orange") {
-					whoseTurn = Player::Orange;
+					whoseTurn = *Player::Orange;
 				} else { // line == "yellow"
-					whoseTurn = Player::Yellow;
+					whoseTurn = *Player::Yellow;
 				}
 			} else if (lineNumber == 2) {
   			stringstream lineStream;
@@ -464,10 +464,10 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
 			} else if (lineNumber == 7) {
 				int intGeeseAt = stoi(line);
 				if (geeseAt != -1) {
-					tiles[geeseAt]->toggleGeese;
+					tiles[geeseAt]->toggleGeese();
 				}
 				geeseAt = intGeeseAt;
-				tiles[geeseAt]->toggleGeese;
+				tiles[geeseAt]->toggleGeese();
 			}
 			++lineNumber;
 		}
@@ -668,7 +668,7 @@ void Board::print() {
 
 void Board::status() {
 	for (auto student: students) {
-		students.printStatus(); // check with student class
+		student.printStatus(); 
 	}
 }
 
@@ -683,7 +683,7 @@ void Board::criteria(Player player) {
 	} else { // player == Player::Yellow
 		toPrint = 3;
 	}
-	this->students[toPrint]->printCriteria(); // check with student class
+	cout << this->students[toPrint]->printCriteria() << endl;
 }
 
 void Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource take) {
