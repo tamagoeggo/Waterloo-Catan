@@ -28,34 +28,92 @@ void Student::updateGoal(Goal *goal){
   goals.emplace_back(goal);
 }
 
+// A student’s data is printed out as follows:
+// <numCaffeines> <numLabs> <numLectures> <numStudies> <numTutorials> g <goals> c <criteria>
+// returns number of each resource in the order spsecified as s string separated by spaces
+std::string Student::returnResources(){
+  std::string output = "";
+  std::string num = "0";
+
+  if(resources.count(Resource::Caffeine)){
+    num = std::to_string(resources[Resource::Caffeine]);
+  }
+  output += num + " ";
+  num = "0";
+  if(resources.count(Resource::Lab)){
+    num = std::to_string(resources[Resource::Lab]);
+  }
+  output += num + " ";
+  num = "0";
+  if(resources.count(Resource::Lecture)){
+    num = std::to_string(resources[Resource::Lecture]);
+  }
+  output += num + " ";
+  num = "0";
+  if(resources.count(Resource::Study)){
+    num = std::to_string(resources[Resource::Study]);
+  }
+  output += num + " ";
+  num = "0";
+  if(resources.count(Resource::Tutorial)){
+    num = std::to_string(resources[Resource::Tutorial]);
+  }
+  output += "and " + num + " ";
+  num = "0";
+
+  return output;
+}
+
+// A student’s data is printed out as follows:
+// <numCaffeines> <numLabs> <numLectures> <numStudies> <numTutorials> g <goals> c <criteria>
+// returns the number of gaols the student has
+std::string Student::returnGoals(){
+  std::string output = "";
+  std::string num = std::to_string(goals.size());
+  output += num;
+  return output;
+}
+
+
+// A student’s data is printed out as follows:
+// <numCaffeines> <numLabs> <numLectures> <numStudies> <numTutorials> g <goals> c <criteria>
+// returns the number of criteria a student has
+std::string Student::returnCriteria(){
+  std::string output = "";
+  std::string num = std::to_string(criteria.size());
+  output += num;
+  return output;
+}
+
+
 // prints the resource status of the student
 // reference assignment section 2.7
 std::string Student::printResources(){
   std::string output = "";
   std::string num = "0";
 
-  if(resources.count(Caffeine)){
-    num = std::to_string(resources[Caffeine]);
+  if(resources.count(Resource::Caffeine)){
+    num = std::to_string(resources[Resource::Caffeine]);
   }
   output += num + " caffeines, ";
   num = "0";
-  if(resources.count(Lab)){
-    num = std::to_string(resources[Lab]);
+  if(resources.count(Resource::Lab)){
+    num = std::to_string(resources[Resource::Lab]);
   }
   output += num + " labs, ";
   num = "0";
-  if(resources.count(Lecture)){
-    num = std::to_string(resources[Lecture]);
+  if(resources.count(Resource::Lecture)){
+    num = std::to_string(resources[Resource::Lecture]);
   }
   output += num + " lectures, ";
   num = "0";
-  if(resources.count(Study)){
-    num = std::to_string(resources[Study]);
+  if(resources.count(Resource::Study)){
+    num = std::to_string(resources[Resource::Study]);
   }
   output += num + " studies, ";
   num = "0";
-  if(resources.count(Tutorial)){
-    num = std::to_string(resources[Tutorial]);
+  if(resources.count(Resource::Tutorial)){
+    num = std::to_string(resources[Resource::Tutorial]);
   }
   output += "and " + num + " tutorials";
   num = "0";
@@ -120,7 +178,7 @@ void Student::stealResources(Student &student){
   std::cout << "Student " << player << " steals " << "resource" << " from student " << student.player << std::endl;
   // probablity of being stolen from
   Resource steal = Resource::None;
-  float probablity = 0;
+  float probablity = 0.00;
   int total = resources.size();
   if(!total){
     total = 1;

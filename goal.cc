@@ -24,6 +24,10 @@ int Goal::getCoordinate() {
 	return coordinate;
 }
 
+vector<Criterion *> Goal::getNeighbors() {
+	return neighbors;
+}
+
 void Goal::addNeighbor(Criterion *c) {
 	neighbors.emplace_back(c);
 	c->addGoal(this);

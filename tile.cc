@@ -14,3 +14,7 @@ void Tile::toggleGeese(){
     geeseHere = false;
   }
 }
+
+void Tile::addCriterion(Criterion *c) {
+	criterion.emplace_back(c);
+}

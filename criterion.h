@@ -15,7 +15,7 @@ class Criterion : public Subject { // Vertex
 	Student *occupiedBy;
 	Completion type = Completion::None; // default is none
 	vector<Goal *> goals;
-	vector<Criterion *> neigbors;
+	vector<Criterion *> neighbors;
 	public:
 	Criterion(int coordinate); // ctor
 	void updateOccupant(Student *); // updates occupiedBy
@@ -24,7 +24,7 @@ class Criterion : public Subject { // Vertex
 	State getState() override; // overrides subject function
 	int getCoordinate(); // can be used for printing
 	void addGoal(Goal *g);
-	void addNeighbor(Criterion *c);
+	void addNeighbor(); // adding neighbor from goal
 };
 
 

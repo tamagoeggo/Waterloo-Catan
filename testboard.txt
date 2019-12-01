@@ -1,19 +1,19 @@
                                    |XX|--YY--|XX|
                                    /            \
                                  YY      AA     YY                                  .
-                                 /                \                                 .
+                                 /    CAFFEINE    \                                 .
                     |XX|--YY--|XX|        BB       |XX|--YY--|XX|                   .
-                    /            \                /            \                    .
+                    /            \      GEESE     /            \                    .
                   YY      AA     YY             YY       AA    YY                   .
-                  /                \            /                \                  .
+                  /     NETFLIX    \            /       LAB      \                  .
      |XX|--YY--|XX|       BB       |XX|--YY--|XX|        BB      |XX|--11--|XX|     .
      /            \                /            \                /            \     .
    XX      AA     XX             YY      AA     YY             YY      AA     YY    .
-   /                \            /                \            /                \   .
+   /                \            /     LECTURE    \            /    TUTORIAL    \   .
 |XX|        BB      |XX|--YY--|XX|       BB       |XX|--YY--|XX|       BB       |XX|.
    \                /            \                /            \                /   .
    YY             YY      AA     YY             YY      AA     YY             YY    .
-     \            /                \            /                \            /     .
+     \            /                \            /      STUDY     \            /     .
      |XX|--YY--|XX|       BB       |XX|--YY--|XX|       BB       |XX|--28--|XX|     .
      /            \                /            \                /            \     .
    YY      AA     YY              YY     AA     YY             YY      AA     YY    .
