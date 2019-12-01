@@ -6,6 +6,7 @@
 #include <algorithm>    // std::random_shuffle
 #include <ctime>
 #include <cstdlib>      // std::rand, std::srand
+#include "criterion.h"
 using namespace std;
 
 // ctor
