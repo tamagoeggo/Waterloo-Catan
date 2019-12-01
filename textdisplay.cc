@@ -5,7 +5,9 @@ TextDisplay::TextDisplay(vector<int> values, vector<Resource> resources) {
 	vector<string> newValuesString;
 	vector<string> newResourcesString;
 	for(auto value: values) {
-		if (value < 10) {
+		if (value == 7) {
+			string toEmplace = "                ";
+		} else if (value < 10) {
 			string toEmplace = "        " + str(value) + "       ";
 		} else {
 			string toEmplace = "       " + str(value) + "       ";
