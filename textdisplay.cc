@@ -4,16 +4,7 @@ using namespace std;
 TextDisplay::TextDisplay(vector<int> values, vector<Resource> resources) {
 	vector<string> newValuesString;
 	vector<string> newResourcesString;
-	for(auto value: values) {
-		if (value == 7) {
-			string toEmplace = "                ";
-		} else if (value < 10) {
-			string toEmplace = "        " + str(value) + "       ";
-		} else {
-			string toEmplace = "       " + str(value) + "       ";
-		}
-		newValuesString.emplace_back(toEmplace);
-	}
+	int netflixAt = -1;
 	for(auto resource: resources) {
 		if (resource == Resource::Caffeine) {
 			string toEmplace = "    CAFFEINE    ";
@@ -27,10 +18,21 @@ TextDisplay::TextDisplay(vector<int> values, vector<Resource> resources) {
 			string toEmplace = "    TUTORIAL    ";
 		} else if (resource == Resource::Netflix) {
 			string toEmplace = "     NETFLIX    ";
+			netflixAt = newResourcesString.size() - 1;
 		} else if (resource == Resource::None) {
 			string toEmplace = "                ";
 		}
 		newResourcesString.emplace_back(toEmplace);
+	}
+	for(auto value: values) {
+		if (newResourcesString.size() - 1 == netflixAt) {
+			string toEmplace = "                 ";
+		} else if (value < 10) {
+			string toEmplace = "        " + str(value) + "       ";
+		} else {
+			string toEmplace = "       " + str(value) + "       ";
+		}
+		newValuesString.emplace_back(toEmplace);
 	}
 	this->valuesString = newValuesString;	// not sure if this actually uses the copy constructor
 	this->newResourcesString = newResourcesString;
