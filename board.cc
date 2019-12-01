@@ -1,20 +1,4 @@
 #include "board.h"
-#include "tile.h"
-#include "criterion.h"
-#include "goal.h"
-#include "student.h"
-#include "textdisplay.h"
-#include "player.h"
-#include "resource.h"
-#include "fair.h"
-#include "loaded.h"
-
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <ctime>
-#include <algorithm>    // std::random_shuffle
-#include <cstdlib>      // std::rand, std::srand
 using namespace std;
 
 // ctor with randomized resources and value, init textdisplay

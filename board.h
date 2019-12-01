@@ -1,10 +1,24 @@
 #ifndef _BOARD_H_
 #define _BOARD_H_
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <ctime>
+#include <algorithm>    // std::random_shuffle
+#include <cstdlib>      // std::rand, std::srand
 #include <memory>
 #include <vector>
 #include <string>
-#include "dice.h"
+#include "tile.h"
+#include "criterion.h"
+#include "goal.h"
+#include "student.h"
+#include "textdisplay.h"
+#include "player.h"
+#include "resource.h"
+#include "fair.h"
+#include "loaded.h"
 
 class Tile;
 class Criterion;
