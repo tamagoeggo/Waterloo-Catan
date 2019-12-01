@@ -5,6 +5,7 @@
 #include <string>
 #include "state.h"
 #include "student.h"
+#include "subject.h"
 
 class Criterion;
 
