@@ -2,9 +2,11 @@
 #define _PLAYER_H_
 
 #include <string>
+#include <iostream>
+
 enum class Player {Blue, Red, Orange, Yellow, None};
 
-std::ostream &operator<<(std::ostream &out, const Player &player) const{
+std::ostream &operator<<(std::ostream &out, const Player &player) {
     if (player == Player::Blue) {
         return out << "Blue";
     }
