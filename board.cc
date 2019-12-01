@@ -6,6 +6,8 @@
 #include "textdisplay.h"
 #include "player.h"
 #include "resource.h"
+#include "fair.h"
+#include "loaded.h"
 
 #include <iostream>
 #include <fstream>
@@ -164,8 +166,8 @@ void Board::firstCriterion(const int coordinate, Player player) {
 	}
 	else {
 		criterion[coordinate]->updateOccupant(students[iter].get());
-		criterion[coordinate]->upgrade(); 
-		students[iter]->updateCriterion(criterion[coordinate].get());	
+		criterion[coordinate]->upgrade();
+		students[iter]->updateCriterion(criterion[coordinate].get());
 		td->notify(criterion[coordinate].get());
 	}
 }
@@ -177,7 +179,7 @@ void Board::upgradeCriterion(const int coordinate, Player player) {
 			iter = i;
 			break;
 		}
-	}	
+	}
 	if (criterion[coordinate]->getStudent() == students[iter].get()) {
 		State state = criterion[coordinate]->getState();
 		if (!students[iter]->resourcesCheck(state.type)) {
@@ -231,7 +233,7 @@ void Board::firstGoal(const int coordinate, Player player) {
 	else {
 		goals[coordinate]->updateOccupant(students[iter].get());
 		students[iter]->updateGoal(goals[coordinate].get());
-		td->notify(goals[coordinate].get());	
+		td->notify(goals[coordinate].get());
 	}
 }
 
@@ -240,7 +242,7 @@ void Board::firstGoal(const int coordinate, Player player) {
 // the student will lose half their resources
 void Board::loseResourcesGeese() {
   for(auto const &student: students){
-    student.loseResources();
+    student->loseResources();
   }
 }
 
@@ -275,20 +277,10 @@ Player Board::whoWon() {
 	}
 }
 
-// prints Student data, a method used for save and load
-// <numCaffeines> <numLabs> <numLectures> <numStudies> <numTutorials> g <goals> c <criteria>
-string Board::printStudent(Student student) {
-	string studentData = "";
-	studentData += student.returnResources()
-  + " g " + student.returnGoals()
-  + " c " + student.returnCriteria();
-	return studentData;
-}
-
 
 void Board::saveGame(Player curTurn) {
   cout << "Please name your save file:" << endl;
-  string name;
+  string name, studentPrint;
   cin >> name;
   ofstream saveFile(name + ".txt"); // change this to date and time
   if (curTurn == Player::Blue) {
@@ -336,126 +328,126 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
 				}
 			} else if (lineNumber == 2) {
   			stringstream lineStream;
-  			lineStream << input;
+  			lineStream << line;
   			while (lineStream) {
     			string inputType = "caffeine"; // either resource, goal or criterion
     			string num;
     			lineStream >> num;
     			if (inputType == "caffeine") {
-    				student[0]->updateResources(Resource::Caffeine, int(num));
+    				students[0]->updateResources(Resource::Caffeine, stoi(num));
       			inputType = "lab";
     			} else if (inputType == "lab") {
-    				student[0]->updateResources(Resource::Lab, int(num));
+    				students[0]->updateResources(Resource::Lab, stoi(num));
       			inputType = "lecture";
     			} else if (inputType == "lecture") {
-    				student[0]->updateResources(Resource::Lecture, int(num));
+    				students[0]->updateResources(Resource::Lecture, stoi(num));
       			inputType = "study";
     			} else if (inputType == "study") {
-    				student[0]->updateResources(Resource::Study, int(num));
+    				students[0]->updateResources(Resource::Study, stoi(num));
       			inputType = "tutorial";
     			} else if (inputType == "tutorial") {
-    				student[0]->updateResources(Resource::Tutorial, int(num));
+    				students[0]->updateResources(Resource::Tutorial, stoi(num));
     			} else if (num == "g") {
       			inputType = "goal";
     			} else if (num == "c") {
       			inputType = "criterion";
     			} else if (inputType == "goal") {
-      			student[0]->updateGoal(this->goals[int(num)]);
+      			students[0]->updateGoal(goals[stoi(num)].get());
     			} else if (inputType == "criterion") {
-      			student[0]->updateCriterion(this->criterion[int(num)]);
+      			students[0]->updateCriterion(criterion[stoi(num)].get());
     			}
   			}
 			} else if (lineNumber == 3) {
   			stringstream lineStream;
-  			lineStream << input;
+  			lineStream << line;
   			while (lineStream) {
     			string inputType = "caffeine"; // either resource, goal or criterion
     			string num;
     			lineStream >> num;
     			if (inputType == "caffeine") {
-    				student[1]->updateResources(Resource::Caffeine, int(num));
+    				students[1]->updateResources(Resource::Caffeine, stoi(num));
       			inputType = "lab";
     			} else if (inputType == "lab") {
-    				student[1]->updateResources(Resource::Lab, int(num));
+    				students[1]->updateResources(Resource::Lab, stoi(num));
       			inputType = "lecture";
     			} else if (inputType == "lecture") {
-    				student[1]->updateResources(Resource::Lecture, int(num));
+    				students[1]->updateResources(Resource::Lecture, stoi(num));
       			inputType = "study";
     			} else if (inputType == "study") {
-    				student[1]->updateResources(Resource::Study, int(num));
+    				students[1]->updateResources(Resource::Study, stoi(num));
       			inputType = "tutorial";
     			} else if (inputType == "tutorial") {
-    				student[1]->updateResources(Resource::Tutorial, int(num));
+    				students[1]->updateResources(Resource::Tutorial, stoi(num));
     			} else if (num == "g") {
       			inputType = "goal";
     			} else if (num == "c") {
       			inputType = "criterion";
     			} else if (inputType == "goal") {
-      			student[1]->updateGoal(this->goals[int(num)]);
+      			students[1]->updateGoal(goals[stoi(num)].get());
     			} else if (inputType == "criterion") {
-      			student[1]->updateCriterion(this->criterion[int(num)]);
+      			students[1]->updateCriterion(criterion[stoi(num)].get();
     			}
   			}
 			} else if (lineNumber == 4) {
   			stringstream lineStream;
-  			lineStream << input;
+  			lineStream << line;
   			while (lineStream) {
     			string inputType = "caffeine"; // either resource, goal or criterion
     			string num;
     			lineStream >> num;
     			if (inputType == "caffeine") {
-    				student[2]->updateResources(Resource::Caffeine, int(num));
+    				students[2]->updateResources(Resource::Caffeine, stoi(num));
       			inputType = "lab";
     			} else if (inputType == "lab") {
-    				student[2]->updateResources(Resource::Lab, int(num));
+    				students[2]->updateResources(Resource::Lab, stoi(num));
       			inputType = "lecture";
     			} else if (inputType == "lecture") {
-    				student[2]->updateResources(Resource::Lecture, int(num));
+    				students[2]->updateResources(Resource::Lecture, stoi(num));
       			inputType = "study";
     			} else if (inputType == "study") {
-    				student[2]->updateResources(Resource::Study, int(num));
+    				students[2]->updateResources(Resource::Study, stoi(num));
       			inputType = "tutorial";
     			} else if (inputType == "tutorial") {
-    				student[2]->updateResources(Resource::Tutorial, int(num));
+    				students[2]->updateResources(Resource::Tutorial, stoi(num));
     			} else if (num == "g") {
       			inputType = "goal";
     			} else if (num == "c") {
       			inputType = "criterion";
     			} else if (inputType == "goal") {
-      			student[2]->updateGoal(this->goals[int(num)]);
+      			students[2]->updateGoal(goals[stoi(num)].get());
     			} else if (inputType == "criterion") {
-      			student[2]->updateCriterion(this->criterion[int(num)]);
+      			students[2]->updateCriterion(criterion[stoi(num)].get());
     			}
   			}
 			} else if (lineNumber == 5) {
   			stringstream lineStream;
-  			lineStream << input;
+  			lineStream << line;
   			while (lineStream) {
     			string inputType = "caffeine"; // either resource, goal or criterion
     			string num;
     			lineStream >> num;
     			if (inputType == "caffeine") {
-    				student[3]->updateResources(Resource::Caffeine, int(num));
+    				students[3]->updateResources(Resource::Caffeine, stoi(num));
       			inputType = "lab";
     			} else if (inputType == "lab") {
-    				student[3]->updateResources(Resource::Lab, int(num));
+    				students[3]->updateResources(Resource::Lab, stoi(num));
       			inputType = "lecture";
     			} else if (inputType == "lecture") {
-    				student[3]->updateResources(Resource::Lecture, int(num));
+    				students[3]->updateResources(Resource::Lecture, stoi(num));
       			inputType = "study";
     			} else if (inputType == "study") {
-    				student[3]->updateResources(Resource::Study, int(num));
+    				students[3]->updateResources(Resource::Study, stoi(num));
       			inputType = "tutorial";
     			} else if (inputType == "tutorial") {
-    				student[3]->updateResources(Resource::Tutorial, int(num));
+    				students[3]->updateResources(Resource::Tutorial, stoi(num));
     			} else if (num == "g") {
       			inputType = "goal";
     			} else if (num == "c") {
       			inputType = "criterion";
     			} else if (inputType == "goal") {
-      			student[3]->updateGoal(this->goals[int(num)]);
+      			students[3]->updateGoal(goals[stoi(num)].get());
     			} else if (inputType == "criterion") {
-      			student[3]->updateCriterion(this->criterion[int(num)]);
+      			students[3]->updateCriterion(criterion[stoi(num)].get());
     			}
   			}
   		} else if (lineNumber == 6) {
@@ -481,11 +473,11 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
 					} else {
 						resourceType = Resource::Netflix;
 					}
-					tiles[location] = Tile{value, resourceType};
+					tiles[location] = make_unique<Tile>(value, resourceType);
 					++location;
 				}
 			} else if (lineNumber == 7) {
-				int intGeeseAt = int(line);
+				int intGeeseAt = stoi(line);
 				if (geeseAt != -1) {
 					tiles[geeseAt]->toggleGeese;
 				}
@@ -661,11 +653,11 @@ void Board::update(const int n, vector<vector<Criterion *>> &criterion, vector<v
 	}
 }
 
-Board::setDice(string type) {
+void Board::setDice(string type) {
 	dice = type;
 }
 
-Board::roll() {
+void Board::roll() {
 	if (dice == "fair") {
 		Fair die = Fair();
 		die.roll();
@@ -685,17 +677,17 @@ Board::roll() {
 	}
 }
 
-Board::print() {
+void Board::print() {
 	cout << *td;
 }
 
-Board::status() {
+void Board::status() {
 	for (auto student: students) {
-		student.printStatus(); // check with student class
+		students.printStatus(); // check with student class
 	}
 }
 
-Board::criteria(Player player) {
+void Board::criteria(Player player) {
 	int toPrint;
 	if (player == Player::Blue) {
 		toPrint = 0;
@@ -706,36 +698,36 @@ Board::criteria(Player player) {
 	} else { // player == Player::Yellow
 		toPrint = 3;
 	}
-	this->students[toPrint].printCriteria(); // check with student class
+	this->students[toPrint]->printCriteria(); // check with student class
 }
 
-Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource take) {
+void Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource take) {
 	Student *player1;
 	Student *player2;
 	if (tradeFrom == Player::Blue) {
-		player1 = this->students[0];
+		player1 = students[0].get();
 	} else if (tradeFrom == Player::Red) {
-		player1 = this->students[1];
+		player1 = students[1].get();
 	} else if (tradeFrom == Player::Orange) {
-		player1 = this->students[2];
+		player1 = students[2].get();
 	} else { // player == Player::Yellow
-		player1 = this->students[3];
+		player1 = students[3].get();
 	}
 	if (tradeWith == Player::Blue) {
-		player2 = this->students[0];
+		player2 = students[0].get();
 	} else if (tradeWith == Player::Red) {
-		player2 = this->students[1];
+		player2 = students[1].get();
 	} else if (tradeWith == Player::Orange) {
-		player2 = this->students[2];
+		player2 = students[2].get();
 	} else { // player == Player::Yellow
-		player2 = this->students[3];
+		player2 = students[3].get();
 	}
-	player1->trade(player2, give, take);
+	player1->trade(tradeWith, give, take);
 }
 
 void Board::criterionAdderHelper(int &iter, const int tileNo) {
 	for (int i = 0; i < 2; ++i) {
-		tiles[iter]->addCriterion(criterion[iter]);
+		tiles[iter]->addCriterion(criterion[iter].get());
 		++iter;
 	}
 }
