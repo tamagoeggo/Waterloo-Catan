@@ -14,8 +14,41 @@
 using namespace std;
 
 // ctor with randomized resources and value, init textdisplay
-Board::Board(){
+Board::Board(int layer){
   srand(time(NULL)); // seed
+  vector<vector<Criterion *>> criterionv;
+  vector<vector<Goal *>> goalv;
+  rowSetup(layer, criterionv, goalv);
+  update(layer, criterionv, goalv);
+
+  // init Criterion
+  /*for(int i = 0; i <= 53; i++){
+    Criterion *crit = new Criterion(i);
+    criterion.emplace_back(crit);
+  }*/
+  size_t total_size{ 0 };
+  for (auto const& row: criterionv){
+      total_size += row.size();
+  }
+  criterion.reserve(total_size);
+  for (auto const& row: criterionv){
+      criterion.insert(end(criterion), begin(row), end(row));
+  }
+
+  // init  goals
+  /*for(int i = 0; i <= 71; i++){
+    Goal *newgoal = new Goal(i);
+    goals.emplace_back(newgoal);
+  }*/
+  size_t total_size{ 0 };
+  for (auto const& row: goalv){
+      total_size += row.size();
+  }
+  goals.reserve(total_size);
+  for (auto const& row: goalv){
+      goals.insert(end(goals), begin(row), end(row));
+  }
+
   // num = (rand() % (upper – lower + 1)) + lower
   // The board will consist of the following values: one 2, one 12, two 3-6, and two 8-11.
 	vector<int> values ={2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12};
@@ -44,18 +77,6 @@ Board::Board(){
     tiles.emplace_back(newtile);
   }
 
-  // init Criterion
-  for(int i = 0; i <= 53; i++){
-    Criterion *crit = new Criterion(i);
-    criterion.emplace_back(crit);
-  }
-
-  // init  goals
-  for(int i = 0; i <= 71; i++){
-    Goal *newgoal = new Goal(i);
-    goals.emplace_back(newgoal);
-  }
-
   // The assignments will be chosen by students in the order Blue, Red, Orange, Yellow, Yellow, Orange, Red, Blue.
   // 4.1
   // init students
@@ -72,7 +93,6 @@ Board::Board(){
   td = make_unique<TextDisplay>(values, resourcetype);
 
 }
-
 
 /////////////////// ZACH'S OLD WORK /////////////////////////
 

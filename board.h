@@ -9,7 +9,7 @@ class Board {
 	unique_ptr<TextDisplay> td = nullptr;  // to call textdisplay to update it and notify it
 	Dice dice; // dice
 	public:
-	Board(int n = 2); // ctor with randomized resources and value, init textdisplay
+	Board(int layer = 2); // ctor with randomized resources and value, init textdisplay
 	void placeCriterion(int coordinate); // places criteria(similar to setPiece in a4q4)
 	void placeGoal(int coordinate); // places goals(similar to setPiece in a4q4)
 	void upgradeCriterion(int coordinate);
