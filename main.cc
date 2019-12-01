@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
   for (int i = 0; i < argc; ++i) {
     cout << argv[i] << "\n";
     if (i > 0 && i % 2 == 0) { // if it is a command line option
-    	if (strcmp(argv[i], "-seed")) {
+    	if (argv[i].compare("-seed")) {
     		try {
     			seed = int(argv[i + 1]);
 					seed_set = true;
@@ -32,13 +32,13 @@ int main(int argc, char* argv[]) {
     			cerr << "Missing Seed" << endl;
 					seed_set = false;
     		}
-    	} else if (strcmp(argv[i], "-load")) {
+    	} else if (argv[i].compare("-load")) {
     		try {
     			load = argv[i + 1];
     		} catch (...) {
     			cerr << "Missing Load File" << endl;
     		}
-    	} else if (strcmp(argv[i], "-board")) {
+    	} else if (argv[i].compare("-board")) {
     		try {
     			board = argv[i + 1];
     		} catch (...) {
