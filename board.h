@@ -9,17 +9,29 @@ class Board {
 	unique_ptr<TextDisplay> td = nullptr;  // to call textdisplay to update it and notify it
 	Dice dice; // dice
 	public:
-	Board(int layer = 2); // ctor with randomized resources and value, init textdisplay
-	void placeCriterion(int coordinate); // places criteria(similar to setPiece in a4q4)
-	void placeGoal(int coordinate); // places goals(similar to setPiece in a4q4)
-	void upgradeCriterion(int coordinate);
+
+	Board(int seed, string board, int layer = 2); // ctor with randomized resources and value, init textdisplay
+
+	void placeCriterion(int coordinate, Player player); // places criteria(similar to setPiece in a4q4)
+	void placeGoal(int coordinate, Player player); // places goals(similar to setPiece in a4q4)
+	void upgradeCriterion(int coordinate, Player player);
+
 	void moveGeese(int coordinates); // look at assignment specifications for what moving a goose means
 	Player whoWon();
 	std::string printStudent(Student); // method used for save and load
 	void saveGame(Player curTurn); // takes in current player turn to save for next time
-	void loadGame();
-	void rowSetup(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal);
-	void update(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal);
+
+	void loadGame(string loadFile);
+
+	void rowSetup(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal); // DONE
+	void update(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal); // DONE
+
+	void setDice(string type); // DONE
+	void roll(); // DONE
+	void print(); // DONE
+	void status(); // DONE
+	void criteria(Player player); // DONE
+	void trade(Player tradeFrom, Player tradeWith, Resource give, Resource take); // DONE
 
 };
 

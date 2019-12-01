@@ -118,7 +118,7 @@ int main(int argc, char* argv[]) {
 		} else if (command == "status") {
 			b.status();
 		} else if (command == "criteria") {
-			b.criteria(Player whoseTurn);
+			b.criteria(whoseTurn);
 		} else if (command == "achieve") { // consider the number
 			int goal;
 			cin >> goal;
@@ -130,7 +130,7 @@ int main(int argc, char* argv[]) {
 		} else if (command == "improve") {
 			int criterion;
 			cin >> criterion;
-			b.improve(coordinate, whoseTurn);
+			b.improveCriterion(coordinate, whoseTurn);
 		} else if (command == "trade") {
 			Player tradeWith;
 			Resource give;
