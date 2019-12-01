@@ -10,7 +10,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
 #include <ctime>
 #include <algorithm>    // std::random_shuffle
 #include <cstdlib>      // std::rand, std::srand
@@ -18,7 +17,6 @@ using namespace std;
 
 // ctor with randomized resources and value, init textdisplay
 Board::Board(/*int seed, */string board = "default", int layer = 2){
-
 	if (board != "default") {
 			stringstream lineStream;
 			lineStream << board;
@@ -42,7 +40,7 @@ Board::Board(/*int seed, */string board = "default", int layer = 2){
 				} else {
 					resourceType = Resource::Netflix;
 				}
-				tiles[location] = Tile{value, resourceType};
+				tiles[location] = make_unique<Tile>(value, resourceType);
 				++location;
 			}
 	}
