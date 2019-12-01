@@ -8,6 +8,7 @@ class Board {
 	vector<unique_ptr<Student>> students;
 	unique_ptr<TextDisplay> td = nullptr;  // to call textdisplay to update it and notify it
 	Dice dice; // dice
+	int geeseAt;
 	public:
 
 	Board(int seed, string board, int layer = 2); // ctor with randomized resources and value, init textdisplay

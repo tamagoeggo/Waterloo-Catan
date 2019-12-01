@@ -108,15 +108,24 @@ void Board::saveGame(Player curTurn) {
   cout << "Please name your save file:" << endl;
   string name;
   cin >> name;
-  ofstream saveFile(name + "txt"); // change this to date and time
+  ofstream saveFile(name + ".txt"); // change this to date and time
+  if (curTurn == Player::Blue) {
+  	string studentPrint = "blue";
+  } else if (curTurn == Player::Red) {
+  	string studentPrint = "red";
+  } else if (curTurn == Player::Orange) {
+  	string studentPrint = "orange";
+  } else { // curTurn == Player::Orange
+  	string studentPrint = "yellow";
+  }
 	if (saveFile.is_open()) {
-		saveFile << curTurn << endl;
-		saveFile << printStudent(/*blue student*/) << endl;
-		saveFile << printStudent(/*red student*/) << endl;
-		saveFile << printStudent(/*orange student*/) << endl;
-		saveFile << printStudent(/*yellow student*/) << endl;
-		saveFile << printBoard() << endl;
-		saveFile << /*geese*/ << endl;
+		saveFile << studentPrint << endl;
+		saveFile << this->students[0].printStudent() << endl;
+		saveFile << this->students[1].printStudent() << endl;
+		saveFile << this->students[2].printStudent() << endl;
+		saveFile << this->students[3].printStudent() << endl;
+		saveFile << this->print() << endl;
+		saveFile << this->geeseAt << endl;
 	}
 	saveFile.close();
 }
@@ -129,7 +138,7 @@ void Board::loadGame() {
 	ifstream saveFile("example.txt");
 	if (saveFile.is_open()) {
 		while (getline(saveFile, line)) {
-			// do stuff with lines
+			
 		}
 		saveFile.close();
 	}
