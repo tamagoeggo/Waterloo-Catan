@@ -37,7 +37,6 @@ class Board {
 	void loseResourcesGeese(); // function called if 7 is rolled
 	void moveGeese(int coordinates); // moves geese to new tile
 	Player whoWon();
-	std::string printStudent(Student); // method used for save and load
 
 	void saveGame(Player curTurn); // takes in current player turn to save for next time
 	void loadGame(std::string loadFile, Player &whoseTurn);

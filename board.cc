@@ -164,8 +164,8 @@ void Board::firstCriterion(const int coordinate, Player player) {
 	}
 	else {
 		criterion[coordinate]->updateOccupant(students[iter].get());
-		criterion[coordinate]->upgrade(); 
-		students[iter]->updateCriterion(criterion[coordinate].get());	
+		criterion[coordinate]->upgrade();
+		students[iter]->updateCriterion(criterion[coordinate].get());
 		td->notify(criterion[coordinate].get());
 	}
 }
@@ -177,7 +177,7 @@ void Board::upgradeCriterion(const int coordinate, Player player) {
 			iter = i;
 			break;
 		}
-	}	
+	}
 	if (criterion[coordinate]->getStudent() == students[iter].get()) {
 		State state = criterion[coordinate]->getState();
 		if (!students[iter]->resourcesCheck(state.type)) {
@@ -231,7 +231,7 @@ void Board::firstGoal(const int coordinate, Player player) {
 	else {
 		goals[coordinate]->updateOccupant(students[iter].get());
 		students[iter]->updateGoal(goals[coordinate].get());
-		td->notify(goals[coordinate].get());	
+		td->notify(goals[coordinate].get());
 	}
 }
 
@@ -273,16 +273,6 @@ Player Board::whoWon() {
 	} else {
 		return Player::None;
 	}
-}
-
-// prints Student data, a method used for save and load
-// <numCaffeines> <numLabs> <numLectures> <numStudies> <numTutorials> g <goals> c <criteria>
-string Board::printStudent(Student student) {
-	string studentData = "";
-	studentData += student.returnResources()
-  + " g " + student.returnGoals()
-  + " c " + student.returnCriteria();
-	return studentData;
 }
 
 
