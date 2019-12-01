@@ -45,7 +45,7 @@ Board::Board(/*int seed, */string board = "default", int layer = 2){
 			}
 	}
 
-  srand(time(NULL)); // seed
+  //srand(time(NULL)); // seed
   vector<vector<Criterion *>> criterionv;
   vector<vector<Goal *>> goalv;
   rowSetup(layer, criterionv, goalv);
@@ -147,11 +147,105 @@ void Board::completeCriterion(const int coordinate, const Player player) {
 	}
 	else {
 		criterion[coordinate]->updateOccupant(students[iter].get());
+<<<<<<< HEAD
+		criterion[coordinate]->upgrade(); 								// update the type of achievement at criterion
+		students[iter]->resourcesSpent(Type::Assignment); 				// decrease Player's resources
+		students[iter]->updateCriterion(criterion[coordinate].get());	// update Player's criterion owned list
+		td->notify(criterion[coordinate].get());
+	}
+}
+
+void Board::firstCriterion(const int coordinate, Player player) {
+	int iter;
+	for (int i = 0; i < 4; ++i) {
+		if (students[i]->getPlayer() == player) {
+			iter = i;
+			break;
+		}
+	}
+	if (criterion[coordinate]->getStudent()) { // check if criterion is occupied
+		throw "You cannot build here because this Criterion is already completed.";
+	}
+	else {
+		criterion[coordinate]->updateOccupant(students[iter].get());
+		criterion[coordinate]->upgrade(); 
+		students[iter]->updateCriterion(criterion[coordinate].get());	
+		td->notify(criterion[coordinate].get());
+	}
+}
+
+void Board::upgradeCriterion(const int coordinate, Player player) {
+	int iter;
+	for (int i = 0; i < 4; ++i) {
+		if (students[i]->getPlayer() == player) {
+			iter = i;
+			break;
+		}
+	}	
+	if (criterion[coordinate]->getStudent() == students[iter].get()) {
+		State state = criterion[coordinate]->getState();
+		if (!students[iter]->resourcesCheck(state.type)) {
+			throw "You cannot build here because you do not have the necessary Resources.";
+		}
+		criterion[coordinate]->upgrade(); 								// update the type of achievement at criterion
+		students[iter]->resourcesSpent(state.type);
+		td->notify(criterion[coordinate].get());
+	}
+	else {
+		throw "You cannot build here because you do not own this criterion.";
+	}
+}
+
+void Board::achieveGoal(const int coordinate, Player player) {
+	int iter;
+	for (int i = 0; i < 4; ++i) {
+		if (students[i]->getPlayer() == player) {
+			iter = i;
+			break;
+		}
+	}
+	if (goals[coordinate]->getStudent()) { // check if criterion is occupied
+		throw "You cannot build here because this Goal is already achieved.";
+	}
+	else if (!goals[coordinate]->canPlayerAchieveGoal(students[iter].get())) {
+		throw "You cannot build here because you have not completed any adjacent Criterion(s).";
+	}
+	else if (!students[iter]->resourcesCheck(Type::Achievement)) {
+		throw "You cannot build here because you do not have the necessary Resources.";
+	}
+	else {
+		goals[coordinate]->updateOccupant(students[iter].get());
+		students[iter]->resourcesSpent(Type::Achievement);
+		students[iter]->updateGoal(goals[coordinate].get());
+		td->notify(goals[coordinate].get());
+	}
+}
+
+void Board::firstGoal(const int coordinate, Player player) {
+	int iter;
+	for (int i = 0; i < 4; ++i) {
+		if (students[i]->getPlayer() == player) {
+			iter = i;
+			break;
+		}
+	}
+	if (goals[coordinate]->getStudent()) { // check if criterion is occupied
+		throw "You cannot build here because this Goal is already achieved.";
+	}
+	else {
+		goals[coordinate]->updateOccupant(students[iter].get());
+		students[iter]->updateGoal(goals[coordinate].get());
+		td->notify(goals[coordinate].get());	
+	}
+}
+
+=======
 		criterion[coordinate]->upgrade();
 		students[iter]->resourcesSpent(Type::Assignment);
 	}
 }
 
+>>>>>>> 7ea0cbd6a33e289913681b868f1d36b4c67019cc
 // loops through students when a 7 is rolled and checks if
 // the student will lose half their resources
 void Board::loseResourcesGeese() {
@@ -373,7 +467,7 @@ void Board::loadGame(string loadFile, Player &whoseTurn) {
     			} else if (inputType == "criterion") {
       			student[3]->updateCriterion(this->criterion[int(num)]);
     			}
-  			}			
+  			}
   		} else if (lineNumber == 6) {
 				stringstream lineStream;
 				lineStream << line;

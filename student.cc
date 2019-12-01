@@ -235,7 +235,7 @@ void Student::loseResources(){
     int numStudies = 0;
     int numTutorials = 0;
     cout << "Student " << player << " loses " << numLost << " resources to the geese. They lose:" << endl;
-    srand(time(NULL)); // seed
+     //srand(time(NULL)); // seed
 
     for(const auto &res : resources){
       keys.emplace_back(res.first);

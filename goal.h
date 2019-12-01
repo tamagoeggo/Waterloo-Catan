@@ -20,6 +20,7 @@ class Goal : public Subject { // Road
 	int getCoordinate(); // can be used for printing
 	std::vector<Criterion *> getNeighbors(); // to help criterion
 	void addNeighbor(Criterion *c);
+	bool canPlayerAchieveGoal(Student *s); // to check if Student s owns any of the neighbor
 };
 
 
