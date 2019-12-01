@@ -13,12 +13,10 @@ class Board {
 
 	Board(/*int seed, string board, */int layer = 2); // ctor with randomized resources and value, init textdisplay
 
-<<<<<<< HEAD
+
 	void completeCriterion(const int coordinate, const Player player); // places criteria(similar to setPiece in a4q4) second turn onward
-=======
 	void firstCriterion(int coordinate, Player player);
 	void completeCriterion(int coordinate, Player player); // places criteria(similar to setPiece in a4q4) second turn onward
->>>>>>> 17c81402b99df8224bcd4945242ef72400e5124a
 	void placeGoal(int coordinate, Player player); // places goals(similar to setPiece in a4q4)
 	void upgradeCriterion(int coordinate, Player player);
 
