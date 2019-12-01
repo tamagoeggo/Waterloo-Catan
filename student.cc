@@ -8,10 +8,6 @@
 #include <cstdlib>      // std::rand, std::srand
 #include "criterion.h"
 using namespace std;
-// forward declaration
-std::string returnResources(); // for saving file
-std::string returnGoals(); // for saving file
-std::string returnCriteria(); // for saving file
 
 // ctor
 Student::Student(Player player) : player{player} {}
@@ -104,7 +100,7 @@ string Student::returnCriteria(){
 // 3.7
 string printStudent(){
   string output = "";
-  output += returnResources() + " g " + returnGoals() + " c " + returnCriteria();
+  output += this->returnResources() + " g " + this->returnGoals() + " c " + this->returnCriteria();
   return output;
 }
 
