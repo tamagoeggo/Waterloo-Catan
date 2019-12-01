@@ -1,10 +1,8 @@
 #include "student.h"
-#include "resource.h"
 #include "type.h"
 #include "state.h"
 #include <iostream>   // std::cout
 #include <string>     // std::string, std::to_string
-#include <vector>
 #include <algorithm>    // std::random_shuffle
 #include <ctime>
 #include <cstdlib>      // std::rand, std::srand

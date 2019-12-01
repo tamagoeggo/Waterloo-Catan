@@ -5,13 +5,14 @@
 #include "resource.h"
 #include "type.h"
 #include <map>
+#include <vector>
 
 class Criterion;
 class Goal;
 
 class Student {
 	Player player; //enum
-	map<Resource, int> resources;
+	std::map<Resource, int> resources;
 	std::vector<Criterion*> criteria;
 	std::vector<Goal*> goals;
 	public:
