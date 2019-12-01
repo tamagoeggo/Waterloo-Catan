@@ -20,12 +20,11 @@ class Board {
 	std::vector<std::unique_ptr<Goal>> goals; // need for putting down goals
 	std::vector<std::unique_ptr<Student>> students;
 	std::unique_ptr<TextDisplay> td = nullptr;  // to call textdisplay to update it and notify it
-	string dice = "fair";
+	std::string dice = "fair";
 	int geeseAt = -1;
 	public:
 
 	Board(std::string board, int layer = 2); // ctor with randomized resources and value, init textdisplay
-
 
 	void completeCriterion(const int coordinate, Player player); // places criteria(similar to setPiece in a4q4) second turn onward
 	void firstCriterion(const int coordinate, Player player);
@@ -40,7 +39,7 @@ class Board {
 	std::string printStudent(Student); // method used for save and load
 
 	void saveGame(Player curTurn); // takes in current player turn to save for next time
-	void loadGame(std::string loadFile, Player &whoseTurn);
+	void loadGame(std::string loadFile, Player *whoseTurn);
 
 	// constructs goals and criterions (coordinates) in vec of vec
 	void rowSetup(const int layer, std::vector<std::vector<Criterion *>> &criterion, std::vector<std::vector<Goal *>> &goal); // DONE

@@ -19,28 +19,27 @@ int main(int argc, char* argv[]) {
 	bool seed_set = false;
 	string load = "default";
 	string board = "default";
-	Board b;
   for (int i = 0; i < argc; ++i) {
     cout << argv[i] << "\n";
     if (i > 0 && i % 2 == 0) { // if it is a command line option
-    	if (argv[i].compare("-seed")) {
+    	if (string(argv[i]).compare("-seed") == 0) {
     		try {
-    			seed = int(argv[i + 1]);
+    			seed = stoi(argv[i + 1]);
 					seed_set = true;
 					srand(seed);
     		} catch (...) {
     			cerr << "Missing Seed" << endl;
 					seed_set = false;
     		}
-    	} else if (argv[i].compare("-load")) {
+    	} else if (string(argv[i]).compare("-load") == 0) {
     		try {
-    			load = argv[i + 1];
+    			load = string(argv[i + 1]);
     		} catch (...) {
     			cerr << "Missing Load File" << endl;
     		}
-    	} else if (argv[i].compare("-board")) {
+    	} else if (string(argv[i]).compare("-board") == 0) {
     		try {
-    			board = argv[i + 1];
+    			board = string(argv[i + 1]);
     		} catch (...) {
     			cerr << "Missing Board File" << endl;
     		}
@@ -51,7 +50,7 @@ int main(int argc, char* argv[]) {
 		srand(time(NULL));
 	}
 	Player whoseTurn = Player::Blue;
-	b = Board(board);
+	Board b = Board(board);
 	b.loadGame(load, &whoseTurn);
 	bool rolled = false;
 	while (true) {
@@ -218,4 +217,5 @@ int main(int argc, char* argv[]) {
 		}
 	}
 };
+
 
