@@ -25,6 +25,9 @@ void Tile::toggleGeese() {
 }
 
 void Tile::sendResources() {
+  if (geeseHere) {
+    return;
+  }
   for (int i = 0; i < 6; ++i) {
     if (criterion[i]->getStudent()) { // to check if criterion is occupied
       criterion[i]->sendResources(resource);
