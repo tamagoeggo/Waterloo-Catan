@@ -20,8 +20,12 @@ class Board {
 	void loadGame();
 	void rowSetup(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal);
 	void update(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal);
+	
+	void criterionAdderHelper(int &iter, const int tileNo); 	// helper function for addCriterion
+	void updateCriterionsInTile(const int n); 			// adding the Criterions for a board with n layer(s)i
 
 };
+
 
 
 #endif

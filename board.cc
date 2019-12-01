@@ -304,3 +304,145 @@ void Board::update(const int n, vector<vector<Criterion *>> &criterion, vector<v
 		}
 	}
 }
+
+void Board::criterionAdderHelper(int &iter, const int tileNo) {
+	for (int i = 0; i < 2; ++i) {
+		tiles[iter]->addCriterion(criterion[iter]);
+		++iter;
+	}
+}
+
+void Board::updateCriterionsInTile(const int n) {
+	int totalTiles = (3 * n * n) + (3 * n) + 1;
+	
+	int patternStartsAt = (n * (n + 1)) / 2;	// Tile No.
+	double secondPattern = ((n * n) / (double)2) + ((3 * n) / (double)2) + 1;
+	int two_n = 2 * patternStartsAt;    		// counter
+	int two_n2 = 2 * secondPattern + 1; 		// counter
+	int start;                          		// counter
+	for (int k = 0; k < n + 1; ++k) {			// loop through the rows
+		int starting = patternStartsAt;
+		if (k != 0) { starting += (2 * n + 1) * k; }
+		for (int i = 0; i < 3; ++i) { 			// loop through the columns
+			for (int j = 0; j < n + 1; ++j) {	// loop through the tiles in a row k
+				criterionAdderHelper(two_n, starting + j);
+			}
+		}
+		two_n -= 2 * n + 2;
+		start = starting;
+	}
+	for (int k = 0; k < n; ++k) {
+		int starting = secondPattern;
+		if (k != 0) { starting += (2 * n + 1) * k; }
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < n; ++j) {
+				criterionAdderHelper(two_n2, starting + j);
+			}
+			two_n2 += 2;
+		}
+		two_n2 -= 2 * n + 2;
+	}
+
+	// FIRST END CASE
+	
+	vector<vector<int>> row; // helper top row
+	row.resize(n + 1);
+	int tileNo = 0;
+	for (int k = 0; k < n + 1; ++k) {
+		for (int j = 0; j < k + 1; ++j) {
+			row[k].emplace_back(tileNo);
+			++tileNo;
+		}
+	}
+
+	int vert = 0;
+	for (int k = 0; k < n + 1; ++k) {
+		int vert2 = vert + 1;
+		if (k == n) {
+			int vert3 = vert2 + 1;
+			for (auto j = row[k - 1].begin(); j != row[k - 1].end(); ++j) { // row where Pattern starts
+				criterionAdderHelper(vert2, *j);
+			}
+			if (k > 1) {
+				for (auto j = row[k - 2].begin(); j != row[k - 2].end(); ++j) {
+					criterionAdderHelper(vert3, *j);
+				}
+				vert3 += 3;
+				for (auto j = row[k - 1].begin(); j != row[k - 1].end(); ++j) {
+					criterionAdderHelper(vert3, *j);
+				}
+				break;
+			}
+			vert2 += 2;
+			for (auto j = row[k - 1].begin(); j != row[k - 1].end(); ++j) {
+				criterionAdderHelper(vert2, *j);
+			}
+			break;
+		}
+		for (auto j = row[k].begin(); j != row[k].end(); ++j) {
+			criterionAdderHelper(vert, *j);
+		}
+		if (k >= 2) {
+			int vert3 = vert2 + 1;
+			for (auto j = row[k - 1].begin(); j != row[k - 1].end(); ++j) {
+				criterionAdderHelper(vert2, *j);
+			}
+			for (auto j = row[k - 2].begin(); j != row[k - 2].end(); ++j) {
+				criterionAdderHelper(vert3, *j);
+			}
+		}
+		else if (k == 1) {
+			for (auto j = row[k - 1].begin(); j != row[k - 1].end(); ++j) {
+				criterionAdderHelper(vert2, *j);
+			}
+		}
+	}
+
+	// SECOND END CASE
+
+	vector<vector<int>> bottomRow; // helper bottom row
+	bottomRow.resize(n);
+	
+	int secondEndCase = start + n + 1;
+	int counter = n;
+	int start2 = two_n + 1;
+	int start3 = start2 + 1;
+	for (int k = n - 1; k >= 0; --k) { // fix limit
+		for (int j = 0; j < counter; ++j) {
+			bottomRow[k].emplace_back(secondEndCase);
+			++secondEndCase;
+		}
+		--counter;
+	}
+	
+	int temp = two_n - (2 * n) - 1;
+	for (auto j = bottomRow[n - 1].begin(); j != bottomRow[n - 1].end(); ++j) { // for special end case
+		criterionAdderHelper(temp, *j);
+		criterionAdderHelper(start2, *j);
+	}
+
+	if (n - 2 >= 0) {
+		for (auto j = bottomRow[n - 2].begin(); j != bottomRow[n - 2].end(); ++j) { 
+			criterionAdderHelper(start3, *j);
+		}
+	}
+	++start2;
+	
+	int temp2 = start2 + 1; // for k - 1
+	for (int k = n - 1; k >= 0; --k) {
+		int temp3 = temp2 + 1; // for  k - 2
+		for (auto j = bottomRow[k].begin(); j != bottomRow[k].end(); ++j) {
+			criterionAdderHelper(start2, *j);
+		}		
+		if (k - 1 >= 0) {
+			for (auto j = bottomRow[k - 1].begin(); j != bottomRow[k - 1].end(); ++j) {
+				criterionAdderHelper(temp2, *j);
+			}
+			if (k - 2 >= 0) {
+				for (auto j = bottomRow[k - 2].begin(); j != bottomRow[k - 2].end(); ++j) {
+					criterionAdderHelper(temp3, *j);
+				}
+			}
+		}
+	}
+}
