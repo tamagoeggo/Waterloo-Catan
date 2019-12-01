@@ -35,7 +35,7 @@ class Board {
 	
 	void criterionAdderHelper(int &iter, const int tileNo); 	// helper function for addCriterion
 	void updateCriterionsInTile(const int n); 			// adding the Criterions for a board with n layer(s)i
-
+	void updateCriterionsNeighbor();
 
 };
 
