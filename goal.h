@@ -18,6 +18,7 @@ class Goal : public Subject { // Road
 	std::string getStudent();
 	State getState() override; // overrides subject function
 	int getCoordinate(); // can be used for printing
+	std::vector<Criterion *> getNeighbors(); // to help criterion
 	void addNeighbor(Criterion *c);
 };
 

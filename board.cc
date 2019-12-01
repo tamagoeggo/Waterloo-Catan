@@ -37,6 +37,8 @@ Board::Board(int layer){
       }
   }
 
+  updateCriterionsNeighbor();
+
   // init  goals
   /*for(int i = 0; i <= 71; i++){
     Goal *newgoal = new Goal(i);
@@ -444,5 +446,12 @@ void Board::updateCriterionsInTile(const int n) {
 				}
 			}
 		}
+	}
+}
+
+void Board::updateCriterionsNeighbor() {
+	int size = criterion.size();
+	for (int i = 0; i < size; ++i) {
+		criterion[i]->addNeighbor();
 	}
 }

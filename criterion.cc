@@ -40,6 +40,10 @@ void Criterion::addGoal(Goal *g) {
 	goals.emplace_back(g);
 }
 
-void Criterion::addNeighbor(Criterion *c) {
-	neighbors.emplace_back(c);
+void Criterion::addNeighbor() {
+	int size = goals.size();
+	for (int i = 0; i < size; ++i) {
+		neighbors.emplace_back(goals[i]->getNeighbors()[0]);
+		neighbors.emplace_back(goals[i]->getNeighbors()[1]);
+	}
 }
