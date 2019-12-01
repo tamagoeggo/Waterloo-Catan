@@ -32,8 +32,13 @@ class Board {
 	void status(); // DONE
 	void criteria(Player player); // DONE
 	void trade(Player tradeFrom, Player tradeWith, Resource give, Resource take); // DONE
+	
+	void criterionAdderHelper(int &iter, const int tileNo); 	// helper function for addCriterion
+	void updateCriterionsInTile(const int n); 			// adding the Criterions for a board with n layer(s)i
+
 
 };
+
 
 
 #endif

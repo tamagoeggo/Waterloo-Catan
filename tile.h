@@ -13,6 +13,7 @@ class Tile {
 	void getValue();
 	void toggleGeese(); // changes bool value to true or false if geese is on tile
 	void sendResources(); // updates student’s resources if criteria of the tile is occupied
+	void addCriterion(Criterion *c);
 };
 
 #endif
