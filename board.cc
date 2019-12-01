@@ -95,6 +95,12 @@ Board::Board(int layer){
 
 }
 
+void Board::completeCriterion(int coordinate, Player player) {
+	// if (criterion[coordinate]->getStudent()) {
+	// 	throw invalid_argument("")
+	// }
+}
+
 // moves geese to a coordinate on the board,
 // updating geeseAt
 void Board::moveGeese(int coordinates){

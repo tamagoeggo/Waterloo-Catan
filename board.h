@@ -2,10 +2,10 @@
 #define _BOARD_H_
 
 class Board {
-	vector<unique_ptr<Tile>> tiles;
-	vector<unique_ptr<Criterion>> criterion; // need for putting down criteria
-	vector<unique_ptr<Goal>> goals; // need for putting down goals
-	vector<unique_ptr<Student>> students;
+	std::vector<unique_ptr<Tile>> tiles;
+	std::vector<unique_ptr<Criterion>> criterion; // need for putting down criteria
+	std::vector<unique_ptr<Goal>> goals; // need for putting down goals
+	std::vector<unique_ptr<Student>> students;
 	unique_ptr<TextDisplay> td = nullptr;  // to call textdisplay to update it and notify it
 	Dice dice; // dice
 	int geeseAt = -1;
@@ -13,7 +13,7 @@ class Board {
 
 	Board(int seed, string board, int layer = 2); // ctor with randomized resources and value, init textdisplay
 
-	void placeCriterion(int coordinate, Player player); // places criteria(similar to setPiece in a4q4)
+	void completeCriterion(int coordinate, Player player); // places criteria(similar to setPiece in a4q4) second turn onward
 	void placeGoal(int coordinate, Player player); // places goals(similar to setPiece in a4q4)
 	void upgradeCriterion(int coordinate, Player player);
 
