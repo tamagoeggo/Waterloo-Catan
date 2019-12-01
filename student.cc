@@ -31,10 +31,14 @@ void Student::updateGoal(Goal *goal) {
   goals.emplace_back(goal);
 }
 
+<<<<<<< HEAD
 // return the total number of resources as an ini
 int Student::numResources(){
   return resources.size();
 }
+=======
+
+>>>>>>> d5717da826505495d54362c3481ea80f574a86d5
 
 // A student’s data is printed out as follows:
 // <numCaffeines> <numLabs> <numLectures> <numStudies> <numTutorials> g <goals> c <criteria>
@@ -92,7 +96,6 @@ string Student::returnCriteria(){
   output += num;
   return output;
 }
-
 
 // prints the resource status of the student
 // reference assignment section 2.7
