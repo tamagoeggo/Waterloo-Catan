@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
 	string load = "default";
 	string board = "default";
 	Board b;
-	for (int i = 0; i < argc; ++i) {
+  for (int i = 0; i < argc; ++i) {
     cout << argv[i] << "\n";
     if (i > 0 && i % 2 == 0) { // if it is a command line option
     	if (argv[i] == "-seed") {
