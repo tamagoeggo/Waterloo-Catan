@@ -19,7 +19,7 @@ class Board {
 	std::vector<std::unique_ptr<Goal>> goals; // need for putting down goals
 	std::vector<std::unique_ptr<Student>> students;
 	std::unique_ptr<TextDisplay> td = nullptr;  // to call textdisplay to update it and notify it
-	Dice dice; // dice
+	Dice dice = Fair(); // dice
 	int geeseAt = -1;
 	public:
 
@@ -60,3 +60,4 @@ class Board {
 
 
 #endif
+

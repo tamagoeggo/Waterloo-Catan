@@ -7,17 +7,11 @@
 #include <memory>
 #include <ctime> // std::time
 #include <cstdlib>  // std::rand, std::srand
-#include "grid.h"
+#include "board.h"
 #include "loaded.h"
 #include "fair.h"
-#include "board.h"
-#include "criterion.h"
-#include "dice.h"
-#include "goal.h"
-#include "observer.h"
-#include "student.h"
-#include "subject.h"
-#include "textdisplay.h"
+#include "resource.h"
+#include "player.h"
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -210,17 +204,18 @@ int main(int argc, char* argv[]) {
 		} else if (command == "save") {
 			b.saveGame(whoseTurn);
 		} else if (command == "help") {
-			cout << "Valid commands:\n
-							board\n
-							status\n
-							criteria\n
-							achieve <goal>\n
-							complete <criterion>\n
-							improve <criterion>\n
-							trade <colour> <give> <take>\n
-							next\n
-							save <file>\n
-							help" << endl;
+			cout << "Valid commands:" << endl
+							<< "board" << endl
+							<< "status" << endl
+							<< "criteria" << endl
+							<< "achieve <goal>" << endl
+							<< "complete <criterion>" << endl
+							<< "improve <criterion>" << endl
+							<< "trade <colour> <give> <take>" << endl
+							<< "next" << endl
+							<< "save <file>" << endl
+							<< "help" << endl;
 		}
 	}
 };
+
