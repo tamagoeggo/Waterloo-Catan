@@ -75,7 +75,7 @@ void TextDisplay::notify(Goal *goal) {
 	if (state.type == Type::Achievement) {
 		toReplace += "A";
 	}
-	this->goalString[state.coordinate] = toReplace;
+	this->goalsString[state.coordinate] = toReplace;
 }
 
 void TextDisplay::notify(int geeseAt) {
