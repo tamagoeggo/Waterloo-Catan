@@ -5,6 +5,8 @@
 #include <fstream>
 #include <sstream>
 #include <memory>
+#include <ctime> // std::time
+#include <cstdlib>  // std::rand, std::srand
 #include "grid.h"
 #include "loaded.h"
 #include "fair.h"
@@ -19,7 +21,8 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	int seed = 133436;
+	int seed;
+	bool seed_set = false;
 	string load = "default";
 	//string board = "default";
 	Board b;
@@ -29,8 +32,11 @@ int main(int argc, char* argv[]) {
     	if (argv[i] == "-seed") {
     		try {
     			seed = int(argv[i + 1]);
+					seed_set = true;
+					srand(seed);
     		} catch (...) {
     			cerr << "Missing Seed" << endl;
+					seed_set = false;
     		}
     	} else if (argv[i] == "-load") {
     		try {
@@ -46,6 +52,9 @@ int main(int argc, char* argv[]) {
     		}
     	}
     }
+	}
+	if(seed_set == false){
+		srand(time(NULL));
 	}
 	Player whoseTurn = Player::Blue;
 	b = Board(/*seed, board*/);

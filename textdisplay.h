@@ -49,8 +49,8 @@ class TextDisplay: public Observer {
 		"      17     ", "      18     "};
 	public:
 	TextDisplay();
-	void notify(Criterion &criterion) override;
-	void notify(Goal &goal) override;
+	void notify(Criterion *criterion) override;
+	void notify(Goal *goal) override;
 	void notify(int geeseAt) override;
 	friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
 };

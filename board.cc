@@ -15,9 +15,37 @@
 using namespace std;
 
 // ctor with randomized resources and value, init textdisplay
-Board::Board(/*int seed, string board, */int layer = 2){
+Board::Board(/*int seed, */string board = "default", int layer = 2){
 
-  srand(time(NULL)); // seed
+	if (board != "default") {
+			stringstream lineStream;
+			lineStream << board;
+			while (lineStream) {
+				int type;
+				Resource resourceType;
+				int value;
+				int location = 0;
+				lineStream >> type;
+				lineStream >> value;
+				if (type == 0) {
+					resourceType = Resource::Caffeine;
+				} else if (type == 1) {
+					resourceType = Resource::Lab;
+				} else if (type == 2) {
+					resourceType = Resource::Lecture;
+				} else if (type == 3) {
+					resourceType = Resource::Study;
+				} else if (type == 4) {
+					resourceType = Resource::Tutorial;
+				} else {
+					resourceType = Resource::Netflix;
+				}
+				tiles[location] = Tile{value, resourceType};
+				++location;
+			}
+	}
+
+  //srand(time(NULL)); // seed
   vector<vector<Criterion *>> criterionv;
   vector<vector<Goal *>> goalv;
   rowSetup(layer, criterionv, goalv);
@@ -25,11 +53,11 @@ Board::Board(/*int seed, string board, */int layer = 2){
 
   // init Criterion
   size_t total_size{ 0 };
-  for (auto const& row: criterionv){
+  for (auto const& row: criterionv) {
       total_size += row.size();
   }
   criterion.reserve(total_size);
-  for (auto const& row: criterionv){
+  for (auto const& row: criterionv) {
       for (auto const& crit: row){
         criterion.emplace_back(move(crit));
       }
@@ -39,7 +67,7 @@ Board::Board(/*int seed, string board, */int layer = 2){
 
   // init  goals
   size_t total_size{ 0 };
-  for (auto const& row: goalv){
+  for (auto const& row: goalv) {
       total_size += row.size();
   }
   goals.reserve(total_size);
@@ -65,7 +93,7 @@ Board::Board(/*int seed, string board, */int layer = 2){
 	random_shuffle(resourcetype.begin(), resourcetype.end());
 
   // init tiles
-  for(int i = 0; i < 19; i++){
+  for (int i = 0; i < 19; i++) {
     if(resourcetype.front() == Resource::Netflix`){
       unique_ptr<Tile> newtile = make_unique<Tile>(7, resourcetype.front());
     }
@@ -97,7 +125,7 @@ Board::Board(/*int seed, string board, */int layer = 2){
 
 }
 
-void Board::completeCriterion(const int coordinate, Player player) {
+void Board::completeCriterion(const int coordinate, const Player player) {
 	int iter;
 	for (int i = 0; i < 4; ++i) {
 		if (students[i]->getPlayer() == player) {
@@ -119,6 +147,7 @@ void Board::completeCriterion(const int coordinate, Player player) {
 	}
 	else {
 		criterion[coordinate]->updateOccupant(students[iter].get());
+<<<<<<< HEAD
 		criterion[coordinate]->upgrade(); 								// update the type of achievement at criterion
 		students[iter]->resourcesSpent(Type::Assignment); 				// decrease Player's resources
 		students[iter]->updateCriterion(criterion[coordinate].get());	// update Player's criterion owned list
@@ -210,9 +239,16 @@ void Board::firstGoal(const int coordinate, Player player) {
 	}
 }
 
+=======
+		criterion[coordinate]->upgrade();
+		students[iter]->resourcesSpent(Type::Assignment);
+	}
+}
+
+>>>>>>> 7ea0cbd6a33e289913681b868f1d36b4c67019cc
 // loops through students when a 7 is rolled and checks if
 // the student will lose half their resources
-void Board::loseResourcesGeese(){
+void Board::loseResourcesGeese() {
   for(auto const &student: students){
     student.loseResources();
   }
@@ -220,7 +256,7 @@ void Board::loseResourcesGeese(){
 
 // moves geese to a coordinate on the board,
 // updating geeseAt
-void Board::moveGeese(int coordinates){
+void Board::moveGeese(int coordinates) {
   if(geeseAt != -1){
     tiles[geeseAt]->toggleGeese();
   }
@@ -229,6 +265,24 @@ void Board::moveGeese(int coordinates){
   }
   geeseAt = coordinates;
   tiles[coordinates]->toggleGeese();
+}
+
+Player Board::whoWon() {
+	int bluePoints = this->students[0]->getPoints();
+	int redPoints = this->students[1]->getPoints();
+	int orangePoints = this->students[2]->getPoints();
+	int yellowPoints = this->students[3]->getPoints();
+	if (bluePoints >= 10) {
+		return Player::Blue;
+	} else if (redPoints >= 10) {
+		return Player::Red;
+	} else if (orangePoints >= 10) {
+		return Player::Orange;
+	} else if (yellowPoints >= 10) {
+		return Player::Yellow;
+	} else {
+		return Player::None;
+	}
 }
 
 // prints Student data, a method used for save and load
@@ -413,11 +467,11 @@ void Board::loadGame(string loadFile, Player &whoseTurn) {
     			} else if (inputType == "criterion") {
       			student[3]->updateCriterion(this->criterion[int(num)]);
     			}
-  			}			
+  			}
   		} else if (lineNumber == 6) {
 				stringstream lineStream;
 				lineStream << line;
-				while (lineStream) { // do i need a sstream
+				while (lineStream) {
 					int type;
 					Resource resourceType;
 					int value;
