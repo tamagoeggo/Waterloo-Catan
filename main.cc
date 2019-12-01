@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
 		}
 		int placeCriterionAt;
 		cin >> placeCriterionAt;
-		b.placeCriterion(placeCriterionAt);
+		b.firstCriterion(placeCriterionAt);
 		int placeGoalAt;
 		cin >> placeGoalAt;
 		b.placeGoal(placeGoalAt);
@@ -126,7 +126,7 @@ int main(int argc, char* argv[]) {
 		} else if (command == "complete") {
 			int criterion;
 			cin >> criterion;
-			b.placeCriterion(criterion, whoseTurn);
+			b.completeCriterion(criterion, whoseTurn);
 		} else if (command == "improve") {
 			int criterion;
 			cin >> criterion;
