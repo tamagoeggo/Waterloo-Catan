@@ -178,13 +178,13 @@ void Student::trade(Student stud, Resource resource1, Resource resource2){
 int Student::getPoints(){
   int points = 0;
   for(const auto &completed: criteria){
-    if(completed.getState().type == Type::Assignment){
+    if(completed->getState().type == Type::Assignment){
       points += 1;
     }
-    else if(completed.getState().type == Type::Midterm){
+    else if(completed->getState().type == Type::Midterm){
       points += 2;
     }
-    else if(completed.getState().type == Type::Exam){
+    else if(completed->getState().type == Type::Exam){
       points += 3;
     }
   }
@@ -230,7 +230,7 @@ void Student::stealResources(Student &student){
 void Student::loseResources(){
   if(numResources() >= 10){
     int numLost = numResources() / 2;
-    vector<string> keys;
+    vector<Resource> keys;
     int numCaffeines = 0;
     int numLabs = 0;
     int numLectures = 0;
@@ -245,7 +245,7 @@ void Student::loseResources(){
 
     for(int i = 0; i < numLost; i++){
       random_shuffle(keys.begin(), keys.end());
-      while(resources[keys.front()] == 0){
+      while(resources.[keys.front()] == 0){
         random_shuffle(keys.begin(), keys.end());
       }
       if(keys.front() == Resource::Caffeine){
