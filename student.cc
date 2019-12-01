@@ -175,7 +175,19 @@ void Student::trade(Student stud, Resource resource1, Resource resource2){
 
 // returns the points, which is the number of completed criterions a student has
 int Student::getPoints(){
-  return criteria.size();
+  int points = 0;
+  for(const auto &completed: criteria){
+    if(completed.getState().type == Type::Assignment){
+      points += 1;
+    }
+    else if(completed.getState().type == Type::Midterm){
+      points += 2;
+    }
+    else if(completed.getState().type == Type::Exam){
+      points += 3;
+    }
+  }
+  return points;
 }
 
 // student steals resources from another student
