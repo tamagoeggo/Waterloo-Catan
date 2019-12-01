@@ -15,7 +15,35 @@
 using namespace std;
 
 // ctor with randomized resources and value, init textdisplay
-Board::Board(/*int seed, string board, */int layer = 2){
+Board::Board(/*int seed, */string board = "default", int layer = 2){
+
+	if (board != "default") {
+			stringstream lineStream;
+			lineStream << board;
+			while (lineStream) {
+				int type;
+				Resource resourceType;
+				int value;
+				int location = 0;
+				lineStream >> type;
+				lineStream >> value;
+				if (type == 0) {
+					resourceType = Resource::Caffeine;
+				} else if (type == 1) {
+					resourceType = Resource::Lab;
+				} else if (type == 2) {
+					resourceType = Resource::Lecture;
+				} else if (type == 3) {
+					resourceType = Resource::Study;
+				} else if (type == 4) {
+					resourceType = Resource::Tutorial;
+				} else {
+					resourceType = Resource::Netflix;
+				}
+				tiles[location] = Tile{value, resourceType};
+				++location;
+			}
+	}
 
   srand(time(NULL)); // seed
   vector<vector<Criterion *>> criterionv;
@@ -97,7 +125,7 @@ Board::Board(/*int seed, string board, */int layer = 2){
 
 }
 
-void Board::completeCriterion(const int coordinate, Player player) {
+void Board::completeCriterion(const int coordinate, const Player player) {
 	int iter;
 	for (int i = 0; i < 4; ++i) {
 		if (students[i]->getPlayer() == player) {
@@ -119,35 +147,10 @@ void Board::completeCriterion(const int coordinate, Player player) {
 	}
 	else {
 		criterion[coordinate]->updateOccupant(students[iter].get());
-		criterion[coordinate]->upgrade(); 								// update the type of achievement at criterion
-		students[iter]->resourcesSpent(Type::Assignment); 				// decrease Player's resources
-		students[iter]->updateCriterion(criterion[coordinate].get());	// update Player's criterion owned list
+		criterion[coordinate]->upgrade();
+		students[iter]->resourcesSpent(Type::Assignment);
 	}
 }
-
-void Board::firstCriterion(const int coordinate, Player player) {
-	int iter;
-	for (int i = 0; i < 4; ++i) {
-		if (students[i]->getPlayer() == player) {
-			iter = i;
-			break;
-		}
-	}
-	if (criterion[coordinate]->getStudent()) { // check if criterion is occupied
-		throw "You cannot build here because this Criterion is already completed.";
-	}
-	else {
-		criterion[coordinate]->updateOccupant(students[iter].get());
-		criterion[coordinate]->upgrade(); 
-		students[iter]->updateCriterion(criterion[coordinate].get());	
-	}
-}
-
-void Board::upgradeCriterion(const int coordinate, Player player) {}
-
-void Board::achieveGoal(const int coordinate, Player player) {}
-
-void Board::firstGoal(const int coordinate, Player player) {}
 
 // loops through students when a 7 is rolled and checks if
 // the student will lose half their resources
@@ -356,7 +359,7 @@ void Board::loadGame(string loadFile, Player &whoseTurn) {
   		} else if (lineNumber == 6) {
 				stringstream lineStream;
 				lineStream << line;
-				while (lineStream) { // do i need a sstream
+				while (lineStream) {
 					int type;
 					Resource resourceType;
 					int value;
