@@ -280,7 +280,7 @@ Player Board::whoWon() {
 
 void Board::saveGame(Player curTurn) {
   cout << "Please name your save file:" << endl;
-  string name;
+  string name, studentPrint;
   cin >> name;
   ofstream saveFile(name + ".txt"); // change this to date and time
   if (curTurn == Player::Blue) {
@@ -683,7 +683,7 @@ void Board::print() {
 
 void Board::status() {
 	for (auto student: students) {
-		student.printStatus(); // check with student class
+		students.printStatus(); // check with student class
 	}
 }
 
