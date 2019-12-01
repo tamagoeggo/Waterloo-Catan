@@ -246,23 +246,28 @@ void Student::loseResources(){
 
     for(int i = 0; i < numLost; i++){
       random_shuffle(keys.begin(), keys.end());
-      while(resources.[keys.front()] == 0){
+      while(this->resources.[keys.front()] == 0){
         random_shuffle(keys.begin(), keys.end());
       }
       if(keys.front() == Resource::Caffeine){
-        numCaffeines += resources[keys.front()];
+        numCaffeines += 1;
+        this->resources.[keys.front()] -= 1;
       }
       else if(keys.front() == Resource::Lab){
-        numLabs += resources[keys.front()];
+        numLabs += 1;
+        this->resources.[keys.front()] -= 1;
       }
       else if(keys.front() == Resource::Lecture){
-        numLectures += resources[keys.front()];
+        numLectures += 1;
+        this->resources.[keys.front()] -= 1;
       }
       else if(keys.front() == Resource::Study){
-        numStudies += resources[keys.front()];
+        numStudies += 1;
+        this->resources.[keys.front()] -= 1;
       }
       else if(keys.front() == Resource::Tutorial){
-        numTutorials += resources[keys.front()];
+        numTutorials += 1;
+        this->resources.[keys.front()] -= 1;
       }
     }
 
