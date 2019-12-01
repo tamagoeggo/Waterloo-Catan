@@ -95,6 +95,15 @@ string Student::returnCriteria(){
   return output;
 }
 
+// used for saving student studentData
+// <numCaffeines> <numLabs> <numLectures> <numStudies> <numTutorials> g <goals> c <criteria>
+// 3.7
+string printStudent(){
+  string output = "";
+  output += returnResources() + " g " + returnGoals() + " c " + returnCriteria();
+  return output;
+}
+
 // prints the resource status of the student
 // reference assignment section 2.7
 string Student::printResources(){

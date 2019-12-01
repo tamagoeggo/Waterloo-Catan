@@ -27,6 +27,7 @@ class Student {
 	std::string returnResources(); // for saving file
 	std::string returnGoals(); // for saving file
 	std::string returnCriteria(); // for saving file
+	std::string printStudent(); // calls returnResources, returnGoals, returnCriteria
 
 	std::string printResources();
 	//std::string printGoals();
