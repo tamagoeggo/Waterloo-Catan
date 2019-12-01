@@ -268,19 +268,19 @@ void Student::loseResources(){
 
     // <numResource> <resourceName>
     if(numCaffeines != 0){
-      cout << numCaffeines << " " << Caffeine << endl;
+      cout << numCaffeines << " " << "Caffeine" << endl;
     }
     if(numLabs != 0){
-      cout << numLabs << " " << Lab << endl;
+      cout << numLabs << " " << "Lab" << endl;
     }
     if(numLectures != 0){
-      cout << numLectures << " " << Lecture << endl;
+      cout << numLectures << " " << "Lecture" << endl;
     }
     if(numStudies != 0){
-      cout << numStudies << " " << Study << endl;
+      cout << numStudies << " " << "Study" << endl;
     }
     if(numTutorials != 0){
-      cout << numTutorials << " " << Tutorial << endl;
+      cout << numTutorials << " " << "Tutorial" << endl;
     }
   }
 }
