@@ -152,17 +152,17 @@ void Board::rowSetup(const int n, vector<vector<Criterion *>> &criterion, vector
 	for (int i = 0; i < patternedRow; ++i) {	// first set of special rows
 		if (i % 2 == 0) {
 			for (int j = 0; j < k; ++j) {
-				goal[i].emplace_back(new Goal(goalNo));
+				goal[i].emplace_back(make_unique<Goal>(goalNo));
 				++goalNo;
 			}
 			for (int j = 0; j < (2 * k); ++j) {
-				criterion[i].emplace_back(new Criterion(criterionNo));
+				criterion[i].emplace_back(make_unique<Criterion>(criterionNo));
 				++criterionNo;
 			}
 		}
 		else {
 			for (int j = 0; j < (2 * k); ++j) {
-				goal[i].emplace_back(new Goal(goalNo));
+				goal[i].emplace_back(make_unique<Goal>(goalNo));
 				++goalNo;
 			}
 			++k;
@@ -174,19 +174,19 @@ void Board::rowSetup(const int n, vector<vector<Criterion *>> &criterion, vector
 	for (int i = patternedRow; i < secondPatternedRow; ++i) {
 		if (i % 2 == 0) {
 			for (int j = 0; j < temp; ++j) {
-				goal[i].emplace_back(new Goal(goalNo));
+				goal[i].emplace_back(make_unique<Goal>(goalNo));
 				++goalNo;
 			}
 			if (temp == n) { ++temp; }
 			else { --temp; }
 			for (int j = 0; j < ((2 * n) + 2); ++j) {
-				criterion[i].emplace_back(new Criterion(criterionNo));
+				criterion[i].emplace_back(make_unique<Criterion>(criterionNo));
 				++criterionNo;
 			}
 		}
 		else {
 			for (int j = 0; j < ((2 * n) + 2); ++j) {
-				goal[i].emplace_back(new Goal(goalNo));
+				goal[i].emplace_back(make_unique<Goal>(goalNo));
 				++goalNo;
 			}
 		}
@@ -196,17 +196,17 @@ void Board::rowSetup(const int n, vector<vector<Criterion *>> &criterion, vector
 	for (int i = secondPatternedRow; i < (8 * n) + 5; ++i) {
 		if (i % 2 != 0) {
 			for (int j = 0; j < (2 * k); ++j) {
-				goal[i].emplace_back(new Goal(goalNo));
+				goal[i].emplace_back(make_unique<Goal>(goalNo));
 				++goalNo;
 			}
 		}
 		else {
 			for (int j = 0; j < k; ++j) {
-				goal[i].emplace_back(new Goal(goalNo));
+				goal[i].emplace_back(make_unique<Goal>(goalNo));
 				++goalNo;
 			}
 			for (int j = 0; j < (2 * k); ++j) {
-				criterion[i].emplace_back(new Criterion(criterionNo));
+				criterion[i].emplace_back(make_unique<Criterion>(criterionNo));
 				++criterionNo;
 			}
 			--k;
