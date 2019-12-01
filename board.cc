@@ -95,6 +95,19 @@ Board::Board(int layer){
 
 }
 
+// moves geese to a coordinate on the board,
+// updating geeseAt
+void Board::moveGeese(int coordinates){
+  if(geeseAt != -1){
+    tiles[geeseAt]->toggleGeese();
+  }
+  if(coordinates == geeseAt || coordinates > 18 || coordinates < 0){
+    throw std::invalid_argument("Invalid coordinates");
+  }
+  geeseAt = coordinates;
+  tiles[coordinates]->toggleGeese();
+}
+
 // prints Student data, a method used for save and load
 // <numCaffeines> <numLabs> <numLectures> <numStudies> <numTutorials> g <goals> c <criteria>
 string Board::printStudent(Student student) {
@@ -140,7 +153,7 @@ void Board::loadGame() {
 	ifstream saveFile("example.txt");
 	if (saveFile.is_open()) {
 		while (getline(saveFile, line)) {
-			
+
 		}
 		saveFile.close();
 	}
