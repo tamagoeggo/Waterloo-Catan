@@ -2,7 +2,7 @@
 using namespace std;
 
 // ctor with randomized resources and value, init textdisplay
-Board::Board(/*int seed, */string board = "default", int layer = 2){
+Board::Board(string board, int layer) {
 	if (board != "default") {
 			stringstream lineStream;
 			lineStream << board;
@@ -52,7 +52,7 @@ Board::Board(/*int seed, */string board = "default", int layer = 2){
   updateCriterionsNeighbor();
 
   // init  goals
-  size_t total_size{ 0 };
+  total_size = 0;
   for (auto const& row: goalv) {
       total_size += row.size();
   }
@@ -79,29 +79,30 @@ Board::Board(/*int seed, */string board = "default", int layer = 2){
 	random_shuffle(resourcetype.begin(), resourcetype.end());
 
   // init tiles
+	unique_ptr<Tile> newtile;
   for (int i = 0; i < 19; i++) {
     if(resourcetype.front() == Resource::Netflix){
-      unique_ptr<Tile> newtile = make_unique<Tile>(7, resourcetype.front());
+      newtile = make_unique<Tile>(7, resourcetype.front());
     }
     else{
-      unique_ptr<Tile> newtile = make_unique<Tile>(values.front(), resourcetype.front());
-      values.pop_front();
+      newtile = make_unique<Tile>(values.front(), resourcetype.front());
+      values.erase(values.begin());
     }
-    resourcetype.pop_front();
+    resourcetype.erase(resourcetype.begin());
     tiles.emplace_back(newtile);
   }
 
   // The assignments will be chosen by students in the order Blue, Red, Orange, Yellow, Yellow, Orange, Red, Blue.
   // 4.1
   // init students
-  unique_ptr<Student> newstud = make_unique<Student>(Player::Blue);
-  students.emplace_back(newstud);
-  unique_ptr<Student> newstud = make_unique<Student>(Player::Red);
-  students.emplace_back(newstud);
-  unique_ptr<Student> newstud = make_unique<Student>(Player::Orange);
-  students.emplace_back(newstud);
-  unique_ptr<Student> newstud = make_unique<Student>(Player::Yellow);
-  students.emplace_back(newstud);
+  unique_ptr<Student> newstud1 = make_unique<Student>(Player::Blue);
+  students.emplace_back(newstud1);
+  unique_ptr<Student> newstud2 = make_unique<Student>(Player::Red);
+  students.emplace_back(newstud2);
+  unique_ptr<Student> newstud3 = make_unique<Student>(Player::Orange);
+  students.emplace_back(newstud3);
+  unique_ptr<Student> newstud4 = make_unique<Student>(Player::Yellow);
+  students.emplace_back(newstud4);
 
   // init TextDisplay
   td = make_unique<TextDisplay>(values, resourcetype);
