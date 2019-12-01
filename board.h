@@ -22,14 +22,14 @@ class Board {
 	std::string printStudent(Student); // method used for save and load
 
 	void saveGame(Player curTurn); // takes in current player turn to save for next time
-	void loadGame(string loadFile);
+	void loadGame(string loadFile, Player &whoseTurn);
 
 	// constructs goals and criterions (coordinates) in vec of vec
 	void rowSetup(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal); // DONE
 	// adds goals to criterion and adds neighbors to goals
 	void update(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal); // DONE
 	void setDice(string type); // DONE
-	void roll(); // DONE
+	void roll();
 	void print(); // DONE
 	void status(); // DONE
 	void criteria(Player player); // DONE

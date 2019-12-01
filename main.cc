@@ -29,28 +29,28 @@ int main(int argc, char* argv[]) {
     	if (argv[i] == "-seed") {
     		try {
     			seed = int(argv[i + 1]);
-    		} catch {
-    			cerr << "Missing Seed";
+    		} catch (...) {
+    			cerr << "Missing Seed" << endl;
     		}
     	} else if (argv[i] == "-load") {
     		try {
     			load = argv[i + 1];
-    		} catch {
-    			cerr << "Missing Load File";
+    		} catch (...) {
+    			cerr << "Missing Load File" << endl;
     		}
     	} else if (argv[i] == "-board") {
     		try {
     			board = argv[i + 1];
-    		} catch {
-    			cerr << "Missing Board File";
+    		} catch (...) {
+    			cerr << "Missing Board File" << endl;
     		}
     	}
     }
 	}
-	b = Board(seed, board);
-	b.loadGame(load);
-	bool rolled = false;
 	Player whoseTurn = Player::Blue;
+	b = Board(seed, board);
+	b.loadGame(load, &whoseTurn);
+	bool rolled = false;
 	while (true) {
 		bool firstAssignment = true;
 		if (whoseTurn == Player::Blue) {
