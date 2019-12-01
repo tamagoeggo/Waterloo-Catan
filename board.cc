@@ -95,11 +95,13 @@ Board::Board(int layer){
 
 }
 
+// prints Student data, a method used for save and load
+// <numCaffeines> <numLabs> <numLectures> <numStudies> <numTutorials> g <goals> c <criteria>
 string Board::printStudent(Student student) {
 	string studentData = "";
-	studentData += student.printResources() + " g "
-	+ student.printGoals() + " c "
-	+ student.printCriteria();
+	studentData += student.returnResources()
+  + " g " + student.returnGoals()
+  + " c " + student.returnCriteria();
 	return studentData;
 }
 
