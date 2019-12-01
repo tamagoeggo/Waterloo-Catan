@@ -101,6 +101,14 @@ void Board::completeCriterion(int coordinate, Player player) {
 	// }
 }
 
+// loops through students when a 7 is rolled and checks if
+// the student will lose half their resources
+void Board::loseResourcesGeese(){
+  for(auto const &student: students){
+    student.loseResources();
+  }
+}
+
 // moves geese to a coordinate on the board,
 // updating geeseAt
 void Board::moveGeese(int coordinates){

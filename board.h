@@ -17,7 +17,8 @@ class Board {
 	void placeGoal(int coordinate, Player player); // places goals(similar to setPiece in a4q4)
 	void upgradeCriterion(int coordinate, Player player);
 
-	void moveGeese(int coordinates); // look at assignment specifications for what moving a goose means
+	void loseResourcesGeese(); // function called if 7 is rolled
+	void moveGeese(int coordinates); // moves geese to new tile
 	Player whoWon();
 	std::string printStudent(Student); // method used for save and load
 

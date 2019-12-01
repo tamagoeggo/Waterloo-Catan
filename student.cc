@@ -2,6 +2,9 @@
 #include <iostream>   // std::cout
 #include <string>     // std::string, std::to_string
 #include <vector>
+#include <algorithm>    // std::random_shuffle
+#include <ctime>
+#include <cstdlib>      // std::rand, std::srand
 using namespace std;
 
 // ctor
@@ -26,6 +29,11 @@ void Student::updateCriterion(Criterion *crit) {
 // updates the vector of goals a student has completed
 void Student::updateGoal(Goal *goal) {
   goals.emplace_back(goal);
+}
+
+// return the total number of resources as an ini
+int Student::numResources(){
+  return resources.size();
 }
 
 // A student’s data is printed out as follows:
@@ -58,7 +66,7 @@ string Student::returnResources() {
   if(resources.count(Resource::Tutorial)) {
     num = to_string(resources[Resource::Tutorial]);
   }
-  output += "and " + num + " ";
+  output += num;
   num = "0";
 
   return output;
@@ -203,7 +211,62 @@ void Student::stealResources(Student &student){
   }
 }
 
-
+// checks if student will lose resources from a geese roll
+//  Any student with 10 or more resources will lose half of their resources (rounded down)
+// 3.6
 void Student::loseResources(){
-  return;
+  if(numResources() >= 10){
+    int numLost = numResources() / 2;
+    vector<string> keys;
+    int numCaffeines = 0;
+    int numLabs = 0;
+    int numLectures = 0;
+    int numStudies = 0;
+    int numTutorials = 0;
+    cout << "Student " << player << " loses " << numLost << " resources to the geese. They lose:" << endl;
+    srand(time(NULL)); // seed
+
+    for(const auto &res : resources){
+      keys.emplace_back(res.first);
+    }
+
+    for(int i = 0; i < numLost; i++){
+      random_shuffle(keys.begin(), keys.end());
+      while(resources[keys.front()] == 0){
+        random_shuffle(keys.begin(), keys.end());
+      }
+      if(keys.front() == Resource::Caffeine){
+        numCaffeines += resources[keys.front()];
+      }
+      else if(keys.front() == Resource::Lab){
+        numLabs += resources[keys.front()];
+      }
+      else if(keys.front() == Resource::Lecture){
+        numLectures += resources[keys.front()];
+      }
+      else if(keys.front() == Resource::Study){
+        numStudies += resources[keys.front()];
+      }
+      else if(keys.front() == Resource::Tutorial){
+        numTutorials += resources[keys.front()];
+      }
+    }
+
+    // <numResource> <resourceName>
+    if(numCaffeines != 0){
+      cout << numCaffeines << " " << Caffeine << endl;
+    }
+    if(numLabs != 0){
+      cout << numLabs << " " << Lab << endl;
+    }
+    if(numLectures != 0){
+      cout << numLectures << " " << Lecture << endl;
+    }
+    if(numStudies != 0){
+      cout << numStudies << " " << Study << endl;
+    }
+    if(numTutorials != 0){
+      cout << numTutorials << " " << Tutorial << endl;
+    }
+  }
 }
