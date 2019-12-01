@@ -21,7 +21,7 @@ using namespace std;
 int main(int argc, char* argv[]) {
 	int seed = 133436;
 	string load = "default";
-	string board = "default";
+	//string board = "default";
 	Board b;
   for (int i = 0; i < argc; ++i) {
     cout << argv[i] << "\n";
@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
     }
 	}
 	Player whoseTurn = Player::Blue;
-	b = Board(seed, board);
+	b = Board(/*seed, board*/);
 	b.loadGame(load, &whoseTurn);
 	bool rolled = false;
 	while (true) {
@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
 		}
 		int placeCriterionAt;
 		cin >> placeCriterionAt;
-		b.placeCriterion(placeCriterionAt);
+		b.firstCriterion(placeCriterionAt);
 		int placeGoalAt;
 		cin >> placeGoalAt;
 		b.placeGoal(placeGoalAt);
@@ -126,7 +126,7 @@ int main(int argc, char* argv[]) {
 		} else if (command == "complete") {
 			int criterion;
 			cin >> criterion;
-			b.placeCriterion(criterion, whoseTurn);
+			b.completeCriterion(criterion, whoseTurn);
 		} else if (command == "improve") {
 			int criterion;
 			cin >> criterion;
