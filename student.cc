@@ -6,6 +6,7 @@
 #include <algorithm>    // std::random_shuffle
 #include <ctime>
 #include <cstdlib>      // std::rand, std::srand
+#include "criterion.h"
 using namespace std;
 
 // ctor
@@ -178,13 +179,13 @@ void Student::trade(Student stud, Resource resource1, Resource resource2){
 int Student::getPoints(){
   int points = 0;
   for(const auto &completed: criteria){
-    if(completed.getState().type == Type::Assignment){
+    if(completed->getState().type == Type::Assignment){
       points += 1;
     }
-    else if(completed.getState().type == Type::Midterm){
+    else if(completed->getState().type == Type::Midterm){
       points += 2;
     }
-    else if(completed.getState().type == Type::Exam){
+    else if(completed->getState().type == Type::Exam){
       points += 3;
     }
   }
@@ -230,7 +231,7 @@ void Student::stealResources(Student &student){
 void Student::loseResources(){
   if(numResources() >= 10){
     int numLost = numResources() / 2;
-    vector<string> keys;
+    vector<Resource> keys;
     int numCaffeines = 0;
     int numLabs = 0;
     int numLectures = 0;
@@ -245,7 +246,7 @@ void Student::loseResources(){
 
     for(int i = 0; i < numLost; i++){
       random_shuffle(keys.begin(), keys.end());
-      while(resources[keys.front()] == 0){
+      while(resources.[keys.front()] == 0){
         random_shuffle(keys.begin(), keys.end());
       }
       if(keys.front() == Resource::Caffeine){
@@ -267,19 +268,19 @@ void Student::loseResources(){
 
     // <numResource> <resourceName>
     if(numCaffeines != 0){
-      cout << numCaffeines << " " << Caffeine << endl;
+      cout << numCaffeines << " " << "Caffeine" << endl;
     }
     if(numLabs != 0){
-      cout << numLabs << " " << Lab << endl;
+      cout << numLabs << " " << "Lab" << endl;
     }
     if(numLectures != 0){
-      cout << numLectures << " " << Lecture << endl;
+      cout << numLectures << " " << "Lecture" << endl;
     }
     if(numStudies != 0){
-      cout << numStudies << " " << Study << endl;
+      cout << numStudies << " " << "Study" << endl;
     }
     if(numTutorials != 0){
-      cout << numTutorials << " " << Tutorial << endl;
+      cout << numTutorials << " " << "Tutorial" << endl;
     }
   }
 }

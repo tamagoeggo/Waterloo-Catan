@@ -1,9 +1,11 @@
 #ifndef _LOADED_H_
 #define _LOADED_H_
 
+#include "dice.h"
+
 class Loaded: public Dice {
 	int value;
-	Public:
+	public:
 	Loaded(int); //ctor
 	int roll();
 };
