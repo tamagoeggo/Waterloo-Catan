@@ -1,5 +1,7 @@
 #include "criterion.h"
 #include "goal.h"
+#include <iostream>
+#include <string>
 using namespace std;
 
 Criterion::Criterion(int coordinate):coordinate{coordinate} {
@@ -7,13 +9,28 @@ Criterion::Criterion(int coordinate):coordinate{coordinate} {
 	// init neighbors
 }
 
-void Criterion::updateOccupant(unique_ptr<Student> newOccupant) {
+void Criterion::updateOccupant(Student *newOccupant) {
 	occupiedBy = move(newOccupant);
 	this->upgrade();
 }
 
-string Criterion::getStudent() {
-	return occupiedBy->getStudent();	// verify getStudent or getPlayer and what happens if there's no student
+Student *Criterion::getStudent() {
+	return occupiedBy;	// verify getStudent or getPlayer and what happens if there's no student
+}
+
+void Criterion::sendResources(Resource resource) {
+	if (type == Completion::Assignment) {
+		occupiedBy->updateResources(resource, 1);
+	}
+	else if (type == Completion::Midterm) {
+		occupiedBy->updateResources(resource, 2);
+	}
+	else if (type == Completion::Exam) {
+		occupiedBy->updateResources(resource, 3);
+	}
+	else {
+		cout << "Throw an exception here" << endl;
+	}
 }
 
 void Criterion::upgrade() {
@@ -27,8 +44,7 @@ void Criterion::upgrade() {
 }
 
 State Criterion::getState() {
-	State state = State{occupiedBy->getStudent(), // verify getStudent or getPlayer
-											type, coordinate};
+	State state = State{occupiedBy->getPlayer(), type, coordinate};
 	return state;
 }
 
