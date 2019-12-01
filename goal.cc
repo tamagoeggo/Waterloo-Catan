@@ -1,22 +1,20 @@
 #include "goal.h"
 #include "criterion.h"
+#include "type.h"
 using namespace std;
 
-Goal::Goal(int coordinate): coordinate{coordinate} {
-	// init neighbors here
-}
+Goal::Goal(int coordinate): coordinate{coordinate} {}
 
-void Goal::updateOccupant(unique_ptr<Student> newOccupant) {
+void Goal::updateOccupant(Student *newOccupant) {
 	occupiedBy = move(newOccupant);
 }
 
-string Goal::getStudent() {
-	return occupiedBy->getStudent(); // verify and what happens if there's no students
+Student *Goal::getStudent() {
+	return occupiedBy; // verify and what happens if there's no students
 }
 
 State Goal::getState() {
-	State state = State{occupiedBy->getStudent(), // verify getStudent or getPlayer
-											type, coordinate};
+	State state = State{occupiedBy->getPlayer(), Type::Achievement, coordinate};
 	return state;
 }
 

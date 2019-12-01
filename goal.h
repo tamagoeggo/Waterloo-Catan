@@ -10,12 +10,12 @@ class Criterion;
 
 class Goal : public Subject { // Road
 	int coordinate;
-	Student *occupiedBy;
+	Student *occupiedBy = nullptr;
 	vector<Criterion *> neighbors;
 	public:
 	Goal(int coordinate); // ctor
 	void updateOccupant(Student *); // updates occupiedBy
-	std::string getStudent();
+	Student *getStudent();
 	State getState() override; // overrides subject function
 	int getCoordinate(); // can be used for printing
 	std::vector<Criterion *> getNeighbors(); // to help criterion

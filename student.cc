@@ -5,11 +5,11 @@
 using namespace std;
 
 // ctor
-Student::Student(Player player): player{player} {}
+Student::Student(Player player) : player{player} {}
 
 // gets player color
 // can be either {Blue, Red, Orange, Yellow, None}
-Player Student::getPlayer(){
+Player Student::getPlayer() {
   return player;
 }
 
