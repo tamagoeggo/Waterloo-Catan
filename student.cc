@@ -100,7 +100,10 @@ string Student::returnCriteria(){
 // 3.7
 string printStudent(){
   string output = "";
-  output += this->returnResources() + " g " + this->returnGoals() + " c " + this->returnCriteria();
+  string res = returnResources();
+  string goals = returnGoals();
+  string crit = returnCriteria();
+  output += res + " g " + goals + " c " + crit;
   return output;
 }
 
