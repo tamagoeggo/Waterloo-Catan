@@ -1,10 +1,11 @@
 #include "textdisplay.h"
 using namespace std;
 
-TextDisplay::TextDisplay(vector<int> values, vector<Resource> resources) {
+TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resources) {
 	vector<string> newValuesString;
 	vector<string> newResourcesString;
 	int netflixAt = -1;
+	
 	for(auto resource: resources) {
 		if (resource == Resource::Caffeine) {
 			string toEmplace = "    CAFFEINE    ";
@@ -34,6 +35,7 @@ TextDisplay::TextDisplay(vector<int> values, vector<Resource> resources) {
 		}
 		newValuesString.emplace_back(toEmplace);
 	}
+	
 	this->valuesString = newValuesString;	// not sure if this actually uses the copy constructor
 	this->newResourcesString = newResourcesString;
 }
@@ -75,7 +77,7 @@ void TextDisplay::notify(Goal *goal) {
 	if (state.type == Type::Achievement) {
 		toReplace += "A";
 	}
-	this->goalString[state.coordinate] = toReplace;
+	this->goalsString[state.coordinate] = toReplace;
 }
 
 void TextDisplay::notify(int geeseAt) {
