@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "subject.h"
-#include "completion.h"
+#include "type.h"
 #include "state.h"
 #include "student.h"
 #include "resource.h"
@@ -13,7 +13,7 @@ class Goal;
 class Criterion : public Subject { // Vertex
 	int coordinate;
 	Student *occupiedBy = nullptr;
-	Completion type = Completion::None; // default is none
+	Type type = Type::None; // default is none
 	std::vector<Goal *> goals;
 	std::vector<Criterion *> neighbors;
 	public:

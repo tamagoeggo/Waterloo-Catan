@@ -11,7 +11,6 @@
 #include <ctime>
 #include <algorithm>    // std::random_shuffle
 #include <cstdlib>      // std::rand, std::srand
-#include <memory>
 using namespace std;
 
 // ctor with randomized resources and value, init textdisplay
@@ -94,7 +93,7 @@ Board::Board(/*int seed, */string board = "default", int layer = 2){
 
   // init tiles
   for (int i = 0; i < 19; i++) {
-    if(resourcetype.front() == Resource::Netflix`){
+    if(resourcetype.front() == Resource::Netflix){
       unique_ptr<Tile> newtile = make_unique<Tile>(7, resourcetype.front());
     }
     else{
@@ -147,7 +146,6 @@ void Board::completeCriterion(const int coordinate, const Player player) {
 	}
 	else {
 		criterion[coordinate]->updateOccupant(students[iter].get());
-<<<<<<< HEAD
 		criterion[coordinate]->upgrade(); 								// update the type of achievement at criterion
 		students[iter]->resourcesSpent(Type::Assignment); 				// decrease Player's resources
 		students[iter]->updateCriterion(criterion[coordinate].get());	// update Player's criterion owned list
@@ -239,13 +237,7 @@ void Board::firstGoal(const int coordinate, Player player) {
 	}
 }
 
-=======
-		criterion[coordinate]->upgrade();
-		students[iter]->resourcesSpent(Type::Assignment);
-	}
-}
 
->>>>>>> 7ea0cbd6a33e289913681b868f1d36b4c67019cc
 // loops through students when a 7 is rolled and checks if
 // the student will lose half their resources
 void Board::loseResourcesGeese() {

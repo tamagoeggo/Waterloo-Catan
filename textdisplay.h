@@ -4,12 +4,13 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "resource.h"
 #include "criterion.h"
 #include "goal.h"
 #include "observer.h"
 #include "state.h"
 
-class TextDisplay: public Observer {
+class TextDisplay : public Observer {
 	int geeseAt = -1;
 	std::vector<std::string> criteriaString = {" 0", " 1", " 2", " 3", " 4",
 		" 5", " 6", " 7", " 8", " 9", "10",

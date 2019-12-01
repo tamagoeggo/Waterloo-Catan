@@ -19,13 +19,13 @@ Student *Criterion::getStudent() {
 }
 
 void Criterion::sendResources(Resource resource) {
-	if (type == Completion::Assignment) {
+	if (type == Type::Assignment) {
 		occupiedBy->updateResources(resource, 1);
 	}
-	else if (type == Completion::Midterm) {
+	else if (type == Type::Midterm) {
 		occupiedBy->updateResources(resource, 2);
 	}
-	else if (type == Completion::Exam) {
+	else if (type == Type::Exam) {
 		occupiedBy->updateResources(resource, 3);
 	}
 	else {
@@ -34,12 +34,12 @@ void Criterion::sendResources(Resource resource) {
 }
 
 void Criterion::upgrade() {
-	if (this->type == Completion::None) {
-		type = Completion::Assignment;
-	} else if (this->type == Completion::Assignment) {
-		type = Completion::Midterm;
-	} else if (this->type == Completion::Midterm) {
-		type = Completion::Exam;
+	if (this->type == Type::None) {
+		type = Type::Assignment;
+	} else if (this->type == Type::Assignment) {
+		type = Type::Midterm;
+	} else if (this->type == Type::Midterm) {
+		type = Type::Exam;
 	}
 	else {
 		throw "Invalid command; Criterion is already an Exam.";

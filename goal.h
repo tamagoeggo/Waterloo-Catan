@@ -5,13 +5,14 @@
 #include <string>
 #include "state.h"
 #include "student.h"
+#include "subject.h"
 
 class Criterion;
 
 class Goal : public Subject { // Road
 	int coordinate;
 	Student *occupiedBy = nullptr;
-	vector<Criterion *> neighbors;
+	std::vector<Criterion *> neighbors;
 	public:
 	Goal(int coordinate); // ctor
 	void updateOccupant(Student *); // updates occupiedBy

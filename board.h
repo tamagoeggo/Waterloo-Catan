@@ -1,12 +1,24 @@
 #ifndef _BOARD_H_
 #define _BOARD_H_
 
+#include <memory>
+#include <vector>
+#include "dice.h"
+
+class Tile;
+class Criterion;
+class Goal;
+class Student;
+class TextDisplay;
+enum class Player;
+enum class Resource;
+
 class Board {
-	std::vector<unique_ptr<Tile>> tiles;
-	std::vector<unique_ptr<Criterion>> criterion; // need for putting down criteria
-	std::vector<unique_ptr<Goal>> goals; // need for putting down goals
-	std::vector<unique_ptr<Student>> students;
-	unique_ptr<TextDisplay> td = nullptr;  // to call textdisplay to update it and notify it
+	std::vector<std::unique_ptr<Tile>> tiles;
+	std::vector<std::unique_ptr<Criterion>> criterion; // need for putting down criteria
+	std::vector<std::unique_ptr<Goal>> goals; // need for putting down goals
+	std::vector<std::unique_ptr<Student>> students;
+	std::unique_ptr<TextDisplay> td = nullptr;  // to call textdisplay to update it and notify it
 	Dice dice; // dice
 	int geeseAt = -1;
 	public:
@@ -27,13 +39,13 @@ class Board {
 	std::string printStudent(Student); // method used for save and load
 
 	void saveGame(Player curTurn); // takes in current player turn to save for next time
-	void loadGame(string loadFile, Player &whoseTurn);
+	void loadGame(std::string loadFile, Player &whoseTurn);
 
 	// constructs goals and criterions (coordinates) in vec of vec
-	void rowSetup(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal); // DONE
+	void rowSetup(const int layer, std::vector<std::vector<Criterion *>> &criterion, std::vector<std::vector<Goal *>> &goal); // DONE
 	// adds goals to criterion and adds neighbors to goals
-	void update(const int layer, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal); // DONE
-	void setDice(string type); // DONE
+	void update(const int layer, std::vector<std::vector<Criterion *>> &criterion, std::vector<std::vector<Goal *>> &goal); // DONE
+	void setDice(std::string type); // DONE
 	void roll();
 	void print(); // DONE
 	void status(); // DONE
