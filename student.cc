@@ -98,12 +98,12 @@ string Student::returnCriteria(){
 // used for saving student studentData
 // <numCaffeines> <numLabs> <numLectures> <numStudies> <numTutorials> g <goals> c <criteria>
 // 3.7
-string printStudent(){
+string Student::printStudent(){
   string output = "";
-  string res = returnResources();
-  string goals = returnGoals();
-  string crit = returnCriteria();
-  output += res + " g " + goals + " c " + crit;
+  string res = this->returnResources();
+  string goals = this->returnGoals();
+  string crit = this->returnCriteria();
+  output = res + " g " + goals + " c " + crit;
   return output;
 }
 
