@@ -53,11 +53,11 @@ Board::Board(/*int seed, */string board = "default", int layer = 2){
 
   // init Criterion
   size_t total_size{ 0 };
-  for (auto const& row: criterionv){
+  for (auto const& row: criterionv) {
       total_size += row.size();
   }
   criterion.reserve(total_size);
-  for (auto const& row: criterionv){
+  for (auto const& row: criterionv) {
       for (auto const& crit: row){
         criterion.emplace_back(move(crit));
       }
@@ -67,7 +67,7 @@ Board::Board(/*int seed, */string board = "default", int layer = 2){
 
   // init  goals
   size_t total_size{ 0 };
-  for (auto const& row: goalv){
+  for (auto const& row: goalv) {
       total_size += row.size();
   }
   goals.reserve(total_size);
@@ -93,7 +93,7 @@ Board::Board(/*int seed, */string board = "default", int layer = 2){
 	random_shuffle(resourcetype.begin(), resourcetype.end());
 
   // init tiles
-  for(int i = 0; i < 19; i++){
+  for (int i = 0; i < 19; i++) {
     if(resourcetype.front() == Resource::Netflix`){
       unique_ptr<Tile> newtile = make_unique<Tile>(7, resourcetype.front());
     }
@@ -154,7 +154,7 @@ void Board::completeCriterion(const int coordinate, const Player player) {
 
 // loops through students when a 7 is rolled and checks if
 // the student will lose half their resources
-void Board::loseResourcesGeese(){
+void Board::loseResourcesGeese() {
   for(auto const &student: students){
     student.loseResources();
   }
@@ -162,7 +162,7 @@ void Board::loseResourcesGeese(){
 
 // moves geese to a coordinate on the board,
 // updating geeseAt
-void Board::moveGeese(int coordinates){
+void Board::moveGeese(int coordinates) {
   if(geeseAt != -1){
     tiles[geeseAt]->toggleGeese();
   }
@@ -171,6 +171,24 @@ void Board::moveGeese(int coordinates){
   }
   geeseAt = coordinates;
   tiles[coordinates]->toggleGeese();
+}
+
+Player Board::whoWon() {
+	int bluePoints = this->students[0]->getPoints();
+	int redPoints = this->students[1]->getPoints();
+	int orangePoints = this->students[2]->getPoints();
+	int yellowPoints = this->students[3]->getPoints();
+	if (bluePoints >= 10) {
+		return Player::Blue;
+	} else if (redPoints >= 10) {
+		return Player::Red;
+	} else if (orangePoints >= 10) {
+		return Player::Orange;
+	} else if (yellowPoints >= 10) {
+		return Player::Yellow;
+	} else {
+		return Player::None;
+	}
 }
 
 // prints Student data, a method used for save and load
