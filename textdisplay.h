@@ -50,7 +50,7 @@ class TextDisplay : public Observer {
 		"      14     ", "      15     ", "      16     ", 
 		"      17     ", "      18     "};
 	public:
-	TextDisplay(vector<int> values, vector<Resource> resources);
+	TextDisplay(std::vector<int> values, std::vector<Resource> resources);
 	void notify(Criterion *criterion);
 	void notify(Goal *goal);
 	void notify(int geeseAt);
