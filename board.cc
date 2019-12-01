@@ -303,13 +303,13 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
 		while (getline(saveFile, line)) {
 			if (lineNumber == 1) {
 				if (line == "blue") {
-					whoseTurn = *Player::Blue;
+					*whoseTurn = Player::Blue;
 				} else if (line == "red") {
-					whoseTurn = *Player::Red;
+					*whoseTurn = Player::Red;
 				} else if (line == "orange") {
-					whoseTurn = *Player::Orange;
+					*whoseTurn = Player::Orange;
 				} else { // line == "yellow"
-					whoseTurn = *Player::Yellow;
+					*whoseTurn = Player::Yellow;
 				}
 			} else if (lineNumber == 2) {
   			stringstream lineStream;
@@ -370,7 +370,7 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			} else if (inputType == "goal") {
       			students[1]->updateGoal(goals[stoi(num)].get());
     			} else if (inputType == "criterion") {
-      			students[1]->updateCriterion(criterion[stoi(num)].get();
+      			students[1]->updateCriterion(criterion[stoi(num)].get());
     			}
   			}
 			} else if (lineNumber == 4) {
