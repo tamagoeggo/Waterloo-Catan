@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
   for (int i = 0; i < argc; ++i) {
     cout << argv[i] << "\n";
     if (i > 0 && i % 2 == 0) { // if it is a command line option
-    	if (argv[i] == "-seed") {
+    	if (argv[i].compare("-seed")) {
     		try {
     			seed = int(argv[i + 1]);
 					seed_set = true;
@@ -32,13 +32,13 @@ int main(int argc, char* argv[]) {
     			cerr << "Missing Seed" << endl;
 					seed_set = false;
     		}
-    	} else if (argv[i] == "-load") {
+    	} else if (argv[i].compare("-load")) {
     		try {
     			load = argv[i + 1];
     		} catch (...) {
     			cerr << "Missing Load File" << endl;
     		}
-    	} else if (argv[i] == "-board") {
+    	} else if (argv[i].compare("-board")) {
     		try {
     			board = argv[i + 1];
     		} catch (...) {
@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
 		srand(time(NULL));
 	}
 	Player whoseTurn = Player::Blue;
-	b = Board(/*seed, */board);
+	b = Board(board);
 	b.loadGame(load, &whoseTurn);
 	bool rolled = false;
 	while (true) {
@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
 		b.firstCriterion(placeCriterionAt);
 		int placeGoalAt;
 		cin >> placeGoalAt;
-		b.placeGoal(placeGoalAt);
+		b.firstGoal(placeGoalAt);
 		if (firstAssignment) {
 			if (whoseTurn == Player::Blue) {
 				whoseTurn = Player::Red;
@@ -125,7 +125,7 @@ int main(int argc, char* argv[]) {
 		} else if (command == "achieve") { // consider the number
 			int goal;
 			cin >> goal;
-			b.placeGoal(goal, whoseTurn);
+			b.achieveGoal(goal, whoseTurn);
 		} else if (command == "complete") {
 			int criterion;
 			cin >> criterion;
@@ -133,7 +133,7 @@ int main(int argc, char* argv[]) {
 		} else if (command == "improve") {
 			int criterion;
 			cin >> criterion;
-			b.improveCriterion(coordinate, whoseTurn);
+			b.upgradeCriterion(coordinate, whoseTurn);
 		} else if (command == "trade") {
 			Player tradeWith;
 			Resource give;
