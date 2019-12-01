@@ -1,9 +1,12 @@
 #include "board.h"
-#include "player.h"
 #include "tile.h"
+#include "criterion.h"
+#include "goal.h"
 #include "student.h"
-#include "resource.h"
 #include "textdisplay.h"
+#include "player.h"
+#include "resource.h"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
