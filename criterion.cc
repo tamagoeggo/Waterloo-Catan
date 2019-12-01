@@ -41,6 +41,9 @@ void Criterion::upgrade() {
 	} else if (this->type == Completion::Midterm) {
 		type = Completion::Exam;
 	}
+	else {
+		throw "Invalid command; Criterion is already an Exam.";
+	}
 }
 
 State Criterion::getState() {
@@ -62,4 +65,20 @@ void Criterion::addNeighbor() {
 		neighbors.emplace_back(goals[i]->getNeighbors()[0]);
 		neighbors.emplace_back(goals[i]->getNeighbors()[1]);
 	}
+}
+
+bool Criterion::areNeighborsUnoccupied() {
+	int size = neighbors.size();
+	for (int i = 0; i < size; ++i) {
+		if (neighbors[i]->getStudent()) return false; // if neighbour is occupied
+	}
+	return true;
+}
+
+bool Criterion::goalsOccupancy(Player player) {
+	int size = goals.size();
+	for (int i = 0; i < size; ++i) {
+		if (goals[i]->getStudent()->getPlayer() == player) return true;
+	}
+	return false;
 }

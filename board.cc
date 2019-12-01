@@ -95,10 +95,31 @@ Board::Board(int layer){
 
 }
 
-void Board::completeCriterion(int coordinate, Player player) {
-	// if (criterion[coordinate]->getStudent()) {
-	// 	throw invalid_argument("")
-	// }
+void Board::completeCriterion(const int coordinate, const Player player) {
+	int iter;
+	for (int i = 0; i < 4; ++i) {
+		if (students[i]->getPlayer() == player) {
+			iter = i;
+			break;
+		}
+	}
+	if (criterion[coordinate]->getStudent()) { // check if criterion is occupied
+		throw "You cannot build here because this Criterion is already completed.";
+	}
+	else if (!criterion[coordinate]->areNeighborsUnoccupied()) {
+		throw "You cannot build here because the adjacent Criterion(s) is(are) completed.";
+	}
+	else if (!criterion[coordinate]->goalsOccupancy(player)) {
+		throw "You cannot build here because you have not achieved any adjacent Goal.";
+	}
+	else if (!students[iter]->resourcesCheck(Type::Assignment)) {
+		throw "You cannot build here because you do not have the necessary Resources.";
+	}
+	else {
+		criterion[coordinate]->updateOccupant(students[iter].get());
+		criterion[coordinate]->upgrade();
+		students[iter]->resourcesSpent(Type::Assignment);
+	}
 }
 
 // moves geese to a coordinate on the board,

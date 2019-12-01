@@ -207,3 +207,61 @@ void Student::stealResources(Student &student){
 void Student::loseResources(){
   return;
 }
+
+bool Student::resourcesCheck(Type type) {
+  if (type == Type::Assignment) {
+    if (resources[Resource::Caffeine] < 1) return false;
+    if (resources[Resource::Lab] < 1) return false;
+    if (resources[Resource::Lecture] < 1) return false;
+    if (resources[Resource::Tutorial] < 1) return false;
+    return true;
+  }
+  else if (type == Type::Midterm) {
+    if (resources[Resource::Lecture] < 2) return false;
+    if (resources[Resource::Study] < 3) return false;
+    return true;
+  }
+  else if (type == Type::Exam) {
+    if (resources[Resource::Caffeine] < 3) return false;
+    if (resources[Resource::Lab] < 2) return false;
+    if (resources[Resource::Lecture] < 2) return false;
+    if (resources[Resource::Tutorial] < 1) return false;
+    if (resources[Resource::Study] < 2) return false;
+    return true;
+  }
+  else if (type == Type::Achievement) {
+    if (resources[Resource::Tutorial] < 1) return false;
+    if (resources[Resource::Study] < 1) return false;
+    return true;
+  }
+  else {
+    throw "Invalid type.";
+  }
+}
+
+void Student::resourcesSpent(Type type) {
+  if (type == Type::Assignment) {
+    resources[Resource::Caffeine] -= 1;
+    resources[Resource::Lab] -= 1;
+    resources[Resource::Lecture] -= 1;
+    resources[Resource::Tutorial] -= 1;
+  }
+  else if (type == Type::Midterm) {
+    resources[Resource::Lecture] -= 2;
+    resources[Resource::Study] -= 3;
+  }
+  else if (type == Type::Exam) {
+    resources[Resource::Caffeine] -= 3;
+    resources[Resource::Lab] -= 2;
+    resources[Resource::Lecture] -= 2;
+    resources[Resource::Tutorial] -= 1;
+    resources[Resource::Study] -= 2;
+  }
+  else if (type == Type::Achievement) {
+    resources[Resource::Tutorial] -= 1;
+    resources[Resource::Study] -= 1;
+  }
+  else {
+    throw "Invalid type.";
+  }
+}

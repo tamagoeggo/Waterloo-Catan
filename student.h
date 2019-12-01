@@ -3,6 +3,7 @@
 
 #include "player.h"
 #include "resource.h"
+#include "type.h"
 #include <map>
 
 class Criterion;
@@ -33,6 +34,9 @@ class Student {
 	int getPoints();
 	void stealResources(Student &student);
 	void loseResources();
+
+	bool resourcesCheck(Type type); // returns true if student owns the necessary resources to complete criterion
+	void resourcesSpent(Type type); // decreases the amount of resources owned depending on the type of criterion completed
 };
 
 #endif
