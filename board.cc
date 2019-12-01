@@ -165,6 +165,9 @@ void Board::saveGame(Player curTurn) {
 //  0 representing CAFFEINE, 1 representing LAB, 2 representing LECTURE, 3 representing STUDY, 4 representing TUTORIAL, and 5 representing NETFLIX
 
 void Board::loadGame(string loadFile, Player &whoseTurn) {
+	if (loadFile == "default") {
+		return;
+	}
 	int lineNumber = 1;
 	string line;
 	ifstream saveFile(loadFile + ".txt");
