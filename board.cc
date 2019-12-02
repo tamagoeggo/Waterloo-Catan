@@ -158,7 +158,6 @@ void Board::firstCriterion(const int coordinate, Player player) {
 	}
 	else {
 		criterion[coordinate]->updateOccupant(students[iter].get());
-		criterion[coordinate]->upgrade();
 		students[iter]->updateCriterion(criterion[coordinate].get());
 		td->notify(criterion[coordinate].get());
 	}
