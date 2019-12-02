@@ -40,8 +40,6 @@ TextDisplay::TextDisplay(std::vector<int> *values, std::vector<Resource> *resour
 			toEmplace = "       " + to_string((*values)[i]) + "       ";
 		}
 		valuesString[j] = toEmplace;
-		cout << "valuesString[valuePosn] is ";
-		cout << valuesString[j] << endl;
 		++j;
 		if (netflixAt != -1) {
 			++i;
