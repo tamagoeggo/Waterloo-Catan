@@ -111,8 +111,6 @@ Board::Board(string board, int layer) {
   unique_ptr<Student> newstud4 = make_unique<Student>(Player::Yellow);
   students.emplace_back(move(newstud4));
 
-  updateCriterionsInTile(layer);
-
 }
 
 void Board::completeCriterion(const int coordinate, const Player player) {
@@ -655,7 +653,8 @@ void Board::roll() {
 	if (dice == "fair") {
 		Fair die = Fair();
 		rolledval = die.roll();
-	} else if (dice == "load") {
+	}
+	else if (dice == "load") {
 		int toLoad;
 		while (true) {
 			cout << "Input a roll between 2 and 12:" << endl;
@@ -671,11 +670,16 @@ void Board::roll() {
 	}
 	// checking tiles that have same value as rolled value
 	// and sending resources
-	//cout << "size of tiles vector" << tiles.size() << endl; // DEBUG
-	for(int i = 0; i < 19; ++i){
+	bool sent = false;
+	for(int i = 0; i < 19; i++){
 		if(tiles[i]->getValue() == rolledval){
-			tiles[i]->sendResources();
+			if(tiles[i]->sendResources()) {
+				sent = true;
+			}
 		}
+	}
+	if(!sent){
+		cout << "No students gained resources." << endl;
 	}
 }
 
@@ -771,12 +775,14 @@ void Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource ta
 
 void Board::criterionAdderHelper(int &iter, const int tileNo) {
 	for (int i = 0; i < 2; ++i) {
-		tiles[tileNo]->addCriterion(criterion[iter].get());
+		tiles[iter]->addCriterion(criterion[iter].get());
 		++iter;
 	}
 }
 
 void Board::updateCriterionsInTile(const int n) {
+	//int totalTiles = (3 * n * n) + (3 * n) + 1;
+
 	int patternStartsAt = (n * (n + 1)) / 2;	// Tile No.
 	double secondPattern = ((n * n) / (double)2) + ((3 * n) / (double)2) + 1;
 	int two_n = 2 * patternStartsAt;    		// counter

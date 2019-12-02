@@ -266,6 +266,10 @@ int main(int argc, char* argv[]) {
 						cerr << "Invalid resource to take. Valid resources: Caffeine, Lab, Lecture, Study, Tutorial" << endl;
 						continue;
 					}
+					if(whoseTurn == tradeWith){
+						cout << "You cannot trade with yourself." << endl;
+						continue;
+					}
 					b.trade(whoseTurn, tradeWith, give, take);
 				}
 				// next player turn

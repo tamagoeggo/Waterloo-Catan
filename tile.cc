@@ -26,10 +26,10 @@ void Tile::toggleGeese() {
 }
 
 // 3.5.5
-void Tile::sendResources() {
+bool Tile::sendResources() {
  bool gained = false;
   if (geeseHere) { return; } // 2.3
-  if (resource == Resource::Netflix) { return; } // 2.2
+  if (resource == Resource::Netflix) { return; } // 2.2 (No resources sent)
   for (int i = 0; i < 6; ++i) {
     if (criterion[i]->getStudent()) { // to check if criterion is occupied
      // Student <colour> gained:
@@ -38,9 +38,7 @@ void Tile::sendResources() {
       gained = true;
     }
   }
-  if (!gained) {
-    cout << "No students gained resources." << endl;
-  }
+  return gained;
 }
 
 void Tile::addCriterion(Criterion *c) {
