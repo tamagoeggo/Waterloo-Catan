@@ -652,9 +652,10 @@ void Board::roll() {
 	int rolledval;
 	if (dice == "fair") {
 		Fair die = Fair();
+		//cout << "die has been made" << endl; // DEBUG
 		rolledval = die.roll();
-	}
-	else if (dice == "load") {
+		//cout << "die has been rolled" << endl; // DEBUG
+	} else if (dice == "load") {
 		int toLoad;
 		while (true) {
 			cout << "Input a roll between 2 and 12:" << endl;

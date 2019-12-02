@@ -148,7 +148,7 @@ int main(int argc, char* argv[]) {
 				cout << "Invalid command" << endl;
 				cin >> command;
 			}
-			 if (command == "roll") {
+			if (command == "roll") {
 				rolled = true;
 				b.roll(); // rolls the dice and sends resources, printing dice roll and resources
 			}
