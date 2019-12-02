@@ -68,7 +68,7 @@ int main(int argc, char* argv[]) {
 		int placeCriterionAt;
 		cin >> placeCriterionAt;
 		b.firstCriterion(placeCriterionAt, whoseTurn);
-		int placeGoalAt;
+		//int placeGoalAt;
 		//cin >> placeGoalAt;
 		//b.firstGoal(placeGoalAt, whoseTurn);
 		if (firstAssignment) {
