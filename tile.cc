@@ -1,5 +1,6 @@
 #include "tile.h"
 #include "criterion.h"
+#include <iostream>
 using namespace std;
 
 Tile::Tile(int value, Resource res):value{value}, resource{res}{

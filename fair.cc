@@ -1,5 +1,6 @@
 #include "fair.h"
 #include <stdlib.h>
+#include <iostream>
 
 // 2.8
 // ctor for a randomly generated fair dice

@@ -1,4 +1,5 @@
 #include "loaded.h"
+#include <iostream>
 
 Loaded::Loaded(int num) {
   value = num;
