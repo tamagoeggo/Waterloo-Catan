@@ -283,7 +283,7 @@ void Board::saveGame(Player curTurn) {
 		saveFile << this->students[1]->printStudent() << endl;
 		saveFile << this->students[2]->printStudent() << endl;
 		saveFile << this->students[3]->printStudent() << endl;
-		saveFile << this->print() << endl;
+		saveFile << this->savePrint() << endl;
 		saveFile << this->geeseAt << endl;
 	}
 	saveFile.close();
@@ -664,6 +664,32 @@ void Board::roll() {
 
 void Board::print() {
 	cout << *td;
+}
+
+string Board::savePrint() {
+	string toPrint = "";
+	for (int i = 0; i <= 19; ++i) {
+		if (toPrint != "") {
+			toPrint += " "; // {Caffeine, Lab, Lecture, Study, Tutorial, Netflix, None};
+		}
+		Resource toAppend = tiles[i]->getResource();
+		if (toAppend == Resource::Caffeine) {
+			toPrint += "0";
+		} else if (toAppend == Resource::Lab) {
+			toPrint += "1";
+		} else if (toAppend == Resource::Lecture) {
+			toPrint += "2";
+		} else if (toAppend == Resource::Study) {
+			toPrint += "3";
+		} else if (toAppend == Resource::Tutorial) {
+			toPrint += "4";
+		} else if (toAppend == Resource::Netflix) {
+			toPrint += "5";
+		}
+		toPrint += " ";
+		toPrint += string(tiles[i]->getValue());
+	}
+	return toPrint;
 }
 
 void Board::status() {
