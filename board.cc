@@ -668,7 +668,7 @@ void Board::print() {
 
 void Board::status() {
 	for (auto student: students) {
-		student.printStatus();
+		student->printStatus();
 	}
 }
 
