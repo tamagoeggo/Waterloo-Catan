@@ -274,7 +274,6 @@ Player Board::whoWon() {
 	}
 }
 
-
 void Board::saveGame(Player curTurn) {
   cout << "Please name your save file:" << endl;
   string name, studentPrint;
