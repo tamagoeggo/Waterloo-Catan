@@ -61,6 +61,7 @@ class Board {
 	void setDice(std::string type); // DONE
 	void roll();
 	void print(); // DONE
+	string savePrint();
 	void status(); // DONE
 	void criteria(Player player); // DONE
 	void trade(Player tradeFrom, Player tradeWith, Resource give, Resource take); // DONE
