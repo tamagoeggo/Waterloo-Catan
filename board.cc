@@ -82,17 +82,8 @@ Board::Board(string board, int layer) {
   };
 	random_shuffle(resourcetype.begin(), resourcetype.end());
 
-  cout << "CHECKPOINT 1" << endl;
-	for(int i = 0; i < 18; ++i) {
-		cout << values[i] << endl;
-	}
   // init TextDisplay
   td = make_unique<TextDisplay>(&values, &resourcetype);
-
-  cout << "CHECKPOINT 3" << endl;
-	for(int i = 0; i < 18; ++i) {
-		cout << values[i] << endl;
-	}
 
   // init tiles
 	unique_ptr<Tile> newtile;
@@ -134,7 +125,7 @@ void Board::completeCriterion(const int coordinate, const Player player) {
 		throw "You cannot build here because this Criterion is already completed.";
 	}
 	else if (!criterion[coordinate]->areNeighborsUnoccupied()) {
-		throw "You cannot build here because the adjacent Criterion(s) is(are) completed.";
+		throw "You cannot build here because an adjacent Criterion is completed.";
 	}
 	else if (!criterion[coordinate]->goalsOccupancy(player)) {
 		throw "You cannot build here because you have not achieved any adjacent Goal.";
@@ -653,11 +644,14 @@ void Board::setDice(string type) {
 	dice = type;
 }
 
+// rolls either fair or loaded die
 void Board::roll() {
+	int rolledval;
 	if (dice == "fair") {
 		Fair die = Fair();
-		die.roll();
-	} else if (dice == "load") {
+		rolledval = die.roll();
+	}
+	else if (dice == "load") {
 		int toLoad;
 		while (true) {
 			cout << "Input a roll between 2 and 12:" << endl;
@@ -669,7 +663,14 @@ void Board::roll() {
 			break;
 		}
 		Loaded die = Loaded(toLoad);
-		die.roll();
+		rolledval = die.roll();
+	}
+	// checking tiles that have same value as rolled value
+	// and sending resources
+	for(int i = 0; i < 19; i++){
+		if(tiles[i]->getValue() == rolledval){
+			tiles[i]->sendResources();
+		}
 	}
 }
 
@@ -911,4 +912,3 @@ void Board::updateCriterionsNeighbor() {
 		criterion[i]->addNeighbor();
 	}
 }
-

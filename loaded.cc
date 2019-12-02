@@ -1,4 +1,5 @@
 #include "loaded.h"
+#include <iostream>
 
 Loaded::Loaded(int num) {
   value = num;
@@ -6,4 +7,5 @@ Loaded::Loaded(int num) {
 
 int Loaded::roll() {
   return value;
+  std::cout << "Dice rolled: " << value << std::endl;
 }
