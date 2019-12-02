@@ -4,7 +4,7 @@ using namespace std;
 TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resources) {
 	vector<string> newValuesString;
 	vector<string> newResourcesString;
-	int netflixAt = -1;
+	unsigned int netflixAt = -1;
 	
 	for(auto resource: resources) {
 		if (resource == Resource::Caffeine) {
@@ -20,7 +20,7 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 		} else if (resource == Resource::Netflix) {
 			string toEmplace = "     NETFLIX    ";
 			netflixAt = newResourcesString.size() - 1;
-		} else if (resource == Resource::None) {
+		} else { // (resource == Resource::None) 
 			string toEmplace = "                ";
 		}
 		newResourcesString.emplace_back(toEmplace);
@@ -29,15 +29,15 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 		if (newResourcesString.size() - 1 == netflixAt) {
 			string toEmplace = "                 ";
 		} else if (value < 10) {
-			string toEmplace = "        " + str(value) + "       ";
+			string toEmplace = "        " + string(value) + "       ";
 		} else {
-			string toEmplace = "       " + str(value) + "       ";
+			string toEmplace = "       " + string(value) + "       ";
 		}
 		newValuesString.emplace_back(toEmplace);
 	}
 	
 	this->valuesString = newValuesString;	// not sure if this actually uses the copy constructor
-	this->newResourcesString = newResourcesString;
+	this->ResourcesString = newResourcesString;
 }
 
 void TextDisplay::notify(Criterion *criterion) {
