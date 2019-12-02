@@ -687,7 +687,7 @@ string Board::savePrint() {
 			toPrint += "5";
 		}
 		toPrint += " ";
-		toPrint += string(tiles[i]->getValue());
+		toPrint += to_string(tiles[i]->getValue());
 	}
 	return toPrint;
 }
