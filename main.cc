@@ -34,6 +34,9 @@ int main(int argc, char* argv[]) {
     	} else if (string(argv[i]).compare("-load") == 0) {
     		try {
     			load = string(argv[i + 1]);
+    			cout << "CHECKPOINT 1" << endl; // DEBUG
+    			cout << load << endl; // DEBUG
+    			cout << "CHECKPOINT 2" << endl; // DEBUG
     		} catch (...) {
     			cerr << "Missing Load File" << endl;
     		}

@@ -92,7 +92,6 @@ Board::Board(string board, int layer) {
       newtile = make_unique<Tile>(7, resourcetype.front());
     }
     else{
-    	cout << "values.front() is " << values.front() << endl; // DEBUG
       newtile = make_unique<Tile>(values.front(), resourcetype.front());
       values.erase(values.begin());
     }
@@ -112,8 +111,8 @@ Board::Board(string board, int layer) {
   unique_ptr<Student> newstud4 = make_unique<Student>(Player::Yellow);
   students.emplace_back(move(newstud4));
 
-  cout << "before updateCriterionsinTile" << endl; //DEBUG
-  updateCriterionsInTile(layer);
+  //cout << "before updateCriterionsinTile" << endl; //DEBUG
+  //updateCriterionsInTile(layer);
 
 }
 
@@ -656,9 +655,7 @@ void Board::roll() {
 	int rolledval;
 	if (dice == "fair") {
 		Fair die = Fair();
-		cout << "die has been made" << endl; // DEBUG
 		rolledval = die.roll();
-		cout << "die has been rolled" << endl; // DEBUG
 	} else if (dice == "load") {
 		int toLoad;
 		while (true) {
@@ -677,11 +674,8 @@ void Board::roll() {
 	// and sending resources
 	//cout << "size of tiles vector" << tiles.size() << endl; // DEBUG
 	for(int i = 0; i < 19; ++i){
-		cout << tiles[i]->getValue() << endl; // DEBUG
 		if(tiles[i]->getValue() == rolledval){
-			cout << "sending resources" << endl; // DEBUG
 			tiles[i]->sendResources();
-			cout << "resources sent" << endl; // DEBUG
 		}
 	}
 }
@@ -778,7 +772,11 @@ void Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource ta
 
 void Board::criterionAdderHelper(int &iter, const int tileNo) {
 	for (int i = 0; i < 2; ++i) {
+<<<<<<< HEAD
+		tiles[iter]->addCriterion(criterion[iter].get());
+=======
 		tiles[tileNo]->addCriterion(criterion[iter].get());
+>>>>>>> 4f9946464c27217b5315100c5b0f0c891af240c3
 		++iter;
 	}
 }
