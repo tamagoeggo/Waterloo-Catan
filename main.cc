@@ -226,48 +226,44 @@ int main(int argc, char* argv[]) {
 					cin >> colourInput;
 					cin >> giveInput;
 					cin >> takeInput;
-					if (colourInput == "blue") {
+					if (colourInput == "Blue") {
 						tradeWith = Player::Blue;
-					} else if (colourInput == "red") {
+					} else if (colourInput == "Red") {
 						tradeWith = Player::Red;
-					} else if (colourInput == "orange") {
+					} else if (colourInput == "Orange") {
 						tradeWith = Player::Orange;
-					} else if (colourInput == "yellow") {
+					} else if (colourInput == "Yellow") {
 						tradeWith = Player::Yellow;
 					} else {
-						cerr << "Invalid player." << endl;
+						cerr << "Invalid player. Valid players: Blue, Red, Orange, Yellow"<< endl;
 						continue;
 					}
-					if (giveInput == "caffeine") {
+					if (giveInput == "Caffeine") {
 						give = Resource::Caffeine;
-					} else if (giveInput == "lab") {
+					} else if (giveInput == "Lab") {
 						give = Resource::Lab;
-					} else if (giveInput == "lecture") {
+					} else if (giveInput == "Lecture") {
 						give = Resource::Lecture;
-					} else if (giveInput == "study") {
+					} else if (giveInput == "Study") {
 						give = Resource::Study;
-					} else if (giveInput == "tutorial") {
+					} else if (giveInput == "Tutorial") {
 						give = Resource::Tutorial;
-					} else if (giveInput == "netflix") {
-						give = Resource::Netflix;
 					} else {
-						cerr << "Invalid resource to give." << endl;
+						cerr << "Invalid resource to give. Valid resources: Caffeine, Lab, Lecture, Study, Tutorial" << endl;
 						continue;
 					}
-					if (takeInput == "caffeine") {
+					if (takeInput == "Caffeine") {
 						take = Resource::Caffeine;
-					} else if (takeInput == "lab") {
+					} else if (takeInput == "Lab") {
 						take = Resource::Lab;
-					} else if (takeInput == "lecture") {
+					} else if (takeInput == "Lecture") {
 						take = Resource::Lecture;
-					} else if (takeInput == "study") {
+					} else if (takeInput == "Study") {
 						take = Resource::Study;
-					} else if (takeInput == "tutorial") {
+					} else if (takeInput == "Tutorial") {
 						take = Resource::Tutorial;
-					} else if (takeInput == "netflix") {
-						take = Resource::Netflix;
 					} else {
-						cerr << "Invalid resource to take." << endl;
+						cerr << "Invalid resource to take. Valid resources: Caffeine, Lab, Lecture, Study, Tutorial" << endl;
 						continue;
 					}
 					b.trade(whoseTurn, tradeWith, give, take);
