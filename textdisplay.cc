@@ -5,82 +5,51 @@ TextDisplay::TextDisplay(std::vector<int> *values, std::vector<Resource> *resour
 	//vector<string> newValuesString;
 	//vector<string> newResourcesString;
 	int netflixAt = -1;
-
-  cout << "CHECKPOINT 2" << endl;
-	for(int i = 0; i < 18; ++i) {
-		cout << (*values)[i] << endl;
-	}
-
-	/*
-	for(auto resource: resources) {
+	for(int i = 0; i <= 18; ++i) {
 		string toEmplace;
-		if (resource == Resource::Caffeine) {
+		if ((*resources)[i] == Resource::Caffeine) {
 			toEmplace = "    CAFFEINE    ";
-		} else if (resource == Resource::Lab) {
+		} else if ((*resources)[i] == Resource::Lab) {
 			toEmplace = "       LAB      ";
-		} else if (resource == Resource::Lecture) {
+		} else if ((*resources)[i] == Resource::Lecture) {
 			toEmplace = "     LECTURE    ";
-		} else if (resource == Resource::Study) {
+		} else if ((*resources)[i] == Resource::Study) {
 			toEmplace = "      STUDY     ";
-		} else if (resource == Resource::Tutorial) {
+		} else if ((*resources)[i] == Resource::Tutorial) {
 			toEmplace = "    TUTORIAL    ";
-		} else if (resource == Resource::Netflix) {
+		} else if ((*resources)[i] == Resource::Netflix) {
 			toEmplace = "     NETFLIX    ";
-			netflixAt = newResourcesString.size() - 1;
+			netflixAt = i;
 		} else { // (resource == Resource::None) 
 			toEmplace = "                ";
 		}
-		newResourcesString.emplace_back(toEmplace);
+		resourcesString[i] = toEmplace;
 	}
-	for(auto value: values) {
+	int i = 0;
+	int j = 0;
+	while (j <= 18) {
+		//cout << value << endl;
+		//int valuePosn = 0;
 		string toEmplace;
-		if (newResourcesString.size() - 1 == netflixAt) {
+		if (i == netflixAt) {
 			toEmplace = "                 ";
-		} else if (value < 10) {
-			toEmplace = "        " + to_string(value) + "       ";
+			netflixAt = -1;
+		} else if ((*values)[i] < 10) {
+			toEmplace = "        " + to_string((*values)[i]) + "       ";
 		} else {
-			toEmplace = "       " + to_string(value) + "       ";
+			toEmplace = "       " + to_string((*values)[i]) + "       ";
 		}
-		newValuesString.emplace_back(toEmplace);
-	}
-	*/
-	int resourcePosn = 0;
-	for(auto const &resource: *resources) {
-		string toEmplace;
-		if (resource == Resource::Caffeine) {
-			toEmplace = "    CAFFEINE    ";
-		} else if (resource == Resource::Lab) {
-			toEmplace = "       LAB      ";
-		} else if (resource == Resource::Lecture) {
-			toEmplace = "     LECTURE    ";
-		} else if (resource == Resource::Study) {
-			toEmplace = "      STUDY     ";
-		} else if (resource == Resource::Tutorial) {
-			toEmplace = "    TUTORIAL    ";
-		} else if (resource == Resource::Netflix) {
-			toEmplace = "     NETFLIX    ";
-			netflixAt = resourcesString.size() - 1;
-		} else { // (resource == Resource::None) 
-			toEmplace = "                ";
-		}
-		resourcesString[resourcePosn] = toEmplace;
-		++resourcePosn;
-	}
-	for(auto const &value: *values) {
-		cout << value << endl;
-		int valuePosn = 0;
-		string toEmplace;
-		if (valuePosn == netflixAt) {
-			toEmplace = "                 ";
-		} else if (value < 10) {
-			toEmplace = "        " + to_string(value) + "       ";
-		} else {
-			toEmplace = "       " + to_string(value) + "       ";
-		}
-		valuesString[valuePosn] = toEmplace;
+		valuesString[j] = toEmplace;
 		cout << "valuesString[valuePosn] is ";
-		cout << valuesString[valuePosn] << endl;
-		++valuePosn;
+		cout << valuesString[j] << endl;
+		++j;
+		if (netflixAt != -1) {
+			++i;
+		} else {
+			netflixAt = -2;
+		}
+		//++j;
+		//++valuePosn;
 	}
 	//this->valuesString = newValuesString;	// not sure if this actually uses the copy constructor
 	//this->resourcesString = newResourcesString;
@@ -135,7 +104,7 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 	//int tileNumber = 0;
 
   cout << "CHECKPOINT 4" << endl;
-	for(int i = 0; i < 18; ++i) {
+	for(int i = 0; i <= 18; ++i) {
 		cout << td.valuesString[i] << endl;
 	}
 
