@@ -40,9 +40,11 @@ class Board {
 
 	Board(std::string board, int layer = 2); // ctor with randomized resources and value, init textdisplay
 
+	/*
 	Board(const Board&) = delete; // disable copy ctor
   Board& operator=(const Board&) = delete; // disable copy assignment
   ~Board() = default;
+	*/
 
 	void completeCriterion(const int coordinate, Player player); // places criteria(similar to setPiece in a4q4) second turn onward
 	void firstCriterion(const int coordinate, Player player);

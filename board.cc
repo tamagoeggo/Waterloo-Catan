@@ -96,13 +96,13 @@ Board::Board(string board, int layer) {
   // 4.1
   // init students
   unique_ptr<Student> newstud1 = make_unique<Student>(Player::Blue);
-  students.emplace_back(newstud1);
+  students.emplace_back(move(newstud1));
   unique_ptr<Student> newstud2 = make_unique<Student>(Player::Red);
-  students.emplace_back(newstud2);
+  students.emplace_back(move(newstud2));
   unique_ptr<Student> newstud3 = make_unique<Student>(Player::Orange);
-  students.emplace_back(newstud3);
+  students.emplace_back(move(newstud3));
   unique_ptr<Student> newstud4 = make_unique<Student>(Player::Yellow);
-  students.emplace_back(newstud4);
+  students.emplace_back(move(newstud4));
 
   // init TextDisplay
   td = make_unique<TextDisplay>(values, resourcetype);
