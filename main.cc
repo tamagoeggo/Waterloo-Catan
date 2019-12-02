@@ -55,21 +55,22 @@ int main(int argc, char* argv[]) {
 	bool rolled = false;
 	while (true) {
 		bool firstAssignment = true;
+		b.print()
 		if (whoseTurn == Player::Blue) {
-			cout << "Student blue, where do you want to complete an Assignment?" << endl;
+			cout << "Student Blue, where do you want to complete an Assignment?" << endl;
 		} else if (whoseTurn == Player::Red) {
-			cout << "Student red, where do you want to complete an Assignment?" << endl;
+			cout << "Student Red, where do you want to complete an Assignment?" << endl;
 		} else if (whoseTurn == Player::Orange) {
-			cout << "Student orange, where do you want to complete an Assignment?" << endl;
+			cout << "Student Orange, where do you want to complete an Assignment?" << endl;
 		} else if (whoseTurn == Player::Yellow) {
-			cout << "Student yellow, where do you want to complete an Assignment?" << endl;
+			cout << "Student Yellow, where do you want to complete an Assignment?" << endl;
 		}
 		int placeCriterionAt;
 		cin >> placeCriterionAt;
 		b.firstCriterion(placeCriterionAt, whoseTurn);
 		int placeGoalAt;
-		cin >> placeGoalAt;
-		b.firstGoal(placeGoalAt, whoseTurn);
+		//cin >> placeGoalAt;
+		//b.firstGoal(placeGoalAt, whoseTurn);
 		if (firstAssignment) {
 			if (whoseTurn == Player::Blue) {
 				whoseTurn = Player::Red;
@@ -132,7 +133,7 @@ int main(int argc, char* argv[]) {
 		} else if (command == "improve") {
 			int criterion;
 			cin >> criterion;
-			b.upgradeCriterion(criterion, whoseTurn);
+			b.upgradeCriterion(coordinate, whoseTurn);
 		} else if (command == "trade") {
 			Player tradeWith;
 			Resource give;
