@@ -99,26 +99,72 @@ int main(int argc, char* argv[]) {
 
 	while (cin) {
 		string command;
-		cin >> command;
 		if (!rolled) {
 			if (whoseTurn == Player::Blue) {
 				cout << "Student blue's turn." << endl;
+				// status of student
+				b.blueStatus();
 			} else if (whoseTurn == Player::Red) {
 				cout << "Student red's turn." << endl;
+				// status of student
+				b.redStatus();
 			} else if (whoseTurn == Player::Orange) {
 				cout << "Student orange's turn." << endl;
+				// status of student
+				b.orangeStatus();
 			} else if (whoseTurn == Player::Yellow) {
 				cout << "Student yellow's turn." << endl;
+				// status of student
+				b.yellowStatus();
 			}
+			cout << "Choose a dice command: load or fair" << endl;
+			cin >> command;
 			if (command == "load") {
 				b.setDice("load");
 			} else if (command == "fair") {
 				b.setDice("fair");
-			} else if (command == "roll") {
+			} else {
+				cout << "catch statement here" << endl;
+			}
+			cout << "Roll the dice: roll" << endl;
+			cin >> command;
+			 if (command == "roll") {
 				rolled = true;
 				b.roll();
 			}
-		} else if (command == "board") {
+
+			// end of turn options
+			cout << "||====================================================================================||" << endl;
+			cout << "||                                                                                    ||" << endl;
+			cout << "||                                    COMMANDS                                        ||" << endl;
+			cout << "||                                                                                    ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| board: prints the current board                                                    ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| status: prints the current status of all students in order from student 0 to 3     ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| criteria: prints the criteria the current student has currently completed          ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| achieve <goal\#>: attempts to achieve the goal at <goal\#>                         ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| complete <criterion\#>: attempts to complete the criterion at <criterion\#>        ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| improve <criterion\#>: attempts to improve the criterion at <criterion\#>          ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| trade <colour> <give> <take>: attempts to trade with student <colour> giving one   ||" << endl;
+			cout << "||                               resource of type <give> and receiving one resource   ||" << endl;
+			cout << "||                               of type <take>                                       ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| next: passes control onto the next student in the game.                            ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| save <file>: saves the current game state to <file>                                ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| help: prints out the list of commands                                              ||" << endl;
+			cout << "||====================================================================================||" << endl;
+
+
+		cin >> command;
+		if (command == "board") {
 			b.print();
 		} else if (command == "status") {
 			b.status();

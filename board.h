@@ -69,6 +69,10 @@ class Board {
 	void print(); // DONE
 	std::string savePrint();
 	void status(); // DONE
+	void blueStatus();
+	void redStatus();
+	void orangeStatus();
+	void yellowStatus();
 	void criteria(Player player); // DONE
 	void trade(Player tradeFrom, Player tradeWith, Resource give, Resource take); // DONE
 	void criterionAdderHelper(int &iter, const int tileNo); 	// helper function for addCriterion

@@ -700,9 +700,25 @@ string Board::savePrint() {
 }
 
 void Board::status() {
-	for (auto const& student: students) {
+	for (auto const& student: this->students) {
 		student->printStatus();
 	}
+}
+
+void Board::blueStatus(){
+	this->students[0]->printStatus();
+}
+
+void Board::redStatus(){
+	this->students[1]->printStatus();
+}
+
+void Board::orangeStatus(){
+	this->students[2]->printStatus();
+}
+
+void Board::yellowStatus(){
+	this->students[3]->printStatus();
 }
 
 void Board::criteria(Player player) {
