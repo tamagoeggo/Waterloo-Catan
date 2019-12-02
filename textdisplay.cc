@@ -2,10 +2,10 @@
 using namespace std;
 
 TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resources) {
-	vector<string> newValuesString;
-	vector<string> newResourcesString;
+	//vector<string> newValuesString;
+	//vector<string> newResourcesString;
 	unsigned int netflixAt = -1;
-	
+	/*
 	for(auto resource: resources) {
 		string toEmplace;
 		if (resource == Resource::Caffeine) {
@@ -37,7 +37,42 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 		}
 		newValuesString.emplace_back(toEmplace);
 	}
-	
+	*/
+	int resourcePosn = 0;
+	for(auto resource: resources) {
+		string toEmplace;
+		if (resource == Resource::Caffeine) {
+			toEmplace = "    CAFFEINE    ";
+		} else if (resource == Resource::Lab) {
+			toEmplace = "       LAB      ";
+		} else if (resource == Resource::Lecture) {
+			toEmplace = "     LECTURE    ";
+		} else if (resource == Resource::Study) {
+			toEmplace = "      STUDY     ";
+		} else if (resource == Resource::Tutorial) {
+			toEmplace = "    TUTORIAL    ";
+		} else if (resource == Resource::Netflix) {
+			toEmplace = "     NETFLIX    ";
+			netflixAt = newResourcesString.size() - 1;
+		} else { // (resource == Resource::None) 
+			toEmplace = "                ";
+		}
+		swap(resourcesString[resourcePosn], toEmplace);
+		++resourcePosn;
+	}
+	for(auto value: values) {
+		int valuePosn = 0;
+		string toEmplace;
+		if (newResourcesString.size() - 1 == netflixAt) {
+			toEmplace = "                 ";
+		} else if (value < 10) {
+			toEmplace = "        " + to_string(value) + "       ";
+		} else {
+			toEmplace = "       " + to_string(value) + "       ";
+		}
+		swap(valuesString[valuePosn], toEmplace);
+		++valuePosn;
+	}
 	this->valuesString = newValuesString;	// not sure if this actually uses the copy constructor
 	this->resourcesString = newResourcesString;
 }
