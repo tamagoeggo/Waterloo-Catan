@@ -53,9 +53,9 @@ int main(int argc, char* argv[]) {
 	Board b = Board(board);
 	b.loadGame(load, &whoseTurn);
 	bool rolled = false;
+	bool firstAssignment = true;
 
 	while (true) {
-		bool firstAssignment = true;
 		b.print();
 		if (whoseTurn == Player::Blue) {
 			cout << "Student Blue, where do you want to complete an Assignment?" << endl;

@@ -61,6 +61,7 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 		++resourcePosn;
 	}
 	for(auto value: values) {
+		cout << value << endl;
 		int valuePosn = 0;
 		string toEmplace;
 		if (valuePosn == netflixAt) {
