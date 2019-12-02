@@ -6,7 +6,7 @@
 
 enum class Player {Blue, Red, Orange, Yellow, None};
 
-std::ostream &operator<<(std::ostream &out, const Player &player) {
+inline std::ostream &operator<<(std::ostream &out, const Player &player) {
     if (player == Player::Blue) {
         return out << "Blue";
     }
