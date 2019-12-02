@@ -133,7 +133,7 @@ int main(int argc, char* argv[]) {
 		} else if (command == "improve") {
 			int criterion;
 			cin >> criterion;
-			b.upgradeCriterion(coordinate, whoseTurn);
+			b.upgradeCriterion(criterion, whoseTurn);
 		} else if (command == "trade") {
 			Player tradeWith;
 			Resource give;
