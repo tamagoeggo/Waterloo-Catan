@@ -27,15 +27,12 @@ Student *Criterion::getStudent() {
 void Criterion::sendResources(Resource resource) {
 	if (type == Type::Assignment) {
 		occupiedBy->updateResources(resource, 1);
-		cout << 1 << " " << resource << endl;
 	}
 	else if (type == Type::Midterm) {
 		occupiedBy->updateResources(resource, 2);
-		cout << 2 << " " << resource << endl;
 	}
 	else if (type == Type::Exam) {
 		occupiedBy->updateResources(resource, 3);
-		cout << 3 << " " << resource << endl;
 	}
 	else {
 		throw "Invalid resource";
