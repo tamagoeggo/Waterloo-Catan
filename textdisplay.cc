@@ -4,7 +4,7 @@ using namespace std;
 TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resources) {
 	//vector<string> newValuesString;
 	//vector<string> newResourcesString;
-	unsigned int netflixAt = -1;
+	int netflixAt = -1;
 	/*
 	for(auto resource: resources) {
 		string toEmplace;
@@ -53,11 +53,11 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 			toEmplace = "    TUTORIAL    ";
 		} else if (resource == Resource::Netflix) {
 			toEmplace = "     NETFLIX    ";
-			netflixAt = newResourcesString.size() - 1;
+			netflixAt = resourcesString.size() - 1;
 		} else { // (resource == Resource::None) 
 			toEmplace = "                ";
 		}
-		swap(resourcesString[resourcePosn], toEmplace);
+		resourcesString[resourcePosn] = toEmplace;
 		++resourcePosn;
 	}
 	for(auto value: values) {
@@ -70,7 +70,7 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 		} else {
 			toEmplace = "       " + to_string(value) + "       ";
 		}
-		swap(valuesString[valuePosn], toEmplace);
+		valuesString[valuePosn] = toEmplace;
 		++valuePosn;
 	}
 	//this->valuesString = newValuesString;	// not sure if this actually uses the copy constructor
