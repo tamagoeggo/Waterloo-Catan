@@ -132,7 +132,7 @@ int main(int argc, char* argv[]) {
 			// choose dice type
 			cout << "Choose a dice command: load or fair" << endl;
 			cin >> command;
-			while(command != "load" || command != "fair"){
+			while(command != "load" && command != "fair"){
 				cout << "Invalid command" << endl;
 				cin >> command;
 			}
