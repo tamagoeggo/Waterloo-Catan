@@ -561,9 +561,9 @@ void Board::update(const int n, vector<vector<unique_ptr<Criterion>>> &criterion
 		if (i % 2 == 0) {
 			int c = 0;
 			for (int g = 0; g < goalCounter; ++g) { // traversing through the goals in row i
-				goal[i][g]->addNeighbor(criterion[i][c]);
+				goal[i][g]->addNeighbor(criterion[i][c].get());
 				++c;
-				goal[i][g]->addNeighbor(criterion[i][c]);
+				goal[i][g]->addNeighbor(criterion[i][c].get());
 				++c;
 			}
 			++goalCounter;
@@ -572,13 +572,13 @@ void Board::update(const int n, vector<vector<unique_ptr<Criterion>>> &criterion
 			//adding the first criterion to goal
 			int size = goal[i].size();
 			for (int g = 0; g < size; ++g) {
-				goal[i][g]->addNeighbor(criterion[i - 1][g]);
+				goal[i][g]->addNeighbor(criterion[i - 1][g].get());
 				//cout << criterion[i + 1][g + 1]->getCoordinate() << endl;
 				if (i == patternedRow - 1) {
-					goal[i][g]->addNeighbor(criterion[i + 1][g]);
+					goal[i][g]->addNeighbor(criterion[i + 1][g].get());
 				}
 				else {
-					goal[i][g]->addNeighbor(criterion[i + 1][g + 1]);
+					goal[i][g]->addNeighbor(criterion[i + 1][g + 1].get());
 				}
 			}
 		}
@@ -592,26 +592,26 @@ void Board::update(const int n, vector<vector<unique_ptr<Criterion>>> &criterion
 			if (size == n) {
 				int cCounter = 1;
 				for (int g = 0; g < size; ++g) {
-					goal[i][g]->addNeighbor(criterion[i][cCounter]);
+					goal[i][g]->addNeighbor(criterion[i][cCounter].get());
 					++cCounter;
-					goal[i][g]->addNeighbor(criterion[i][cCounter]);
+					goal[i][g]->addNeighbor(criterion[i][cCounter].get());
 					++cCounter;
 				}
 			}
 			else {
 				int cCounter = 0;
 				for (int g = 0; g < size; ++g) {
-					goal[i][g]->addNeighbor(criterion[i][cCounter]);
+					goal[i][g]->addNeighbor(criterion[i][cCounter].get());
 					++cCounter;
-					goal[i][g]->addNeighbor(criterion[i][cCounter]);
+					goal[i][g]->addNeighbor(criterion[i][cCounter].get());
 					++cCounter;
 				}
 			}
 		}
 		else {
 			for (int g = 0; g < size; ++g) {
-				goal[i][g]->addNeighbor(criterion[i - 1][g]);
-				goal[i][g]->addNeighbor(criterion[i + 1][g]);
+				goal[i][g]->addNeighbor(criterion[i - 1][g].get());
+				goal[i][g]->addNeighbor(criterion[i + 1][g].get());
 			}
 		}
 	}
@@ -622,17 +622,17 @@ void Board::update(const int n, vector<vector<unique_ptr<Criterion>>> &criterion
 		if (i % 2 == 0) {
 			int c = 0;
 			for (int g = 0; g < gCounter; ++g) {
-				goal[i][g]->addNeighbor(criterion[i][c]);
+				goal[i][g]->addNeighbor(criterion[i][c].get());
 				++c;
-				goal[i][g]->addNeighbor(criterion[i][c]);
+				goal[i][g]->addNeighbor(criterion[i][c].get());
 				++c;
 			}
 			--gCounter;
 		}
 		else {
 			for (int g = 0; g < size; ++g) {
-				goal[i][g]->addNeighbor(criterion[i - 1][g + 1]);
-				goal[i][g]->addNeighbor(criterion[i + 1][g]);
+				goal[i][g]->addNeighbor(criterion[i - 1][g + 1].get());
+				goal[i][g]->addNeighbor(criterion[i + 1][g].get());
 			}
 		}
 	}
