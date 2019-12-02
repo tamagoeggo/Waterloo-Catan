@@ -5,7 +5,7 @@
 
 enum class Resource {Caffeine, Lab, Lecture, Study, Tutorial, Netflix, None};
 
-std::ostream &operator<<(std::ostream &out, const Resource &resource) {
+inlnine std::ostream &operator<<(std::ostream &out, const Resource &resource) {
     if (resource == Resource::Caffeine) {
         return out << "Caffeine";
     }
@@ -28,4 +28,5 @@ std::ostream &operator<<(std::ostream &out, const Resource &resource) {
         return out << "Throw an exception in player ostream overload";
     }
 }
+
 #endif
