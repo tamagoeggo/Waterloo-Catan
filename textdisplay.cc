@@ -9,36 +9,37 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 	for(auto resource: resources) {
 		string toEmplace;
 		if (resource == Resource::Caffeine) {
-			string toEmplace = "    CAFFEINE    ";
+			toEmplace = "    CAFFEINE    ";
 		} else if (resource == Resource::Lab) {
-			string toEmplace = "       LAB      ";
+			toEmplace = "       LAB      ";
 		} else if (resource == Resource::Lecture) {
-			string toEmplace = "     LECTURE    ";
+			toEmplace = "     LECTURE    ";
 		} else if (resource == Resource::Study) {
-			string toEmplace = "      STUDY     ";
+			toEmplace = "      STUDY     ";
 		} else if (resource == Resource::Tutorial) {
-			string toEmplace = "    TUTORIAL    ";
+			toEmplace = "    TUTORIAL    ";
 		} else if (resource == Resource::Netflix) {
-			string toEmplace = "     NETFLIX    ";
+			toEmplace = "     NETFLIX    ";
 			netflixAt = newResourcesString.size() - 1;
 		} else { // (resource == Resource::None) 
-			string toEmplace = "                ";
+			toEmplace = "                ";
 		}
 		newResourcesString.emplace_back(toEmplace);
 	}
 	for(auto value: values) {
+		string toEmplace;
 		if (newResourcesString.size() - 1 == netflixAt) {
-			string toEmplace = "                 ";
+			toEmplace = "                 ";
 		} else if (value < 10) {
-			string toEmplace = "        " + to_string(value) + "       ";
+			toEmplace = "        " + to_string(value) + "       ";
 		} else {
-			string toEmplace = "       " + to_string(value) + "       ";
+			toEmplace = "       " + to_string(value) + "       ";
 		}
 		newValuesString.emplace_back(toEmplace);
 	}
 	
 	this->valuesString = newValuesString;	// not sure if this actually uses the copy constructor
-	this->ResourcesString = newResourcesString;
+	this->resourcesString = newResourcesString;
 }
 
 void TextDisplay::notify(Criterion *criterion) {
