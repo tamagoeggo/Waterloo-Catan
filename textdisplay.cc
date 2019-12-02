@@ -63,7 +63,7 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 	for(auto value: values) {
 		int valuePosn = 0;
 		string toEmplace;
-		if (newResourcesString.size() - 1 == netflixAt) {
+		if (valuePosn == netflixAt) {
 			toEmplace = "                 ";
 		} else if (value < 10) {
 			toEmplace = "        " + to_string(value) + "       ";
@@ -73,8 +73,8 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 		swap(valuesString[valuePosn], toEmplace);
 		++valuePosn;
 	}
-	this->valuesString = newValuesString;	// not sure if this actually uses the copy constructor
-	this->resourcesString = newResourcesString;
+	//this->valuesString = newValuesString;	// not sure if this actually uses the copy constructor
+	//this->resourcesString = newResourcesString;
 }
 
 void TextDisplay::notify(Criterion *criterion) {
