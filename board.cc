@@ -111,8 +111,7 @@ Board::Board(string board, int layer) {
   unique_ptr<Student> newstud4 = make_unique<Student>(Player::Yellow);
   students.emplace_back(move(newstud4));
 
-  //cout << "before updateCriterionsinTile" << endl; //DEBUG
-  //updateCriterionsInTile(layer);
+  updateCriterionsInTile(layer);
 
 }
 
@@ -772,11 +771,9 @@ void Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource ta
 
 void Board::criterionAdderHelper(int &iter, const int tileNo) {
 	for (int i = 0; i < 2; ++i) {
-<<<<<<< HEAD
-		tiles[iter]->addCriterion(criterion[iter].get());
-=======
+
 		tiles[tileNo]->addCriterion(criterion[iter].get());
->>>>>>> 4f9946464c27217b5315100c5b0f0c891af240c3
+
 		++iter;
 	}
 }
