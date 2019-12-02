@@ -33,7 +33,7 @@ void Tile::sendResources() {
   for (int i = 0; i < 6; ++i) {
     if (criterion[i]->getStudent()) { // to check if criterion is occupied
       // Student <colour> gained:
-      cout << "Student " << criterion[i]->getStudent().getPlayer() << " gained:" << endl;
+      cout << "Student " << criterion[i]->getStudent()->getPlayer() << " gained:" << endl;
       criterion[i]->sendResources(resource);
       gained = true;
     }
