@@ -19,6 +19,6 @@ int Fair::roll() {
   dice2 = rand() % 6 + 1;
   cout << dice2 << endl; // DEBUG
 	cout << "CHECKPOINT 3" << endl; // DEBUG
-	return dice1 + dice2;
   std::cout << "Dice rolled: " << dice1 + dice2 << std::endl;
+	return dice1 + dice2;
 }
