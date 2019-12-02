@@ -781,7 +781,7 @@ void Board::updateCriterionsInTile(const int n) {
 	int tileNo = 0;
 	for (int k = 0; k < n + 1; ++k) {
 		for (int j = 0; j < k + 1; ++j) {
-			row[k].emplace_back(tileNo);
+			row[k].emplace_back(move(tileNo));
 			++tileNo;
 		}
 	}
@@ -840,7 +840,7 @@ void Board::updateCriterionsInTile(const int n) {
 	int start3 = start2 + 1;
 	for (int k = n - 1; k >= 0; --k) { // fix limit
 		for (int j = 0; j < counter; ++j) {
-			bottomRow[k].emplace_back(secondEndCase);
+			bottomRow[k].emplace_back(move(secondEndCase));
 			++secondEndCase;
 		}
 		--counter;
