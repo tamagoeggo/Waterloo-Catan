@@ -7,6 +7,7 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 	unsigned int netflixAt = -1;
 	
 	for(auto resource: resources) {
+		string toEmplace;
 		if (resource == Resource::Caffeine) {
 			string toEmplace = "    CAFFEINE    ";
 		} else if (resource == Resource::Lab) {
@@ -29,9 +30,9 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 		if (newResourcesString.size() - 1 == netflixAt) {
 			string toEmplace = "                 ";
 		} else if (value < 10) {
-			string toEmplace = "        " + string(value) + "       ";
+			string toEmplace = "        " + to_string(value) + "       ";
 		} else {
-			string toEmplace = "       " + string(value) + "       ";
+			string toEmplace = "       " + to_string(value) + "       ";
 		}
 		newValuesString.emplace_back(toEmplace);
 	}
