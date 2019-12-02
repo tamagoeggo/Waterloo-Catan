@@ -89,7 +89,7 @@ Board::Board(string board, int layer) {
       values.erase(values.begin());
     }
     resourcetype.erase(resourcetype.begin());
-    tiles.emplace_back(newtile);
+    tiles.emplace_back(move(newtile));
   }
 
   // The assignments will be chosen by students in the order Blue, Red, Orange, Yellow, Yellow, Orange, Red, Blue.
