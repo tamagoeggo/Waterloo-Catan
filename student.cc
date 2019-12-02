@@ -166,7 +166,7 @@ void Student::printStatus(){// calls printResources, printGoals, printCriteria
 // active student is current student <colour1> </colour1></colour>(proposing a trade)
 void Student::trade(Student *stud, Resource resource1, Resource resource2){
 //  <colour1> offers <colour2> one <resource1> for one <resource2>. Does <colour2> accept this offer?
-  cout << this->player << " offers " << stud.player << " one " << resource1 << " for one " << resource2 << ". Does " << stud.player << " accept this offer?" << endl;
+  cout << this->player << " offers " << stud->player << " one " << resource1 << " for one " << resource2 << ". Does " << stud->player << " accept this offer?" << endl;
   string answer;
   cin >> answer;
   if(answer == "no") {
@@ -177,8 +177,8 @@ void Student::trade(Student *stud, Resource resource1, Resource resource2){
     // add exceptions later
     this->resources[resource2] += 1;
     this->resources[resource1] -= 1;
-    stud.resources[resource1] += 1;
-    stud.resources[resource2] -= 1;
+    stud->resources[resource1] += 1;
+    stud->resources[resource2] -= 1;
     return;
   }
   else {
