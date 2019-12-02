@@ -715,7 +715,7 @@ void Board::criteria(Player player) {
 
 void Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource take) {
 	Student *player1;
-	Student *player2;
+	//Student *player2;
 	if (tradeFrom == Player::Blue) {
 		player1 = students[0].get();
 	} else if (tradeFrom == Player::Red) {
@@ -745,7 +745,7 @@ void Board::criterionAdderHelper(int &iter, const int tileNo) {
 }
 
 void Board::updateCriterionsInTile(const int n) {
-	int totalTiles = (3 * n * n) + (3 * n) + 1;
+	//int totalTiles = (3 * n * n) + (3 * n) + 1;
 
 	int patternStartsAt = (n * (n + 1)) / 2;	// Tile No.
 	double secondPattern = ((n * n) / (double)2) + ((3 * n) / (double)2) + 1;
