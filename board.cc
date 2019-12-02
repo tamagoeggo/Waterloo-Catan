@@ -92,6 +92,7 @@ Board::Board(string board, int layer) {
       newtile = make_unique<Tile>(7, resourcetype.front());
     }
     else{
+    	cout << "values.front() is " << values.front() << endl; // DEBUG
       newtile = make_unique<Tile>(values.front(), resourcetype.front());
       values.erase(values.begin());
     }
@@ -110,6 +111,9 @@ Board::Board(string board, int layer) {
   students.emplace_back(move(newstud3));
   unique_ptr<Student> newstud4 = make_unique<Student>(Player::Yellow);
   students.emplace_back(move(newstud4));
+
+  cout << "before updateCriterionsinTile" << endl; //DEBUG
+  updateCriterionsInTile(layer);
 
 }
 
@@ -652,9 +656,9 @@ void Board::roll() {
 	int rolledval;
 	if (dice == "fair") {
 		Fair die = Fair();
-		//cout << "die has been made" << endl; // DEBUG
+		cout << "die has been made" << endl; // DEBUG
 		rolledval = die.roll();
-		//cout << "die has been rolled" << endl; // DEBUG
+		cout << "die has been rolled" << endl; // DEBUG
 	} else if (dice == "load") {
 		int toLoad;
 		while (true) {
@@ -671,9 +675,13 @@ void Board::roll() {
 	}
 	// checking tiles that have same value as rolled value
 	// and sending resources
-	for(int i = 0; i < 19; i++){
+	//cout << "size of tiles vector" << tiles.size() << endl; // DEBUG
+	for(int i = 0; i < 19; ++i){
+		cout << tiles[i]->getValue() << endl; // DEBUG
 		if(tiles[i]->getValue() == rolledval){
+			cout << "sending resources" << endl; // DEBUG
 			tiles[i]->sendResources();
+			cout << "resources sent" << endl; // DEBUG
 		}
 	}
 }
@@ -769,7 +777,9 @@ void Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource ta
 }
 
 void Board::criterionAdderHelper(int &iter, const int tileNo) {
+	cout << "CHECKPOINT 1.6" << endl;
 	for (int i = 0; i < 2; ++i) {
+		cout << "CHECKPOINT 1.7" << endl;
 		tiles[iter]->addCriterion(criterion[iter].get());
 		++iter;
 	}
@@ -784,10 +794,12 @@ void Board::updateCriterionsInTile(const int n) {
 	int two_n2 = 2 * secondPattern + 1; 		// counter
 	int start;                          		// counter
 	for (int k = 0; k < n + 1; ++k) {			// loop through the rows
+			cout << "CHECKPOINT 1" << endl; // DEBUG
 		int starting = patternStartsAt;
 		if (k != 0) { starting += (2 * n + 1) * k; }
 		for (int i = 0; i < 3; ++i) { 			// loop through the columns
 			for (int j = 0; j < n + 1; ++j) {	// loop through the tiles in a row k
+				cout << "CHECKPOINT 1.5" << endl;
 				criterionAdderHelper(two_n, starting + j);
 			}
 		}
@@ -806,6 +818,7 @@ void Board::updateCriterionsInTile(const int n) {
 		two_n2 -= 2 * n + 2;
 	}
 
+	cout << "CHECKPOINT 2" << endl; // DEBUG
 	// FIRST END CASE
 
 	vector<vector<int>> row; // helper top row

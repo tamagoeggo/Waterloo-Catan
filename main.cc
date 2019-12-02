@@ -59,6 +59,7 @@ int main(int argc, char* argv[]) {
 
 	while (true) {
 		b.print();
+		break; // DEBUG
 		if (whoseTurn == Player::Blue) {
 			cout << "Student Blue, where do you want to complete an Assignment?" << endl;
 		} else if (whoseTurn == Player::Red) {
