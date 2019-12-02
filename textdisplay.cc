@@ -20,7 +20,7 @@ TextDisplay::TextDisplay(std::vector<int> *values, std::vector<Resource> *resour
 		} else if ((*resources)[i] == Resource::Netflix) {
 			toEmplace = "     NETFLIX    ";
 			netflixAt = i;
-		} else { // (resource == Resource::None) 
+		} else { // (resource == Resource::None)
 			toEmplace = "                ";
 		}
 		resourcesString[i] = toEmplace;
@@ -103,11 +103,6 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 	// when size is two, we increment twice, when size is one, we increment once
 	//int tileNumber = 0;
 
-  cout << "CHECKPOINT 4" << endl;
-	for(int i = 0; i <= 18; ++i) {
-		cout << td.valuesString[i] << endl;
-	}
-
 	int oddToIncrement = 2;
 	int evenToIncrement = 2;
 	int oddToRepeat = 0;
@@ -129,22 +124,22 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 	while (c < criteriaLength && g < goalLength) {
 		if (lineNum == 1 || lineNum == 2 || lineNum == 40 || lineNum == 41) {
 			out << "                                   ";
-		} else if (lineNum == 3 || lineNum == 4 || 
+		} else if (lineNum == 3 || lineNum == 4 ||
 			lineNum == 38 || lineNum == 39) {
 			out << "                                 ";
-		} else if (lineNum == 5 || lineNum == 6 || 
+		} else if (lineNum == 5 || lineNum == 6 ||
 			lineNum == 36 || lineNum == 37) {
 			out << "                    ";
-		} else if (lineNum == 7 || lineNum == 8 || 
+		} else if (lineNum == 7 || lineNum == 8 ||
 			lineNum == 34 || lineNum == 35) {
 			out << "                  ";
-		} else if (lineNum == 9 || lineNum == 10 || lineNum == 16 || 
-			lineNum == 17 || lineNum == 18 || lineNum == 24 || lineNum == 25 || 
+		} else if (lineNum == 9 || lineNum == 10 || lineNum == 16 ||
+			lineNum == 17 || lineNum == 18 || lineNum == 24 || lineNum == 25 ||
 			lineNum == 26 || lineNum == 32 || lineNum == 33) {
 			out << "     ";
-		} else if (lineNum == 11 || lineNum == 12 || lineNum == 14 || 
+		} else if (lineNum == 11 || lineNum == 12 || lineNum == 14 ||
 			lineNum == 15 || lineNum == 19 || lineNum == 20 || lineNum == 22 ||
-			lineNum == 23 || lineNum == 27 || lineNum == 28 || lineNum == 30 || 
+			lineNum == 23 || lineNum == 27 || lineNum == 28 || lineNum == 30 ||
 			lineNum == 31) {
 			out << "   ";
 		}
@@ -187,8 +182,8 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 				out << "/            \\      GEESE     /            \\                /            \\" << endl;
 			} else if (lineNum == 26 && td.geeseAt == 12) {
 				out << "/            \\                /            \\      GEESE     /            \\" << endl;
-			} else { 
-				out << "/            \\                /            \\                /            \\" << endl; 
+			} else {
+				out << "/            \\                /            \\                /            \\" << endl;
 			}
 			++lineNum;
 			continue;
@@ -208,15 +203,15 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 			 (lineNum == 22 && td.geeseAt == 8) ||
 			 (lineNum == 30 && td.geeseAt == 13)) {
 				out << "\\      GEESE     /            \\                /            \\                /" << endl;
-			} else if ((lineNum == 14 && td.geeseAt == 4) || 
-				(lineNum == 22 && td.geeseAt == 9) || 
+			} else if ((lineNum == 14 && td.geeseAt == 4) ||
+				(lineNum == 22 && td.geeseAt == 9) ||
 				(lineNum == 30 && td.geeseAt == 14)) {
 				out << "\\                /            \\      GEESE     /            \\                /" << endl;
-			} else if ((lineNum == 14 && td.geeseAt == 5) || 
-				(lineNum == 22 && td.geeseAt == 10) || 
+			} else if ((lineNum == 14 && td.geeseAt == 5) ||
+				(lineNum == 22 && td.geeseAt == 10) ||
 				(lineNum == 30 && td.geeseAt == 15)) {
 				out << "\\                /            \\                /            \\      GEESE     /" << endl;
-			} else { 
+			} else {
 				out << "\\                /            \\                /            \\                /" << endl;
 			}
 			++lineNum;
@@ -261,7 +256,7 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 			++lineNum;
 			continue;
 		}
-		
+
 		int numGoal = 0;
 		if (odd) {
 			//out << "oddToRepeat is " << oddToRepeat << endl; // DEBUG

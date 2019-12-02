@@ -82,17 +82,8 @@ Board::Board(string board, int layer) {
   };
 	random_shuffle(resourcetype.begin(), resourcetype.end());
 
-  cout << "CHECKPOINT 1" << endl;
-	for(int i = 0; i < 18; ++i) {
-		cout << values[i] << endl;
-	}
   // init TextDisplay
   td = make_unique<TextDisplay>(&values, &resourcetype);
-
-  cout << "CHECKPOINT 3" << endl;
-	for(int i = 0; i < 18; ++i) {
-		cout << values[i] << endl;
-	}
 
   // init tiles
 	unique_ptr<Tile> newtile;
