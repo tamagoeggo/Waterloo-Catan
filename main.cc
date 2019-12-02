@@ -34,6 +34,9 @@ int main(int argc, char* argv[]) {
     	} else if (string(argv[i]).compare("-load") == 0) {
     		try {
     			load = string(argv[i + 1]);
+    			cout << "CHECKPOINT 1" << endl; // DEBUG
+    			cout << load << endl; // DEBUG
+    			cout << "CHECKPOINT 2" << endl; // DEBUG
     		} catch (...) {
     			cerr << "Missing Load File" << endl;
     		}
@@ -148,33 +151,42 @@ int main(int argc, char* argv[]) {
 				cout << "Invalid command" << endl;
 				cin >> command;
 			}
-			 if (command == "roll") {
+			if (command == "roll") {
 				rolled = true;
 				b.roll(); // rolls the dice and sends resources, printing dice roll and resources
 			}
 		}
-		cout << "help: prints out the list of commands" << endl;
+
+		// Phase 3 of gameplay 4.3
+		cout << "Enter a command." << endl;
+		cout << "(help: prints out the list of commands)" << endl;
 
 		cin >> command;
 		if (command == "board") {
 			b.print();
-		} else if (command == "status") {
+		}
+		else if (command == "status") {
 			b.status();
-		} else if (command == "criteria") {
+		}
+		else if (command == "criteria") {
 			b.criteria(whoseTurn);
-		} else if (command == "achieve") { // consider the number
+		}
+		else if (command == "achieve") { // consider the number
 			int goal;
 			cin >> goal;
 			b.achieveGoal(goal, whoseTurn);
-		} else if (command == "complete") {
+		}
+		else if (command == "complete") {
 			int criterion;
 			cin >> criterion;
 			b.completeCriterion(criterion, whoseTurn);
-		} else if (command == "improve") {
+		}
+		else if (command == "improve") {
 			int criterion;
 			cin >> criterion;
 			b.upgradeCriterion(criterion, whoseTurn);
-		} else if (command == "trade") {
+		}
+		else if (command == "trade") {
 			Player tradeWith;
 			Resource give;
 			Resource take;
@@ -229,7 +241,9 @@ int main(int argc, char* argv[]) {
 				continue;
 			}
 			b.trade(whoseTurn, tradeWith, give, take);
-		} else if (command == "next") {
+		}
+		// next player turn
+		else if (command == "next") {
 			if (whoseTurn == Player::Blue) {
 				whoseTurn = Player::Red;
 			} else if (whoseTurn == Player::Red) {
@@ -241,9 +255,11 @@ int main(int argc, char* argv[]) {
 			}
 			rolled = false;
 			continue;
-		} else if (command == "save") {
+		}
+		else if (command == "save") {
 			b.saveGame(whoseTurn);
-		} else if (command == "help") {
+		}
+		else if (command == "help") {
 			cout << "||====================================================================================||" << endl;
 			cout << "||                                                                                    ||" << endl;
 			cout << "||                                    COMMANDS                                        ||" << endl;
