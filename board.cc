@@ -45,7 +45,7 @@ Board::Board(string board, int layer) {
   criterion.reserve(total_size);
   for (auto const& row: criterionv) {
       for (auto const& crit: row){
-        criterion.emplace_back(move(crit));
+        criterion.emplace_back(crit));
       }
   }
 
@@ -59,7 +59,7 @@ Board::Board(string board, int layer) {
   goals.reserve(total_size);
   for (auto const& row: goalv){
     for(auto const& goal: row){
-      goals.emplace_back(move(goal));
+      goals.emplace_back(goal);
     }
   }
 
