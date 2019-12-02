@@ -53,6 +53,7 @@ int main(int argc, char* argv[]) {
 	Board b = Board(board);
 	b.loadGame(load, &whoseTurn);
 	bool rolled = false;
+
 	while (true) {
 		bool firstAssignment = true;
 		b.print();
@@ -95,6 +96,7 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}
+
 	while (cin) {
 		string command;
 		cin >> command;
@@ -218,5 +220,3 @@ int main(int argc, char* argv[]) {
 		}
 	}
 };
-
-
