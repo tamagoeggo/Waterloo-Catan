@@ -693,7 +693,7 @@ string Board::savePrint() {
 }
 
 void Board::status() {
-	for (auto student: students) {
+	for (auto const& student: students) {
 		student->printStatus();
 	}
 }
