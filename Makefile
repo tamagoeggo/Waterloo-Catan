@@ -5,11 +5,11 @@ OBJECTS=main.o board.o completion.o criterion.o dice.o fair.o goal.o loaded.o ob
 DEPENDS=${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
-  ${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
+	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
 
 -include ${DEPENDS}
 
 clean:
-  rm ${OBJECTS} ${EXEC} ${DEPENDS}
+	rm ${OBJECTS} ${EXEC} ${DEPENDS}
 
 .PHONY: clean
