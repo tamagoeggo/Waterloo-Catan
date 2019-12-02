@@ -204,7 +204,12 @@ int main(int argc, char* argv[]) {
 				else if (command == "achieve") { // consider the number
 					int goal;
 					cin >> goal;
-					b.achieveGoal(goal, whoseTurn);
+					try {
+						b.achieveGoal(goal, whoseTurn);
+					}
+					catch (const char *c) {
+						cout << c << endl;
+					}
 				}
 				else if (command == "complete") {
 					int criterion;
