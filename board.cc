@@ -771,13 +771,7 @@ void Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource ta
 
 void Board::criterionAdderHelper(int &iter, const int tileNo) {
 	for (int i = 0; i < 2; ++i) {
-<<<<<<< HEAD
-
 		tiles[tileNo]->addCriterion(criterion[iter].get());
-
-=======
-		tiles[tileNo]->addCriterion(criterion[iter].get());
->>>>>>> 6c26362daa658644f7d4b1322aa54acd40b6d167
 		++iter;
 	}
 }
