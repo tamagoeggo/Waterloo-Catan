@@ -84,10 +84,11 @@ Board::Board(string board, int layer) {
   // The board will consist of the following values: one 2, one 12, two 3-6, and two 8-11.
 	vector<int> values ={2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12};
   random_shuffle(values.begin(), values.end());
-
+  /*
 	for(auto val: values){
 		cout << val << endl;
 	}
+	*/
 
   //  The board consists of the following resources: 3 TUTORIAL, 3 STUDY, 4 CAFFEINE, 4 LAB, 4 LECTURE, and 1 NETFLIX
 	vector<Resource> resourcetype = {
@@ -99,6 +100,18 @@ Board::Board(string board, int layer) {
     Resource::Netflix
   };
 	random_shuffle(resourcetype.begin(), resourcetype.end());
+
+  cout << "CHECKPOINT 1" << endl;
+	for(int i = 0; i < 18; ++i) {
+		cout << values[i] << endl;
+	}
+  // init TextDisplay
+  td = make_unique<TextDisplay>(&values, &resourcetype);
+
+  cout << "CHECKPOINT 3" << endl;
+	for(int i = 0; i < 18; ++i) {
+		cout << values[i] << endl;
+	}
 
   // init tiles
 	unique_ptr<Tile> newtile;
@@ -125,9 +138,6 @@ Board::Board(string board, int layer) {
   students.emplace_back(move(newstud3));
   unique_ptr<Student> newstud4 = make_unique<Student>(Player::Yellow);
   students.emplace_back(move(newstud4));
-
-  // init TextDisplay
-  td = make_unique<TextDisplay>(values, resourcetype);
 
 }
 

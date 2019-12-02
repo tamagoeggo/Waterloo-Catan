@@ -1,10 +1,16 @@
 #include "textdisplay.h"
 using namespace std;
 
-TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resources) {
+TextDisplay::TextDisplay(std::vector<int> *values, std::vector<Resource> *resources) {
 	//vector<string> newValuesString;
 	//vector<string> newResourcesString;
 	int netflixAt = -1;
+
+  cout << "CHECKPOINT 2" << endl;
+	for(int i = 0; i < 18; ++i) {
+		cout << (*values)[i] << endl;
+	}
+
 	/*
 	for(auto resource: resources) {
 		string toEmplace;
@@ -39,7 +45,7 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 	}
 	*/
 	int resourcePosn = 0;
-	for(auto resource: resources) {
+	for(auto const &resource: *resources) {
 		string toEmplace;
 		if (resource == Resource::Caffeine) {
 			toEmplace = "    CAFFEINE    ";
@@ -60,7 +66,7 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 		resourcesString[resourcePosn] = toEmplace;
 		++resourcePosn;
 	}
-	for(auto value: values) {
+	for(auto const &value: *values) {
 		cout << value << endl;
 		int valuePosn = 0;
 		string toEmplace;
@@ -72,6 +78,8 @@ TextDisplay::TextDisplay(std::vector<int> values, std::vector<Resource> resource
 			toEmplace = "       " + to_string(value) + "       ";
 		}
 		valuesString[valuePosn] = toEmplace;
+		cout << "valuesString[valuePosn] is ";
+		cout << valuesString[valuePosn] << endl;
 		++valuePosn;
 	}
 	//this->valuesString = newValuesString;	// not sure if this actually uses the copy constructor
@@ -125,6 +133,12 @@ void TextDisplay::notify(int geeseAt) {
 ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 	// when size is two, we increment twice, when size is one, we increment once
 	//int tileNumber = 0;
+
+  cout << "CHECKPOINT 2" << endl;
+	for(int i = 0; i < 18; ++i) {
+		cout << td.valuesString[i] << endl;
+	}
+
 	int oddToIncrement = 2;
 	int evenToIncrement = 2;
 	int oddToRepeat = 0;
