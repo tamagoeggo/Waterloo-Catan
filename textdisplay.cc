@@ -134,7 +134,7 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 	// when size is two, we increment twice, when size is one, we increment once
 	//int tileNumber = 0;
 
-  cout << "CHECKPOINT 2" << endl;
+  cout << "CHECKPOINT 4" << endl;
 	for(int i = 0; i < 18; ++i) {
 		cout << td.valuesString[i] << endl;
 	}
