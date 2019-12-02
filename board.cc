@@ -153,6 +153,9 @@ void Board::firstCriterion(const int coordinate, Player player) {
 	if (criterion[coordinate]->getStudent()) { // check if criterion is occupied
 		throw "You cannot build here because this Criterion is already completed.";
 	}
+	else if (!criterion[coordinate]->areNeighborsUnoccupied()) {
+		throw "You cannot build here because an adjacent Criterion is completed.";
+	}
 	else {
 		criterion[coordinate]->updateOccupant(students[iter].get());
 		students[iter]->updateCriterion(criterion[coordinate].get());
