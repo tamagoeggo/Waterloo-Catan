@@ -55,9 +55,9 @@ class Board {
 	void loadGame(std::string loadFile, Player *whoseTurn);
 
 	// constructs goals and criterions (coordinates) in vec of vec
-	void rowSetup(const int n, std::vector<std::vector<unique_ptr<Criterion>>> &criterion, std::vector<std::vector<unique_ptr<Goal>>> &goal); // DONE
+	void rowSetup(const int n, std::vector<std::vector<std::unique_ptr<Criterion>>> &criterion, std::vector<std::vector<std::unique_ptr<Goal>>> &goal); // DONE
 	// adds goals to criterion and adds neighbors to goals
-	void update(const int n, std::vector<std::vector<unique_ptr<Criterion>>> &criterion, std::vector<std::vector<unique_ptr<Goal>>> &goal); // DONE
+	void update(const int n, std::vector<std::vector<std::unique_ptr<Criterion>>> &criterion, std::vector<std::vector<std::unique_ptr<Goal>>> &goal); // DONE
 	void setDice(std::string type); // DONE
 	void roll();
 	void print(); // DONE
