@@ -111,8 +111,7 @@ Board::Board(string board, int layer) {
   unique_ptr<Student> newstud4 = make_unique<Student>(Player::Yellow);
   students.emplace_back(move(newstud4));
 
-  //cout << "before updateCriterionsinTile" << endl; //DEBUG
-  //updateCriterionsInTile(layer);
+  updateCriterionsInTile(layer);
 
 }
 
