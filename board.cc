@@ -777,29 +777,23 @@ void Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource ta
 }
 
 void Board::criterionAdderHelper(int &iter, const int tileNo) {
-	cout << "CHECKPOINT 1.6" << endl;
 	for (int i = 0; i < 2; ++i) {
-		cout << "CHECKPOINT 1.7" << endl;
-		tiles[iter]->addCriterion(criterion[iter].get());
+		tiles[tileNo]->addCriterion(criterion[iter].get());
 		++iter;
 	}
 }
 
 void Board::updateCriterionsInTile(const int n) {
-	//int totalTiles = (3 * n * n) + (3 * n) + 1;
-
 	int patternStartsAt = (n * (n + 1)) / 2;	// Tile No.
 	double secondPattern = ((n * n) / (double)2) + ((3 * n) / (double)2) + 1;
 	int two_n = 2 * patternStartsAt;    		// counter
 	int two_n2 = 2 * secondPattern + 1; 		// counter
 	int start;                          		// counter
 	for (int k = 0; k < n + 1; ++k) {			// loop through the rows
-			cout << "CHECKPOINT 1" << endl; // DEBUG
 		int starting = patternStartsAt;
 		if (k != 0) { starting += (2 * n + 1) * k; }
 		for (int i = 0; i < 3; ++i) { 			// loop through the columns
 			for (int j = 0; j < n + 1; ++j) {	// loop through the tiles in a row k
-				cout << "CHECKPOINT 1.5" << endl;
 				criterionAdderHelper(two_n, starting + j);
 			}
 		}
@@ -818,7 +812,6 @@ void Board::updateCriterionsInTile(const int n) {
 		two_n2 -= 2 * n + 2;
 	}
 
-	cout << "CHECKPOINT 2" << endl; // DEBUG
 	// FIRST END CASE
 
 	vector<vector<int>> row; // helper top row
