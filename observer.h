@@ -2,8 +2,8 @@
 #define _OBSERVER_H_
 
 class Observer {
-	virtual void notify(Criterion &) = 0;
-	virtual void notify(Goal &) = 0;
+	virtual void notify(Criterion *) = 0;
+	virtual void notify(Goal *) = 0;
 };
 
 
