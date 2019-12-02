@@ -5,7 +5,7 @@
 
 enum class Resource {Caffeine, Lab, Lecture, Study, Tutorial, Netflix, None};
 
-inlnine std::ostream &operator<<(std::ostream &out, const Resource &resource) {
+inline std::ostream &operator<<(std::ostream &out, const Resource &resource) {
     if (resource == Resource::Caffeine) {
         return out << "Caffeine";
     }
