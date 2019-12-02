@@ -18,15 +18,24 @@ Student *Criterion::getStudent() {
 	return occupiedBy;	// verify getStudent or getPlayer and what happens if there's no student
 }
 
+// 3.5.5: sends resources to student and
+// prints resource send status according to assignment
+// Student <colour> gained:
+// followed by the line:
+// <numResource> <resourceType>
+// for each resource they received from the dice roll.
 void Criterion::sendResources(Resource resource) {
 	if (type == Type::Assignment) {
 		occupiedBy->updateResources(resource, 1);
+		cout << 1 << " " << resource << endl;
 	}
 	else if (type == Type::Midterm) {
 		occupiedBy->updateResources(resource, 2);
+		cout << 2 << " " << resource << endl;
 	}
 	else if (type == Type::Exam) {
 		occupiedBy->updateResources(resource, 3);
+		cout << 3 << " " << resource << endl;
 	}
 	else {
 		cout << "Throw an exception here" << endl;

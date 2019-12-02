@@ -14,4 +14,5 @@ int Fair::roll() {
   dice1 = rand() % 6 + 1;
   dice2 = rand() % 6 + 1;
 	return dice1 + dice2;
+  std::cout << "Dice rolled: " << dice1 + dice2 << std::endl;
 }

@@ -6,4 +6,5 @@ Loaded::Loaded(int num) {
 
 int Loaded::roll() {
   return value;
+  std::cout << "Dice rolled: " << value << std::endl;
 }
