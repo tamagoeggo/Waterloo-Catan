@@ -43,12 +43,19 @@ Board::Board(string board, int layer) {
       total_size += row.size();
   }
   criterion.reserve(total_size);
-
-  for (auto const& row: criterionv) {
-      for (auto const crit: row){
-        criterion.emplace_back(move(crit));
-      }
+  
+  for (unsigned int i = 0; i < criterionv.size(); ++i) {
+	  unsigned int size = criterionv[i].size();
+	  for (unsigned int j = 0; j < size; ++j) {
+		  criterion.emplace_back(move(criterionv[i][j]));
+	  }
   }
+
+  //for (auto const& row: criterionv) {
+  //    for (auto const crit: row){
+  //      criterion.emplace_back(move(crit));
+  //    }
+ // }
 
   updateCriterionsNeighbor();
 
@@ -58,11 +65,20 @@ Board::Board(string board, int layer) {
       total_size += row.size();
   }
   goals.reserve(total_size);
-  for (auto const& row: goalv){
-    for(auto const goal: row){
-      goals.emplace_back(move(goal));
-    }
+  
+  for (unsigned int i = 0; i < goalv.size(); ++i) {
+	  unsigned int size = goalv[i].size();
+	  for (unsigned int j = 0; j < size; ++j) {
+		  goals.emplace_back(move(goalv[i][j]));
+	  }
   }
+
+  
+  //for (auto const& row: goalv){
+  //  for(auto const goal: row){
+  //    goals.emplace_back(move(goal));
+  //  }
+  //}
 
   // num = (rand() % (upper – lower + 1)) + lower
   // The board will consist of the following values: one 2, one 12, two 3-6, and two 8-11.
