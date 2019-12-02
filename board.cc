@@ -43,7 +43,7 @@ Board::Board(string board, int layer) {
       total_size += row.size();
   }
   criterion.reserve(total_size);
-  
+
   for (unsigned int i = 0; i < criterionv.size(); ++i) {
 	  unsigned int size = criterionv[i].size();
 	  for (unsigned int j = 0; j < size; ++j) {
@@ -65,7 +65,7 @@ Board::Board(string board, int layer) {
       total_size += row.size();
   }
   goals.reserve(total_size);
-  
+
   for (unsigned int i = 0; i < goalv.size(); ++i) {
 	  unsigned int size = goalv[i].size();
 	  for (unsigned int j = 0; j < size; ++j) {
@@ -73,7 +73,7 @@ Board::Board(string board, int layer) {
 	  }
   }
 
-  
+
   //for (auto const& row: goalv){
   //  for(auto const goal: row){
   //    goals.emplace_back(move(goal));
@@ -84,6 +84,11 @@ Board::Board(string board, int layer) {
   // The board will consist of the following values: one 2, one 12, two 3-6, and two 8-11.
 	vector<int> values ={2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12};
   random_shuffle(values.begin(), values.end());
+
+	for(auto val: values){
+		cout << val << endl;
+	}
+
   //  The board consists of the following resources: 3 TUTORIAL, 3 STUDY, 4 CAFFEINE, 4 LAB, 4 LECTURE, and 1 NETFLIX
 	vector<Resource> resourcetype = {
 		Resource::Tutorial,Resource::Tutorial,Resource::Tutorial,
