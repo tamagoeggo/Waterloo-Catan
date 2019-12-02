@@ -178,12 +178,12 @@ void Student::trade(Student *stud, Resource resource1, Resource resource2){
   }
   else if(answer == "yes") {
     // resource1 does not exist
-    if(!(this->resources[resource1].count())){
+    if(!(this->resources.count(resource1))) {
       cout << this->player << " does not have enough " << resource1 << " to trade. Trade unsuccessful." << endl;
       return;
     }
     // resource2 does not exist
-    if(!(stud->resources[resource2].count())){
+    if(!(stud->resources.count(resource2))) {
       cout << stud->player << " does not have enough " << resource2 << " to trade. Trade unsuccessful." << endl;
       return;
     }
