@@ -46,9 +46,11 @@ int main(int argc, char* argv[]) {
     	}
     }
 	}
+
 	if(seed_set == false){
 		srand(time(NULL));
 	}
+
 	Player whoseTurn = Player::Blue;
 	Board b = Board(board);
 	b.loadGame(load, &whoseTurn);
@@ -145,11 +147,11 @@ int main(int argc, char* argv[]) {
 			cout << "||====================================================================================||" << endl;
 			cout << "|| criteria: prints the criteria the current student has currently completed          ||" << endl;
 			cout << "||====================================================================================||" << endl;
-			cout << "|| achieve <goal\#>: attempts to achieve the goal at <goal\#>                         ||" << endl;
+			cout << "|| achieve <goal\\#>: attempts to achieve the goal at <goal\\#>                         ||" << endl;
 			cout << "||====================================================================================||" << endl;
-			cout << "|| complete <criterion\#>: attempts to complete the criterion at <criterion\#>        ||" << endl;
+			cout << "|| complete <criterion\\#>: attempts to complete the criterion at <criterion\\#>        ||" << endl;
 			cout << "||====================================================================================||" << endl;
-			cout << "|| improve <criterion\#>: attempts to improve the criterion at <criterion\#>          ||" << endl;
+			cout << "|| improve <criterion\\#>: attempts to improve the criterion at <criterion\\#>          ||" << endl;
 			cout << "||====================================================================================||" << endl;
 			cout << "|| trade <colour> <give> <take>: attempts to trade with student <colour> giving one   ||" << endl;
 			cout << "||                               resource of type <give> and receiving one resource   ||" << endl;
@@ -263,6 +265,7 @@ int main(int argc, char* argv[]) {
 							<< "next" << endl
 							<< "save <file>" << endl
 							<< "help" << endl;
+			}
 		}
 	}
-};
+}
