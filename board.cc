@@ -715,7 +715,7 @@ void Board::criteria(Player player) {
 
 void Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource take) {
 	Student *player1;
-	//Student *player2;
+	Student *player2;
 	if (tradeFrom == Player::Blue) {
 		player1 = students[0].get();
 	} else if (tradeFrom == Player::Red) {
@@ -734,7 +734,7 @@ void Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource ta
 	} else { // player == Player::Yellow
 		player2 = students[3].get();
 	}
-	player1->trade(tradeWith, give, take);
+	player1->trade(player2, give, take);
 }
 
 void Board::criterionAdderHelper(int &iter, const int tileNo) {
