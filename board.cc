@@ -283,7 +283,7 @@ void Board::saveGame(Player curTurn) {
 		saveFile << this->students[1]->printStudent() << endl;
 		saveFile << this->students[2]->printStudent() << endl;
 		saveFile << this->students[3]->printStudent() << endl;
-		saveFile << this->print() << endl;
+		saveFile << this->savePrint() << endl;
 		saveFile << this->geeseAt << endl;
 	}
 	saveFile.close();
