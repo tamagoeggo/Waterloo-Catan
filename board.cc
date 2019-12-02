@@ -51,12 +51,6 @@ Board::Board(string board, int layer) {
 	  }
   }
 
-  //for (auto const& row: criterionv) {
-  //    for (auto const crit: row){
-  //      criterion.emplace_back(move(crit));
-  //    }
- // }
-
   updateCriterionsNeighbor();
 
   // init  goals
@@ -73,23 +67,10 @@ Board::Board(string board, int layer) {
 	  }
   }
 
-
-  //for (auto const& row: goalv){
-  //  for(auto const goal: row){
-  //    goals.emplace_back(move(goal));
-  //  }
-  //}
-
   // num = (rand() % (upper – lower + 1)) + lower
   // The board will consist of the following values: one 2, one 12, two 3-6, and two 8-11.
 	vector<int> values ={2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12};
   random_shuffle(values.begin(), values.end());
-  /*
-	for(auto val: values){
-		cout << val << endl;
-	}
-	*/
-
   //  The board consists of the following resources: 3 TUTORIAL, 3 STUDY, 4 CAFFEINE, 4 LAB, 4 LECTURE, and 1 NETFLIX
 	vector<Resource> resourcetype = {
 		Resource::Tutorial,Resource::Tutorial,Resource::Tutorial,
@@ -101,17 +82,8 @@ Board::Board(string board, int layer) {
   };
 	random_shuffle(resourcetype.begin(), resourcetype.end());
 
-  cout << "CHECKPOINT 1" << endl;
-	for(int i = 0; i < 18; ++i) {
-		cout << values[i] << endl;
-	}
   // init TextDisplay
   td = make_unique<TextDisplay>(&values, &resourcetype);
-
-  cout << "CHECKPOINT 3" << endl;
-	for(int i = 0; i < 18; ++i) {
-		cout << values[i] << endl;
-	}
 
   // init tiles
 	unique_ptr<Tile> newtile;
@@ -153,7 +125,7 @@ void Board::completeCriterion(const int coordinate, const Player player) {
 		throw "You cannot build here because this Criterion is already completed.";
 	}
 	else if (!criterion[coordinate]->areNeighborsUnoccupied()) {
-		throw "You cannot build here because the adjacent Criterion(s) is(are) completed.";
+		throw "You cannot build here because an adjacent Criterion is completed.";
 	}
 	else if (!criterion[coordinate]->goalsOccupancy(player)) {
 		throw "You cannot build here because you have not achieved any adjacent Goal.";
@@ -183,7 +155,6 @@ void Board::firstCriterion(const int coordinate, Player player) {
 	}
 	else {
 		criterion[coordinate]->updateOccupant(students[iter].get());
-		criterion[coordinate]->upgrade();
 		students[iter]->updateCriterion(criterion[coordinate].get());
 		td->notify(criterion[coordinate].get());
 	}
@@ -293,7 +264,6 @@ Player Board::whoWon() {
 		return Player::None;
 	}
 }
-
 
 void Board::saveGame(Player curTurn) {
   cout << "Please name your save file:" << endl;
@@ -674,11 +644,14 @@ void Board::setDice(string type) {
 	dice = type;
 }
 
+// rolls either fair or loaded die
 void Board::roll() {
+	int rolledval;
 	if (dice == "fair") {
 		Fair die = Fair();
-		die.roll();
-	} else if (dice == "load") {
+		rolledval = die.roll();
+	}
+	else if (dice == "load") {
 		int toLoad;
 		while (true) {
 			cout << "Input a roll between 2 and 12:" << endl;
@@ -690,7 +663,14 @@ void Board::roll() {
 			break;
 		}
 		Loaded die = Loaded(toLoad);
-		die.roll();
+		rolledval = die.roll();
+	}
+	// checking tiles that have same value as rolled value
+	// and sending resources
+	for(int i = 0; i < 19; i++){
+		if(tiles[i]->getValue() == rolledval){
+			tiles[i]->sendResources();
+		}
 	}
 }
 
@@ -725,9 +705,25 @@ string Board::savePrint() {
 }
 
 void Board::status() {
-	for (auto const& student: students) {
+	for (auto const& student: this->students) {
 		student->printStatus();
 	}
+}
+
+void Board::blueStatus(){
+	this->students[0]->printStatus();
+}
+
+void Board::redStatus(){
+	this->students[1]->printStatus();
+}
+
+void Board::orangeStatus(){
+	this->students[2]->printStatus();
+}
+
+void Board::yellowStatus(){
+	this->students[3]->printStatus();
 }
 
 void Board::criteria(Player player) {

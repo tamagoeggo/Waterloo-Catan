@@ -46,9 +46,11 @@ int main(int argc, char* argv[]) {
     	}
     }
 	}
+
 	if(seed_set == false){
 		srand(time(NULL));
 	}
+
 	Player whoseTurn = Player::Blue;
 	Board b = Board(board);
 	b.loadGame(load, &whoseTurn);
@@ -66,12 +68,20 @@ int main(int argc, char* argv[]) {
 		} else if (whoseTurn == Player::Yellow) {
 			cout << "Student Yellow, where do you want to complete an Assignment?" << endl;
 		}
-		int placeCriterionAt;
-		cin >> placeCriterionAt;
-		b.firstCriterion(placeCriterionAt, whoseTurn);
-		//int placeGoalAt;
-		//cin >> placeGoalAt;
-		//b.firstGoal(placeGoalAt, whoseTurn);
+
+		bool validArg = true;
+		while(validArg){
+			int placeCriterionAt;
+			cin >> placeCriterionAt;
+			try{
+				b.firstCriterion(placeCriterionAt, whoseTurn);
+				validArg = false;
+			} catch(char const* msg){
+				cout << msg << endl;
+				validArg = true;
+			}
+		}
+
 		if (firstAssignment) {
 			if (whoseTurn == Player::Blue) {
 				whoseTurn = Player::Red;
@@ -97,28 +107,56 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
+	// First 2 rounds of preliminary moves finished
+	// Enter second phase of gameplay
 	while (cin) {
 		string command;
-		cin >> command;
 		if (!rolled) {
 			if (whoseTurn == Player::Blue) {
-				cout << "Student blue's turn." << endl;
+				cout << "Student Blue's turn." << endl;
+				// status of student
+				b.blueStatus();
 			} else if (whoseTurn == Player::Red) {
-				cout << "Student red's turn." << endl;
+				cout << "Student Red's turn." << endl;
+				// status of student
+				b.redStatus();
 			} else if (whoseTurn == Player::Orange) {
-				cout << "Student orange's turn." << endl;
+				cout << "Student Orange's turn." << endl;
+				// status of student
+				b.orangeStatus();
 			} else if (whoseTurn == Player::Yellow) {
-				cout << "Student yellow's turn." << endl;
+				cout << "Student Yellow's turn." << endl;
+				// status of student
+				b.yellowStatus();
+			}
+			// choose dice type
+			cout << "Choose a dice command: load or fair" << endl;
+			cin >> command;
+			while(command != "load" && command != "fair"){
+				cout << "Invalid command" << endl;
+				cin >> command;
 			}
 			if (command == "load") {
 				b.setDice("load");
 			} else if (command == "fair") {
 				b.setDice("fair");
-			} else if (command == "roll") {
-				rolled = true;
-				b.roll();
 			}
-		} else if (command == "board") {
+			// roll chosen dice
+			cout << "Roll the dice: roll" << endl;
+			cin >> command;
+			while(command != "roll"){
+				cout << "Invalid command" << endl;
+				cin >> command;
+			}
+			 if (command == "roll") {
+				rolled = true;
+				b.roll(); // rolls the dice and sends resources, printing dice roll and resources
+			}
+		}
+		cout << "help: prints out the list of commands" << endl;
+
+		cin >> command;
+		if (command == "board") {
 			b.print();
 		} else if (command == "status") {
 			b.status();
@@ -206,17 +244,33 @@ int main(int argc, char* argv[]) {
 		} else if (command == "save") {
 			b.saveGame(whoseTurn);
 		} else if (command == "help") {
-			cout << "Valid commands:" << endl
-							<< "board" << endl
-							<< "status" << endl
-							<< "criteria" << endl
-							<< "achieve <goal>" << endl
-							<< "complete <criterion>" << endl
-							<< "improve <criterion>" << endl
-							<< "trade <colour> <give> <take>" << endl
-							<< "next" << endl
-							<< "save <file>" << endl
-							<< "help" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "||                                                                                    ||" << endl;
+			cout << "||                                    COMMANDS                                        ||" << endl;
+			cout << "||                                                                                    ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| board: prints the current board                                                    ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| status: prints the current status of all students in order from student 0 to 3     ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| criteria: prints the criteria the current student has currently completed          ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| achieve <goal\\#>: attempts to achieve the goal at <goal\\#>                         ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| complete <criterion\\#>: attempts to complete the criterion at <criterion\\#>        ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| improve <criterion\\#>: attempts to improve the criterion at <criterion\\#>          ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| trade <colour> <give> <take>: attempts to trade with student <colour> giving one   ||" << endl;
+			cout << "||                               resource of type <give> and receiving one resource   ||" << endl;
+			cout << "||                               of type <take>                                       ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| next: passes control onto the next student in the game.                            ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| save <file>: saves the current game state to <file>                                ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| help: prints out the list of commands                                              ||" << endl;
+			cout << "||====================================================================================||" << endl;
 		}
 	}
-};
+}
