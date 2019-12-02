@@ -32,8 +32,8 @@ Board::Board(string board, int layer) {
 	}
 
   //srand(time(NULL)); // seed
-  vector<vector<Criterion *>> criterionv;
-  vector<vector<Goal *>> goalv;
+  vector<vector<unique_ptr<Criterion>>> criterionv;
+  vector<vector<unique_ptr<Goal>>> goalv;
   rowSetup(layer, criterionv, goalv);
   update(layer, criterionv, goalv);
 
@@ -478,7 +478,7 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
 // fills in an empty vector of vector of criterion and
 // a vector of vector goals depending on how many layers there are
 // in the board
-void Board::rowSetup(const int n, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal) {
+void Board::rowSetup(const int n, vector<vector<unique_ptr<Criterion>>> &criterion, vector<vector<unique_ptr<Goal>>> &goal) {
 	criterion.resize(8 * n + 5);
 	goal.resize(8 * n + 5);
 
@@ -553,7 +553,7 @@ void Board::rowSetup(const int n, vector<vector<Criterion *>> &criterion, vector
 
 // updates all the criterion and goal vector of vectors with their
 // fields that require pointers to other criterion or goals
-void Board::update(const int n, vector<vector<Criterion *>> &criterion, vector<vector<Goal *>> &goal) {
+void Board::update(const int n, vector<vector<unique_ptr<Criterion>>> &criterion, vector<vector<unique_ptr<Goal>>> &goal) {
 	int patternedRow = (2 * n) + 2;
 
 	int goalCounter = 1;
