@@ -134,36 +134,8 @@ int main(int argc, char* argv[]) {
 				rolled = true;
 				b.roll();
 			}
-
-			// end of turn options
-			cout << "||====================================================================================||" << endl;
-			cout << "||                                                                                    ||" << endl;
-			cout << "||                                    COMMANDS                                        ||" << endl;
-			cout << "||                                                                                    ||" << endl;
-			cout << "||====================================================================================||" << endl;
-			cout << "|| board: prints the current board                                                    ||" << endl;
-			cout << "||====================================================================================||" << endl;
-			cout << "|| status: prints the current status of all students in order from student 0 to 3     ||" << endl;
-			cout << "||====================================================================================||" << endl;
-			cout << "|| criteria: prints the criteria the current student has currently completed          ||" << endl;
-			cout << "||====================================================================================||" << endl;
-			cout << "|| achieve <goal\\#>: attempts to achieve the goal at <goal\\#>                         ||" << endl;
-			cout << "||====================================================================================||" << endl;
-			cout << "|| complete <criterion\\#>: attempts to complete the criterion at <criterion\\#>        ||" << endl;
-			cout << "||====================================================================================||" << endl;
-			cout << "|| improve <criterion\\#>: attempts to improve the criterion at <criterion\\#>          ||" << endl;
-			cout << "||====================================================================================||" << endl;
-			cout << "|| trade <colour> <give> <take>: attempts to trade with student <colour> giving one   ||" << endl;
-			cout << "||                               resource of type <give> and receiving one resource   ||" << endl;
-			cout << "||                               of type <take>                                       ||" << endl;
-			cout << "||====================================================================================||" << endl;
-			cout << "|| next: passes control onto the next student in the game.                            ||" << endl;
-			cout << "||====================================================================================||" << endl;
-			cout << "|| save <file>: saves the current game state to <file>                                ||" << endl;
-			cout << "||====================================================================================||" << endl;
-			cout << "|| help: prints out the list of commands                                              ||" << endl;
-			cout << "||====================================================================================||" << endl;
-
+		}
+		cout << "help: prints out the list of commands" << endl;
 
 		cin >> command;
 		if (command == "board") {
@@ -254,18 +226,33 @@ int main(int argc, char* argv[]) {
 		} else if (command == "save") {
 			b.saveGame(whoseTurn);
 		} else if (command == "help") {
-			cout << "Valid commands:" << endl
-							<< "board" << endl
-							<< "status" << endl
-							<< "criteria" << endl
-							<< "achieve <goal>" << endl
-							<< "complete <criterion>" << endl
-							<< "improve <criterion>" << endl
-							<< "trade <colour> <give> <take>" << endl
-							<< "next" << endl
-							<< "save <file>" << endl
-							<< "help" << endl;
-			}
+			cout << "||====================================================================================||" << endl;
+			cout << "||                                                                                    ||" << endl;
+			cout << "||                                    COMMANDS                                        ||" << endl;
+			cout << "||                                                                                    ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| board: prints the current board                                                    ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| status: prints the current status of all students in order from student 0 to 3     ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| criteria: prints the criteria the current student has currently completed          ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| achieve <goal\\#>: attempts to achieve the goal at <goal\\#>                         ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| complete <criterion\\#>: attempts to complete the criterion at <criterion\\#>        ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| improve <criterion\\#>: attempts to improve the criterion at <criterion\\#>          ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| trade <colour> <give> <take>: attempts to trade with student <colour> giving one   ||" << endl;
+			cout << "||                               resource of type <give> and receiving one resource   ||" << endl;
+			cout << "||                               of type <take>                                       ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| next: passes control onto the next student in the game.                            ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| save <file>: saves the current game state to <file>                                ||" << endl;
+			cout << "||====================================================================================||" << endl;
+			cout << "|| help: prints out the list of commands                                              ||" << endl;
+			cout << "||====================================================================================||" << endl;
 		}
 	}
 }
