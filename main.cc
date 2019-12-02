@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
 	bool rolled = false;
 	while (true) {
 		bool firstAssignment = true;
-		b.print()
+		b.print();
 		if (whoseTurn == Player::Blue) {
 			cout << "Student Blue, where do you want to complete an Assignment?" << endl;
 		} else if (whoseTurn == Player::Red) {
