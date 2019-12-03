@@ -8,6 +8,9 @@ Goal::Goal(int coordinate): coordinate{coordinate} {}
 // dtor
 Goal::~Goal(){
 	occupiedBy = nullptr;
+	for(auto pn: this->neighbors){
+		delete pn;
+	}
 }
 
 void Goal::updateOccupant(Student *newOccupant) {
