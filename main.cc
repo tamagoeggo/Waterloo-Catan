@@ -364,7 +364,8 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		// if eof
-		catch(std::__ios_failure){
+		catch(ios::failure &){
+			cout << "test" << endl;
 			b.saveGame(whoseTurn);
 			cout << "Game ended unexpectedly, saving game." << endl;
 		}
