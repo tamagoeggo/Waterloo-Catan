@@ -679,6 +679,7 @@ void Board::roll() {
 			}
 		}
 	}
+	cout << "LINE 682" << endl;
 	if(!sent){
 		cout << "No students gained resources." << endl;
 	}
