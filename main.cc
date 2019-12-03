@@ -16,7 +16,7 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	cin.exceptions(ios::eofbit);
-	try{
+
 		bool playagain = true;
 		while(playagain){
 			int seed;
@@ -78,6 +78,7 @@ int main(int argc, char* argv[]) {
 			bool rolled = false;
 			bool firstAssignment = true;
 
+			try{
 			// FIRST PHASE
 			if (load == "default") {
 				while (true) {
@@ -133,7 +134,8 @@ int main(int argc, char* argv[]) {
 					}
 				}
 				}
-			} else {
+			}
+			else {
 				b.print();
 			}
 
@@ -361,11 +363,11 @@ int main(int argc, char* argv[]) {
 				}
 			}
 		}
+		// if eof
+		catch(ios::failure &){
+			b.saveGame(whoseTurn);
+			cout << "Game ended unexpectedly, saving game." << endl;
+		}
 		return 0;
-	}
-	// if eof at anytime
-	catch (ios::failure &){
-		b.saveGame(whoseTurn);
-		cout << "Game ended suddenly, saving game." << endl;
 	}
 }
