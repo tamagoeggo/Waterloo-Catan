@@ -3,7 +3,7 @@
 using namespace std;
 
 // ctor with randomized resources and value, init textdisplay
-Board::Board(string board, int layer) {
+Board::Board(bool enhance, string board, int layer) {
 
 	// num = (rand() % (upper – lower + 1)) + lower
   	// The board will consist of the following values: one 2, one 12, two 3-6, and two 8-11.
@@ -48,10 +48,10 @@ Board::Board(string board, int layer) {
 			values2.emplace_back(value);
 			resourceType2vec.emplace_back(resourceType2);
 		}
-		td = make_unique<TextDisplay>(&values2, &resourceType2vec);
+		td = make_unique<TextDisplay>(enhance, &values2, &resourceType2vec);
 	} else {
 		// init TextDisplay
-  		td = make_unique<TextDisplay>(&values, &resourcetype);
+  		td = make_unique<TextDisplay>(enhance, &values, &resourcetype);
 
 		// init tiles
 		unique_ptr<Tile> newtile;

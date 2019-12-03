@@ -39,7 +39,7 @@ class Board {
 	int geeseAt = -1;
 	public:
 
-	Board(std::string board, int layer = 2); // ctor with randomized resources and value, init textdisplay
+	Board(bool enhance, std::string board, int layer = 2); // ctor with randomized resources and value, init textdisplay
 
 	/*
 	Board(const Board&) = delete; // disable copy ctor

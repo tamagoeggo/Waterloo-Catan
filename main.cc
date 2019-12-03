@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
 			cout << "BEGINNING OF PLAYAGAIN LOOP" << endl; */
 			int seed;
 			bool seed_set = false;
+		  bool enhance = false;
 			string load = "default";
 			string board = "default";
 
@@ -51,6 +52,9 @@ int main(int argc, char* argv[]) {
 		    		}
 		    	}
 		    }
+		    if (string(argv[i]).compare("-enhance") == 0) {
+		    		enhance = true;
+		    }
 			}
 
 			if(seed_set == false){
@@ -59,7 +63,6 @@ int main(int argc, char* argv[]) {
 
 		while(playagain){
 			cout << endl;
-
 			cout << "===================================================================================" << endl;
 			cout << "===================================================================================" << endl;
 			cout << "                                       W A T A N                                   " << endl;
@@ -84,7 +87,8 @@ int main(int argc, char* argv[]) {
 					getline(f, board);
 				}
 			}
-			Board b = Board(board);
+
+			Board b = Board(enhance, board);
 			b.loadGame(load, &whoseTurn);
 			bool rolled = false;
 			bool firstAssignment = true;
@@ -165,7 +169,6 @@ int main(int argc, char* argv[]) {
 							cin >> command;
 						}
 						if(command == "yes"){
-							b.Reset(); // resets all player data
 							throw "Play Again";
 						}
 						else if(command == "no"){
@@ -375,6 +378,8 @@ int main(int argc, char* argv[]) {
 
 			// if play again (continue game from beginning of loop)
 			catch(const char* msg){
+				b.Reset(); // resets all player data
+				b = Board(enhance, board);
 				cout << "You chose to: "<< msg << endl;
 				load = "default";
 				board = "default";
