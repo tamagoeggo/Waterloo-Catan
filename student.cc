@@ -25,6 +25,7 @@ void Student::updateResources(Resource resource, int amount) {
 
 // updates the vector of criterion a student has completed
 void Student::updateCriterion(Criterion *crit) {
+  crit->updateOccupant(*this);
   criteria.emplace_back(crit);
 }
 
@@ -169,20 +170,30 @@ void Student::trade(Student *stud, Resource resource1, Resource resource2){
   cout << this->player << " offers " << stud->player << " one " << resource1 << " for one " << resource2 << ". Does " << stud->player << " accept this offer?" << endl;
   string answer;
   cin >> answer;
+  while(answer != "no" && answer != "yes"){
+    cout << "Please accept or decline the trade offer with yes or no." << endl;
+    cin >> answer;
+  }
   if(answer == "no") {
     return;
   }
   else if(answer == "yes") {
-    // assume all valid moves
-    // add exceptions later
+    // resource1 does not exist
+    if(!(this->resources.count(resource1))) {
+      cout << this->player << " does not have enough " << resource1 << " to trade. Trade unsuccessful." << endl;
+      return;
+    }
+    // resource2 does not exist
+    if(!(stud->resources.count(resource2))) {
+      cout << stud->player << " does not have enough " << resource2 << " to trade. Trade unsuccessful." << endl;
+      return;
+    }
+
     this->resources[resource2] += 1;
     this->resources[resource1] -= 1;
     stud->resources[resource1] += 1;
     stud->resources[resource2] -= 1;
-    return;
-  }
-  else {
-    cout << "place catch block here" << endl;
+    cout << "Trade successful" << endl;
     return;
   }
 }

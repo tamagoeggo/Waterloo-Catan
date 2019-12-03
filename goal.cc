@@ -34,5 +34,7 @@ void Goal::addNeighbor(Criterion *c) {
 bool Goal::canPlayerAchieveGoal(Student *s) {
 	if (neighbors[0]->getStudent() == s) { return true; }
 	else if (neighbors[1]->getStudent() == s) { return true; }
+	else if (neighbors[0]->goalsOccupancy(s->getPlayer())) { return true; }
+	else if (neighbors[1]->goalsOccupancy(s->getPlayer())) { return true; }
 	else { return false; }
 }
