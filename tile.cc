@@ -78,7 +78,7 @@ string Tile::playersToStealFrom(Player player){
       yellowThere = "Yellow";
     }
   }
-  cout << "CHECKPOINT 1"<< endl;
+
   vector<string> printOrder;
   if(blueThere != ""){
     printOrder.emplace_back(blueThere);
@@ -92,8 +92,9 @@ string Tile::playersToStealFrom(Player player){
   if(yellowThere != ""){
     printOrder.emplace_back(yellowThere);
   }
-  cout << "CHECKPOINT 2"<< endl;
-  for(int j = 0; j < printOrder.size() - 1; j++){
+
+  int sizeofvec = printOrder.size() - 1;
+  for(int j = 0; j < sizeofvec; j++){
     cout << "CHECKPOINT 3"<< endl;
     output += printOrder[j];
     output += ",";
