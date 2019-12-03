@@ -157,15 +157,13 @@ int main(int argc, char* argv[]) {
 							cin >> command;
 						}
 						if(command == "yes"){
-							cout << b.whoWon() << endl; // DEBUG STATEMENT
 							b.Reset(); // resets all player data
-							cout << b.whoWon() << endl; // DEBUG STATEMENT
 							throw "Play Again";
 						}
 						else if(command == "no"){
 							playagain = false;
+							throw "End Game";
 						}
-						break;
 					}
 
 					if (!rolled) {
@@ -373,7 +371,7 @@ int main(int argc, char* argv[]) {
 
 			// if play again (continue game from beginning of loop)
 			catch(const char* msg){
-				cout << "in catch block" << endl;
+				cout << msg << endl;
 				continue;
 			}
 			// if eof
