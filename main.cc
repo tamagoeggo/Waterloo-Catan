@@ -18,8 +18,8 @@ int main(int argc, char* argv[]) {
 	cin.exceptions(ios::eofbit);
 
 		bool playagain = true;
-		while(playagain){
-			cout << "BEGINNING OF PLAYAGAIN LOOP" << endl;
+	/*	while(playagain){
+			cout << "BEGINNING OF PLAYAGAIN LOOP" << endl; */
 			int seed;
 			bool seed_set = false;
 			string load = "default";
@@ -56,7 +56,8 @@ int main(int argc, char* argv[]) {
 			if(seed_set == false){
 				srand(time(NULL));
 			}
-
+		while(playagain){
+			cout << "BEGINNING OF PLAYAGAIN LOOP" << endl;
 			Player whoseTurn = Player::Blue;
 			if (load == "default" && board == "default") {}
 			else {
