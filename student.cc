@@ -251,9 +251,9 @@ void Student::stealResources(Student &student){
     total = 1;
   }
   for (auto const& x : student.resources){
+      cout << "single resource amount: " << x.second << endl;
       if(x.second / total > probablity){
         probablity = x.second / total;
-        cout << "single resource amount: " << x.second << endl;
         steal = x.first;
       }
     }
