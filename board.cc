@@ -4,7 +4,7 @@ using namespace std;
 
 // ctor with randomized resources and value, init textdisplay
 Board::Board(string board, int layer) {
-	
+
 	// num = (rand() % (upper – lower + 1)) + lower
   	// The board will consist of the following values: one 2, one 12, two 3-6, and two 8-11.
 	vector<int> values ={2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12};
@@ -19,7 +19,7 @@ Board::Board(string board, int layer) {
     		Resource::Netflix
 	};
 	random_shuffle(resourcetype.begin(), resourcetype.end());
-	
+
 	if (board != "default") {
 		stringstream lineStream;
 		lineStream << board;
@@ -49,7 +49,7 @@ Board::Board(string board, int layer) {
 			resourceType2vec.emplace_back(resourceType2);
 		}
 		td = make_unique<TextDisplay>(&values2, &resourceType2vec);
-	} else {	
+	} else {
 		// init TextDisplay
   		td = make_unique<TextDisplay>(&values, &resourcetype);
 
@@ -94,7 +94,7 @@ Board::Board(string board, int layer) {
 		total_size += row.size();
 	}
   	goals.reserve(total_size);
-	
+
 	for (unsigned int i = 0; i < goalv.size(); ++i) {
 		unsigned int size = goalv[i].size();
 		for (unsigned int j = 0; j < size; ++j) {
@@ -135,7 +135,7 @@ void Board::completeCriterion(const int coordinate, const Player player) {
 		throw "You cannot build here because you have not achieved any adjacent Goal.";
 	}
 	else if (!students[iter]->resourcesCheck(Type::Assignment)) {
-		throw "You cannot build here because you do not have the necessary Resources. \n
+		throw "You cannot build here because you do not have the necessary Resources.
 					An assignment costs one Caffeine, one Lab, one Lecture, and one Tutorial";
 	}
 	else {
@@ -179,9 +179,8 @@ void Board::upgradeCriterion(const int coordinate, Player player) {
 	if (criterion[coordinate]->getStudent() == students[iter].get()) {
 		State state = criterion[coordinate]->getState();
 		if (!students[iter]->resourcesCheck(state.type)) {
-			throw "You cannot build here because you do not have the necessary Resources. \n
-						A midterm costs two Lecture, and three Study.\n
-						An exam costs three Caffeine, two Lab, two Lecture, one Tutorial and two Study.";
+			throw "You cannot build here because you do not have the necessary Resources. A midterm costs two Lecture, and three Study.
+			An exam costs three Caffeine, two Lab, two Lecture, one Tutorial and two Study.";
 		}
 		criterion[coordinate]->upgrade(); 								// update the type of achievement at criterion
 		students[iter]->resourcesSpent(state.type);
@@ -208,7 +207,7 @@ void Board::achieveGoal(const int coordinate, Player player) {
 		throw "You cannot build here because you have not completed any adjacent Criterion(s).";
 	}
 	else if (!students[iter]->resourcesCheck(Type::Achievement)) {
-		throw "You cannot build here because you do not have the necessary Resources. \n
+		throw "You cannot build here because you do not have the necessary Resources.
 						The cost of an achievement is one Study and one Tutorial resource";
 	}
 	else {
