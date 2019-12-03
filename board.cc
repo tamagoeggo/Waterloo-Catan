@@ -227,8 +227,9 @@ void Board::loseResourcesGeese() {
 // moves geese to a coordinate on the board,
 // updating geeseAt
 void Board::moveGeese(int coordinates) {
+	cout << "ENTERED MOVEGEESE" << endl;
   if(geeseAt != -1){
-    tiles[geeseAt]->toggleGeese();
+    this->tiles[geeseAt]->toggleGeese();
   }
   if(coordinates == geeseAt || coordinates > 18 || coordinates < 0){
     throw std::invalid_argument("Invalid coordinates");
@@ -728,8 +729,7 @@ void Board::roll(Player curTurn) {
 			cout << "Please input an integer between 0 and 18 inclusive" << endl;
 			cin >> moveto;
 		}
-		cout << moveto << endl; //////////////////////////DEBUG STATEMENT/////////////////////////////////////////
-		this->moveGeese(moveto);
+		this->moveGeese(moveto); // SEG FAULTING HERE
 
 		//Student <colour1> can choose to steal from [students].
 		string str = this->tiles[moveto]->playersToStealFrom(curTurn);
