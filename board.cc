@@ -139,7 +139,6 @@ void Board::completeCriterion(const int coordinate, const Player player) {
 		students[iter]->resourcesSpent(Type::Assignment); 				// decrease Player's resources
 		students[iter]->updateCriterion(criterion[coordinate].get());	// update Player's criterion owned list
 		td->notify(criterion[coordinate].get());
-		cout << "You have completed Criterion " << coordinate << "." << endl;
 	}
 }
 
@@ -180,7 +179,6 @@ void Board::upgradeCriterion(const int coordinate, Player player) {
 		criterion[coordinate]->upgrade(); 								// update the type of achievement at criterion
 		students[iter]->resourcesSpent(state.type);
 		td->notify(criterion[coordinate].get());
-		cout << "Criterion " << coordinate << " has been improved." << endl;
 	}
 	else {
 		throw "You cannot build here because you do not own this criterion.";
@@ -209,9 +207,27 @@ void Board::achieveGoal(const int coordinate, Player player) {
 		students[iter]->resourcesSpent(Type::Achievement);
 		students[iter]->updateGoal(goals[coordinate].get());
 		td->notify(goals[coordinate].get());
-		cout << "You have achieved Goal " << coordinate << "." << endl;
 	}
 }
+
+void Board::firstGoal(const int coordinate, Player player) {
+	int iter;
+	for (int i = 0; i < 4; ++i) {
+		if (students[i]->getPlayer() == player) {
+			iter = i;
+			break;
+		}
+	}
+	if (goals[coordinate]->getStudent()) { // check if criterion is occupied
+		throw "You cannot build here because this Goal is already achieved.";
+	}
+	else {
+		goals[coordinate]->updateOccupant(students[iter].get());
+		students[iter]->updateGoal(goals[coordinate].get());
+		td->notify(goals[coordinate].get());
+	}
+}
+
 
 // loops through students when a 7 is rolled and checks if
 // the student will lose half their resources
@@ -654,6 +670,7 @@ void Board::roll() {
 	}
 	// checking tiles that have same value as rolled value
 	// and sending resources
+	cout << "TEST IN BOARD.CC LINE 673" << endl;
 	bool sent = false;
 	for(int i = 0; i < 19; i++){
 		if(tiles[i]->getValue() == rolledval){
