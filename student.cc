@@ -83,7 +83,7 @@ string Student::returnGoals(){
   string output = "";
   //string num = to_string(goals.size());
   //output += num;
-  for (int i = 0; i < goals.size(); ++i) {
+  for (unsigned int i = 0; i < goals.size(); ++i) {
     if (output != "") {
       output += " ";
     }
@@ -100,7 +100,7 @@ string Student::returnCriteria(){
   string output = "";
   //string num = to_string(criteria.size());
   //output += num;
-  for (int i = 0; i < criteria.size(); ++i) {
+  for (unsigned int i = 0; i < criteria.size(); ++i) {
     if (output != "") {
       output += " ";
     }

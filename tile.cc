@@ -88,7 +88,7 @@ string Tile::playersToStealFrom(Player player){
   }
 
   // blue, orange, yellow
-  for(int j = 0; j < printOrder.size() - 1; j++){
+  for(unsigned int j = 0; j < printOrder.size() - 1; j++){
     output += printOrder[j];
     output += ",";
   }
