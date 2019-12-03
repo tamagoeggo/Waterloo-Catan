@@ -388,6 +388,7 @@ int main(int argc, char* argv[]) {
 			catch(ios::failure &){
 				b.saveGameEof(whoseTurn, "backup");
 				cout << "Game ended unexpectedly, saving game to backup.txt." << endl;
+				playagain = false;
 				return 0;
 			}
 	}
