@@ -135,8 +135,7 @@ void Board::completeCriterion(const int coordinate, const Player player) {
 		throw "You cannot build here because you have not achieved any adjacent Goal.";
 	}
 	else if (!students[iter]->resourcesCheck(Type::Assignment)) {
-		throw "You cannot build here because you do not have the necessary Resources.
-					An assignment costs one Caffeine, one Lab, one Lecture, and one Tutorial";
+		throw "You cannot build here because you do not have the necessary Resources. An assignment costs one Caffeine, one Lab, one Lecture, and one Tutorial";
 	}
 	else {
 		criterion[coordinate]->updateOccupant(students[iter].get());
@@ -179,8 +178,7 @@ void Board::upgradeCriterion(const int coordinate, Player player) {
 	if (criterion[coordinate]->getStudent() == students[iter].get()) {
 		State state = criterion[coordinate]->getState();
 		if (!students[iter]->resourcesCheck(state.type)) {
-			throw "You cannot build here because you do not have the necessary Resources. A midterm costs two Lecture, and three Study.
-			An exam costs three Caffeine, two Lab, two Lecture, one Tutorial and two Study.";
+			throw "You cannot build here because you do not have the necessary Resources. A midterm costs two Lecture, and three Study. An exam costs three Caffeine, two Lab, two Lecture, one Tutorial and two Study.";
 		}
 		criterion[coordinate]->upgrade(); 								// update the type of achievement at criterion
 		students[iter]->resourcesSpent(state.type);
@@ -207,8 +205,7 @@ void Board::achieveGoal(const int coordinate, Player player) {
 		throw "You cannot build here because you have not completed any adjacent Criterion(s).";
 	}
 	else if (!students[iter]->resourcesCheck(Type::Achievement)) {
-		throw "You cannot build here because you do not have the necessary Resources.
-						The cost of an achievement is one Study and one Tutorial resource";
+		throw "You cannot build here because you do not have the necessary Resources. The cost of an achievement is one Study and one Tutorial resource";
 	}
 	else {
 		goals[coordinate]->updateOccupant(students[iter].get());
