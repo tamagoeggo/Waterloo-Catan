@@ -56,6 +56,7 @@ int main(int argc, char* argv[]) {
 			if(seed_set == false){
 				srand(time(NULL));
 			}
+
 		while(playagain){
 			cout << "BEGINNING OF PLAYAGAIN LOOP" << endl;
 			Player whoseTurn = Player::Blue;
@@ -157,9 +158,9 @@ int main(int argc, char* argv[]) {
 						}
 						if(command == "yes"){
 							cout << b.whoWon() << endl; // DEBUG STATEMENT
-							playagain = true;
 							b.Reset(); // resets all player data
 							cout << b.whoWon() << endl; // DEBUG STATEMENT
+							throw "Play Again";
 						}
 						else if(command == "no"){
 							playagain = false;
@@ -368,6 +369,12 @@ int main(int argc, char* argv[]) {
 						cout << "||====================================================================================||" << endl;
 					}
 				}
+			}
+
+			// if play again (continue game from beginning of loop)
+			catch(const char* msg){
+				cout << "in catch block" << endl;
+				continue;
 			}
 			// if eof
 			catch(...){
