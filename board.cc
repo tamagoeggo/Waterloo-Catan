@@ -227,7 +227,6 @@ void Board::loseResourcesGeese() {
 // moves geese to a coordinate on the board,
 // updating geeseAt
 void Board::moveGeese(int coordinates) {
-	cout << "ENTERED MOVEGEESE" << endl;
   if(geeseAt != -1){
     this->tiles[geeseAt]->toggleGeese();
   }
@@ -235,8 +234,11 @@ void Board::moveGeese(int coordinates) {
     throw std::invalid_argument("Invalid coordinates");
   }
   geeseAt = coordinates;
+	cout << "before toggleGeese" << endl;
   tiles[coordinates]->toggleGeese();
+	cout << "after toggleGeese" << endl;
 	td->notify(coordinates); // textdisplay
+	cout << "after td->notify(coordinates)" << endl;
 }
 
 Player Board::whoWon() {
