@@ -262,13 +262,13 @@ void Board::saveGame(Player curTurn) {
   cin >> name;
   ofstream saveFile(name + ".txt"); // change this to date and time
   if (curTurn == Player::Blue) {
-  	string studentPrint = "blue";
+  	studentPrint = "blue";
   } else if (curTurn == Player::Red) {
-  	string studentPrint = "red";
+  	studentPrint = "red";
   } else if (curTurn == Player::Orange) {
-  	string studentPrint = "orange";
+  	studentPrint = "orange";
   } else { // curTurn == Player::Orange
-  	string studentPrint = "yellow";
+  	studentPrint = "yellow";
   }
 	if (saveFile.is_open()) {
 		saveFile << studentPrint << endl;
@@ -820,7 +820,7 @@ void Board::print() {
 
 string Board::savePrint() {
 	string toPrint = "";
-	for (int i = 0; i <= 19; ++i) {
+	for (int i = 0; i < 19; ++i) {
 		if (toPrint != "") {
 			toPrint += " "; // {Caffeine, Lab, Lecture, Study, Tutorial, Netflix, None};
 		}

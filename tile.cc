@@ -88,7 +88,7 @@ string Tile::playersToStealFrom(Player player){
   if(yellowThere != ""){
     printOrder.emplace_back(yellowThere);
   }
-  
+
   for(int j = 0; j < printOrder.size() - 1; j++){
     output += printOrder[j];
     output += ",";
