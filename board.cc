@@ -257,6 +257,13 @@ Player Board::whoWon() {
 	}
 }
 
+// Resets game, student data, but not board
+void Board::Reset(){
+	for(int i = 0; i < 4; i++){
+		this->students[i]->Reset();
+	}
+}
+
 void Board::saveGame(Player curTurn) {
   cout << "Please name your save file:" << endl;
 	cout << ">";

@@ -56,6 +56,7 @@ class Board {
 	void loseResourcesGeese(); // function called if 7 is rolled
 	void moveGeese(int coordinates); // moves geese to new tile
 	Player whoWon();
+	void Reset(); // called when "playagain" is called, resets all player data
 
 	void saveGame(Player curTurn); // takes in current player turn to save for next time
 	void saveGameEof(Player curTurn, std::string name); // save game version called when eof

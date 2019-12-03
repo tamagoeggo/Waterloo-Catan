@@ -334,6 +334,12 @@ void Student::loseResources(){
   }
 }
 
+void Student::Reset(){
+  this->resources.clear();
+  this->criteria.clear();
+  this->goals.clear();
+}
+
 bool Student::resourcesCheck(Type type) {
   if (type == Type::Assignment) {
     if (resources[Resource::Caffeine] < 1) return false;
