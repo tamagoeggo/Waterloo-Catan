@@ -285,6 +285,7 @@ void Board::saveGame(Player curTurn) {
 }
 
 void Board::saveGameEof(Player curTurn, string name) {
+	string studentPrint;
   ofstream saveFile(name + ".txt"); // change this to date and time
   if (curTurn == Player::Blue) {
   	studentPrint = "blue";
