@@ -733,7 +733,7 @@ void Board::roll(Player curTurn) {
 			cout << "Student " << curTurn << " has no students to steal from." << endl;
 		}
 		else{
-			vector<Player> onTile;
+			vector<string> onTile;
 			istringstream ss(str);
 			string token;
 
