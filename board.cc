@@ -713,7 +713,7 @@ void Board::roll(Player curTurn) {
 		}
 
 		if(!lost){
-			cout << "No resources were lost to the geese."
+			cout << "No resources were lost to the geese.";
 		}
 		else{
 			this->loseResourcesGeese();
@@ -1052,4 +1052,3 @@ void Board::updateCriterionsNeighbor() {
 		criterion[i]->addNeighbor();
 	}
 }
-
