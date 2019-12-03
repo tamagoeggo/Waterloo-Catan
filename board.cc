@@ -111,6 +111,8 @@ Board::Board(string board, int layer) {
   unique_ptr<Student> newstud4 = make_unique<Student>(Player::Yellow);
   students.emplace_back(move(newstud4));
 
+	updateCriterionsInTile(layer);
+
 }
 
 void Board::completeCriterion(const int coordinate, const Player player) {
@@ -670,10 +672,8 @@ void Board::roll() {
 	}
 	// checking tiles that have same value as rolled value
 	// and sending resources
-	cout << "TEST IN BOARD.CC LINE 673" << endl;
 	bool sent = false;
 	for(int i = 0; i < 19; i++){
-		cout << "LINE 676" << endl;
 		if(tiles[i]->getValue() == rolledval){
 			if(tiles[i]->sendResources()) {
 				sent = true;
