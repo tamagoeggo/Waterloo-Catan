@@ -61,16 +61,6 @@ int main(int argc, char* argv[]) {
 				srand(time(NULL));
 			}
 
-		while(playagain){
-			cout << endl;
-			cout << "===================================================================================" << endl;
-			cout << "===================================================================================" << endl;
-			cout << "                                       W A T A N                                   " << endl;
-			cout << "===================================================================================" << endl;
-			cout << "===================================================================================" << endl;
-			cout << endl;
-			cout << endl;
-			Player whoseTurn = Player::Blue;
 			if (load == "default" && board == "default") {}
 			else {
 				//string resourceList;
@@ -92,6 +82,17 @@ int main(int argc, char* argv[]) {
 			b.loadGame(load, &whoseTurn);
 			bool rolled = false;
 			bool firstAssignment = true;
+
+		while(playagain){
+			cout << endl;
+			cout << "===================================================================================" << endl;
+			cout << "===================================================================================" << endl;
+			cout << "                                       W A T A N                                   " << endl;
+			cout << "===================================================================================" << endl;
+			cout << "===================================================================================" << endl;
+			cout << endl;
+			cout << endl;
+			Player whoseTurn = Player::Blue;
 
 			try{
 				// FIRST PHASE
