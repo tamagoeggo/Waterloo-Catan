@@ -26,26 +26,19 @@ void Tile::toggleGeese() {
 }
 
 // 3.5.5
-void Tile::sendResources() {
-  cout << "Tile::sendResources" << endl; //DEBUG
-  bool gained = false;
-  if (geeseHere) { return; } // 2.3
-  if (resource == Resource::Netflix) { return; } // 2.2
+bool Tile::sendResources() {
+ bool gained = false;
+  if (geeseHere) { return false; } // 2.3
+  if (resource == Resource::Netflix) { return false; } // 2.2 (No resources sent)
   for (int i = 0; i < 6; ++i) {
-    cout << "in the loop" << endl; // DEBUG
-    cout << "criterion size " << criterion.size() << endl; // DEBUG
-    cout << "1 criterion[i]->getStudent() is " << criterion[i]->getStudent() << endl; // DEBUG
     if (criterion[i]->getStudent()) { // to check if criterion is occupied
-      cout << "2 criterion[i]->getStudent() is " << criterion[i]->getStudent() << endl; // DEBUG
-      // Student <colour> gained:
+     // Student <colour> gained:
       cout << "Student " << criterion[i]->getStudent()->getPlayer() << " gained:" << endl;
       criterion[i]->sendResources(resource);
       gained = true;
     }
   }
-  if (!gained) {
-    cout << "No students gained resources." << endl;
-  }
+  return gained;
 }
 
 void Tile::addCriterion(Criterion *c) {

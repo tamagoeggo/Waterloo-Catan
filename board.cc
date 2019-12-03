@@ -111,7 +111,7 @@ Board::Board(string board, int layer) {
   unique_ptr<Student> newstud4 = make_unique<Student>(Player::Yellow);
   students.emplace_back(move(newstud4));
 
-  updateCriterionsInTile(layer);
+	updateCriterionsInTile(layer);
 
 }
 
@@ -137,10 +137,10 @@ void Board::completeCriterion(const int coordinate, const Player player) {
 	}
 	else {
 		criterion[coordinate]->updateOccupant(students[iter].get());
-		criterion[coordinate]->upgrade(); 								// update the type of achievement at criterion
 		students[iter]->resourcesSpent(Type::Assignment); 				// decrease Player's resources
 		students[iter]->updateCriterion(criterion[coordinate].get());	// update Player's criterion owned list
 		td->notify(criterion[coordinate].get());
+		cout << "You have completed Criterion " << coordinate << "." << endl;
 	}
 }
 
@@ -181,6 +181,7 @@ void Board::upgradeCriterion(const int coordinate, Player player) {
 		criterion[coordinate]->upgrade(); 								// update the type of achievement at criterion
 		students[iter]->resourcesSpent(state.type);
 		td->notify(criterion[coordinate].get());
+		cout << "Criterion " << coordinate << " has been improved." << endl;
 	}
 	else {
 		throw "You cannot build here because you do not own this criterion.";
@@ -209,24 +210,7 @@ void Board::achieveGoal(const int coordinate, Player player) {
 		students[iter]->resourcesSpent(Type::Achievement);
 		students[iter]->updateGoal(goals[coordinate].get());
 		td->notify(goals[coordinate].get());
-	}
-}
-
-void Board::firstGoal(const int coordinate, Player player) {
-	int iter;
-	for (int i = 0; i < 4; ++i) {
-		if (students[i]->getPlayer() == player) {
-			iter = i;
-			break;
-		}
-	}
-	if (goals[coordinate]->getStudent()) { // check if criterion is occupied
-		throw "You cannot build here because this Goal is already achieved.";
-	}
-	else {
-		goals[coordinate]->updateOccupant(students[iter].get());
-		students[iter]->updateGoal(goals[coordinate].get());
-		td->notify(goals[coordinate].get());
+		cout << "You have achieved Goal " << coordinate << "." << endl;
 	}
 }
 
@@ -701,7 +685,8 @@ void Board::roll() {
 	if (dice == "fair") {
 		Fair die = Fair();
 		rolledval = die.roll();
-	} else if (dice == "load") {
+	}
+	else if (dice == "load") {
 		int toLoad;
 		while (true) {
 			cout << "Input a roll between 2 and 12:" << endl;
@@ -717,11 +702,16 @@ void Board::roll() {
 	}
 	// checking tiles that have same value as rolled value
 	// and sending resources
-	//cout << "size of tiles vector" << tiles.size() << endl; // DEBUG
-	for(int i = 0; i < 19; ++i){
+	bool sent = false;
+	for(int i = 0; i < 19; i++){
 		if(tiles[i]->getValue() == rolledval){
-			tiles[i]->sendResources();
+			if(tiles[i]->sendResources()) {
+				sent = true;
+			}
 		}
+	}
+	if(!sent){
+		cout << "No students gained resources." << endl;
 	}
 }
 
@@ -823,6 +813,8 @@ void Board::criterionAdderHelper(int &iter, const int tileNo) {
 }
 
 void Board::updateCriterionsInTile(const int n) {
+	//int totalTiles = (3 * n * n) + (3 * n) + 1;
+
 	int patternStartsAt = (n * (n + 1)) / 2;	// Tile No.
 	double secondPattern = ((n * n) / (double)2) + ((3 * n) / (double)2) + 1;
 	int two_n = 2 * patternStartsAt;    		// counter

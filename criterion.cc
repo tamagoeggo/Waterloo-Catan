@@ -38,7 +38,7 @@ void Criterion::sendResources(Resource resource) {
 		cout << 3 << " " << resource << endl;
 	}
 	else {
-		cout << "Throw an exception here" << endl;
+		throw "Invalid resource";
 	}
 }
 

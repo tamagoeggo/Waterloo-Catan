@@ -17,7 +17,7 @@ class Tile {
 	Resource getResource();
 	int getValue();
 	void toggleGeese(); // changes bool value to true or false if geese is on tile
-	void sendResources(); // updates student’s resources if criteria of the tile is occupied
+	bool sendResources(); // updates student’s resources if criteria of the tile is occupied
 	void addCriterion(Criterion *c);
 };
 
