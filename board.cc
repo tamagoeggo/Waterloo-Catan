@@ -235,6 +235,7 @@ void Board::moveGeese(int coordinates) {
   }
   geeseAt = coordinates;
   tiles[coordinates]->toggleGeese();
+	td->notify(coordinates); // textdisplay
 }
 
 Player Board::whoWon() {
@@ -713,16 +714,18 @@ void Board::roll(Player curTurn) {
 		}
 
 		if(!lost){
-			cout << "No resources were lost to the geese.";
+			cout << "No resources were lost to the Geese." << endl;
 		}
 		else{
 			this->loseResourcesGeese();
 		}
 
-		cout << "Choose where to place the GEESE." << endl;
+		cout << "Choose where to place the Geese." << endl;
 		int moveto;
-		while(!(cin >> moveto) || (moveto == geeseAt) || (moveto > 18) || (moveto < 0)){
+		cin >> moveto;
+		while((moveto == geeseAt) || (moveto > 18) || (moveto < 0)){
 			cout << "Please input an integer between 0 and 18 inclusive" << endl;
+			cin >> moveto;
 		}
 		this->moveGeese(moveto);
 
@@ -791,9 +794,6 @@ void Board::roll(Player curTurn) {
 			students[stealerIndex]->stealResources(*students[stolenfromIndex]);
 		}
 	}
-
-
-
 
 
 	// if 7 IS NOT rolled
