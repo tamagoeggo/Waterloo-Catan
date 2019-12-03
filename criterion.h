@@ -28,7 +28,7 @@ class Criterion : public Subject { // Vertex
 	void addGoal(Goal *g);
 	void addNeighbor(); // adding neighbor from goal
 	bool areNeighborsUnoccupied(); // returns true when if neighbours are not occupied
-	bool goalsOccupancy(Player player); // returns true if player owns any of the goals adjacent
+	bool goalsOccupancy(Player player, int coordinate = -1); // returns true if player owns any of the goals adjacent
 };
 
 

@@ -90,11 +90,13 @@ bool Criterion::areNeighborsUnoccupied() {
 	return true;
 }
 
-bool Criterion::goalsOccupancy(Player player) {
+bool Criterion::goalsOccupancy(Player player, int coordinate) {
 	int size = goals.size();
 	for (int i = 0; i < size; ++i) {
-		if (!goals[i]->getStudent()) return false;
-		if (goals[i]->getStudent()->getPlayer() == player) return true;
+		if (goals[i]->getCoordinate() == coordinate) continue;
+		if (goals[i]->getStudent()) {
+			if (goals[i]->getStudent()->getPlayer() == player) { return true; }
+		}
 	}
 	return false;
 }

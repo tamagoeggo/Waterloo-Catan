@@ -16,7 +16,7 @@ Student::Student(Player player) : player{player} {}
 // gets player color
 // can be either {Blue, Red, Orange, Yellow, None}
 Player Student::getPlayer() {
-  return player;
+	return player;
 }
 
 // updates the number and type of resource a student has
