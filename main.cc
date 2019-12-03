@@ -206,20 +206,27 @@ int main(int argc, char* argv[]) {
 					cin >> goal;
 					try {
 						b.achieveGoal(goal, whoseTurn);
-					}
-					catch (const char *c) {
+					} catch (const char *c) {
 						cout << c << endl;
 					}
 				}
 				else if (command == "complete") {
 					int criterion;
 					cin >> criterion;
-					b.completeCriterion(criterion, whoseTurn);
+					try {
+						b.completeCriterion(criterion, whoseTurn);
+					} catch (const char *c) {
+						cout << c << endl;
+					}
 				}
 				else if (command == "improve") {
 					int criterion;
 					cin >> criterion;
-					b.upgradeCriterion(criterion, whoseTurn);
+					try {
+						b.upgradeCriterion(criterion, whoseTurn);
+					} catch (const char *c) {
+						cout << c << endl;
+					}	
 				}
 				else if (command == "trade") {
 					Player tradeWith;
