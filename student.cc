@@ -257,7 +257,7 @@ void Student::stealResources(Student &student){
     }
 
   if(steal == Resource::None){
-    cout << "exception block here for when there is nothing to be stolen" << endl;
+    cout << student.getPlayer() << " has no resources to steal." << endl;
     return;
   }
   else{
