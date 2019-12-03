@@ -56,10 +56,8 @@ int main(int argc, char* argv[]) {
 			if(seed_set == false){
 				srand(time(NULL));
 			}
-			Board b;
 
 		while(playagain){
-			b = Board(board);
 			cout << endl;
 			cout << "===================================================================================" << endl;
 			cout << "===================================================================================" << endl;
@@ -85,6 +83,7 @@ int main(int argc, char* argv[]) {
 					getline(f, board);
 				}
 			}
+			Board b = Board(board);
 			b.loadGame(load, &whoseTurn);
 			bool rolled = false;
 			bool firstAssignment = true;
