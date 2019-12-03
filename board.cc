@@ -234,11 +234,8 @@ void Board::moveGeese(int coordinates) {
     throw std::invalid_argument("Invalid coordinates");
   }
   geeseAt = coordinates;
-	cout << "before toggleGeese" << endl;
   tiles[coordinates]->toggleGeese();
-	cout << "after toggleGeese" << endl;
 	td->notify(coordinates); // textdisplay
-	cout << "after td->notify(coordinates)" << endl;
 }
 
 Player Board::whoWon() {
@@ -731,10 +728,11 @@ void Board::roll(Player curTurn) {
 			cout << "Please input an integer between 0 and 18 inclusive" << endl;
 			cin >> moveto;
 		}
-		this->moveGeese(moveto); // SEG FAULTING HERE
-
+		this->moveGeese(moveto); // not seg faulting here
+		cout << "before sketch function" << endl;
 		//Student <colour1> can choose to steal from [students].
 		string str = this->tiles[moveto]->playersToStealFrom(curTurn);
+		cout << "after str and sketch function" << endl;
 
 		if(str == ""){
 			cout << "Student " << curTurn << " has no students to steal from." << endl;
