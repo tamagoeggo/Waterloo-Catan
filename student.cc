@@ -335,6 +335,15 @@ void Student::loseResources(){
 }
 
 void Student::Reset(){
+  for (auto p : this->resources){
+     delete p;
+  }
+  for (auto p : this->criteria){
+    delete p;
+  }
+  for (auto p : this->goals){
+     delete p;
+   }
   this->resources.clear();
   this->criteria.clear();
   this->goals.clear();

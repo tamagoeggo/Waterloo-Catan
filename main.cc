@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
 
 		bool playagain = true;
 		while(playagain){
+			cout << "BEGINNING OF PLAYAGAIN LOOP" << endl;
 			int seed;
 			bool seed_set = false;
 			string load = "default";

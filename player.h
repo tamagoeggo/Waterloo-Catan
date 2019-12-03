@@ -20,7 +20,7 @@ inline std::ostream &operator<<(std::ostream &out, const Player &player) {
         return out << "Yellow";
     }
     else {
-        return out << "Throw an exception in player ostream overload";
+        return out << "None";
     }
 }
 
