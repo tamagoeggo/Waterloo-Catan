@@ -542,10 +542,13 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
 			} else if (lineNumber == 7) {
 				int intGeeseAt = stoi(line);
 				if (geeseAt != -1) {
+					if(geeseAt != intGeeseAt){
+						tiles[geeseAt]->toggleGeese();
+					}
+					td->notify(intGeeseAt); // prints geese on board
+					geeseAt = intGeeseAt;
 					tiles[geeseAt]->toggleGeese();
 				}
-				geeseAt = intGeeseAt;
-				tiles[geeseAt]->toggleGeese();
 			}
 			++lineNumber;
 		}
