@@ -673,13 +673,13 @@ void Board::roll() {
 	cout << "TEST IN BOARD.CC LINE 673" << endl;
 	bool sent = false;
 	for(int i = 0; i < 19; i++){
+		cout << "LINE 676" << endl;
 		if(tiles[i]->getValue() == rolledval){
 			if(tiles[i]->sendResources()) {
 				sent = true;
 			}
 		}
 	}
-	cout << "LINE 682" << endl;
 	if(!sent){
 		cout << "No students gained resources." << endl;
 	}
