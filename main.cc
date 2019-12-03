@@ -372,8 +372,7 @@ int main(int argc, char* argv[]) {
 			// if play again (continue game from beginning of loop)
 			catch(const char* msg){
 				cout << msg << endl;
-				continue;
-				cout << "test" << endl;
+				continue; // seg fault here?
 			}
 			// if eof
 			catch(...){
