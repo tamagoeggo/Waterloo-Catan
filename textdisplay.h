@@ -58,3 +58,4 @@ class TextDisplay : public Observer {
 };
 
 #endif
+

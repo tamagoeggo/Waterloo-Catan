@@ -393,3 +393,4 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 	}
 	return out;
 }
+

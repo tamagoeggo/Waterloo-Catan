@@ -953,3 +953,4 @@ void Board::updateCriterionsNeighbor() {
 		criterion[i]->addNeighbor();
 	}
 }
+
