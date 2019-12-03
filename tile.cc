@@ -94,13 +94,13 @@ string Tile::playersToStealFrom(Player player){
   }
 
   int sizeofvec = printOrder.size() - 1;
-  cout << sizeofvec << endl; ///////////////DEBUG//////////////////
+//  cout << sizeofvec << endl; ///////////////DEBUG//////////////////
   for(int j = 0; j < sizeofvec; j++){
-    cout << "CHECKPOINT 3"<< endl;
+  //  cout << "CHECKPOINT 3"<< endl;
     output += printOrder[j];
     output += ",";
   }
-  cout << "CHECKPOINT 4"<< endl;
+//  cout << "CHECKPOINT 4"<< endl;
   if (!printOrder.empty()){
     output += printOrder.back();
   }

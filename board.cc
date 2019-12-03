@@ -732,7 +732,7 @@ void Board::roll(Player curTurn) {
 		//Student <colour1> can choose to steal from [students].
 
 		string str = this->tiles[moveto]->playersToStealFrom(curTurn);
-		cout << "after sketch function" << endl;
+	//	cout << "after sketch function" << endl; // DEBUG STATEMENT
 
 		if(str == ""){
 			cout << "Student " << curTurn << " has no students to steal from." << endl;
