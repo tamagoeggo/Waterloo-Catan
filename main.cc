@@ -19,9 +19,11 @@ int main(int argc, char* argv[]) {
 	bool seed_set = false;
 	string load = "default";
 	string board = "default";
+	cout << argc << endl;
   for (int i = 0; i < argc; ++i) {
-    cout << argv[i] << "\n";
-    if (i > 0 && i % 2 == 0) { // if it is a command line option
+  	cout << "loop" << endl;
+  	cout << argv[i] << endl;
+    if (i > 0 && i % 2 == 1) { // if it is a command line option
     	if (string(argv[i]).compare("-seed") == 0) {
     		try {
     			seed = stoi(argv[i + 1]);
@@ -30,38 +32,46 @@ int main(int argc, char* argv[]) {
     		} catch (...) {
     			cerr << "Missing Seed" << endl;
 					seed_set = false;
+					return 0;
     		}
     	} else if (string(argv[i]).compare("-load") == 0) {
     		try {
-    			load = string(argv[i + 1]);
-    			cout << "CHECKPOINT 1" << endl; // DEBUG
-    			cout << load << endl; // DEBUG
-    			cout << "CHECKPOINT 2" << endl; // DEBUG
+    			cout << "before loading" << endl;;
+    			load = argv[i + 1];
     		} catch (...) {
     			cerr << "Missing Load File" << endl;
+    			return 0;
     		}
     	} else if (string(argv[i]).compare("-board") == 0) {
     		try {
     			board = string(argv[i + 1]);
     		} catch (...) {
     			cerr << "Missing Board File" << endl;
+    			return 0;
     		}
     	}
     }
 	}
-
+	cout << load << endl;
+	cout << "CHECKPOINT 1" << endl;
 	if(seed_set == false){
 		srand(time(NULL));
 	}
-
+	cout << "CHECKPOINT 2" << endl;
 	Player whoseTurn = Player::Blue;
+	cout << "CHECKPOINT 3" << endl;
 	Board b = Board(board);
+	cout << "CHECKPOINT 4" << endl;
 	b.loadGame(load, &whoseTurn);
+	cout << "CHECKPOINT 5" << endl;
 	bool rolled = false;
 	bool firstAssignment = true;
 
 	while (true) {
 		b.print();
+		if (load.compare("default") != 0) {
+			break;
+		}
 		if (whoseTurn == Player::Blue) {
 			cout << "Student Blue, where do you want to complete an Assignment?" << endl;
 		} else if (whoseTurn == Player::Red) {

@@ -300,9 +300,7 @@ void Board::saveGame(Player curTurn) {
 //  0 representing CAFFEINE, 1 representing LAB, 2 representing LECTURE, 3 representing STUDY, 4 representing TUTORIAL, and 5 representing NETFLIX
 
 void Board::loadGame(string loadFile, Player *whoseTurn) {
-	if (loadFile == "default") {
-		return;
-	}
+	if (loadFile == "default") {	return;	}
 	int lineNumber = 1;
 	string line;
 	ifstream saveFile(loadFile + ".txt");
@@ -321,8 +319,8 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
 			} else if (lineNumber == 2) {
   			stringstream lineStream;
   			lineStream << line;
-  			while (lineStream) {
-    			string inputType = "caffeine"; // either resource, goal or criterion
+  			string inputType = "caffeine"; // either resource, goal or criterion
+  			while (!lineStream.eof()) {
     			string num;
     			lineStream >> num;
     			if (inputType == "caffeine") {
@@ -339,6 +337,7 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
       			inputType = "tutorial";
     			} else if (inputType == "tutorial") {
     				students[0]->updateResources(Resource::Tutorial, stoi(num));
+    				inputType = "null";
     			} else if (num == "g") {
       			inputType = "goal";
     			} else if (num == "c") {
@@ -346,14 +345,26 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			} else if (inputType == "goal") {
       			students[0]->updateGoal(goals[stoi(num)].get());
     			} else if (inputType == "criterion") {
+    				int criterionType;
+    				lineStream >> criterionType;
+    				cout << "num is " << num << endl;
+    				cout << "criterionType is " << criterionType << endl;
       			students[0]->updateCriterion(criterion[stoi(num)].get());
+      			//this->td->notify(criterion[stoi(num)]);
+      			if (criterionType == 2) {
+      				(criterion[stoi(num)].get())->upgrade();
+      			} else if (criterionType == 3) {
+      				(criterion[stoi(num)].get())->upgrade();
+      				(criterion[stoi(num)].get())->upgrade();
+      			}
     			}
   			}
 			} else if (lineNumber == 3) {
+				cout << "lineNumber 3" << endl;
   			stringstream lineStream;
   			lineStream << line;
-  			while (lineStream) {
-    			string inputType = "caffeine"; // either resource, goal or criterion
+				string inputType = "caffeine"; // either resource, goal or criterion
+  			while (!lineStream.eof()) {
     			string num;
     			lineStream >> num;
     			if (inputType == "caffeine") {
@@ -370,6 +381,7 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
       			inputType = "tutorial";
     			} else if (inputType == "tutorial") {
     				students[1]->updateResources(Resource::Tutorial, stoi(num));
+    				inputType = "null";
     			} else if (num == "g") {
       			inputType = "goal";
     			} else if (num == "c") {
@@ -377,14 +389,24 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			} else if (inputType == "goal") {
       			students[1]->updateGoal(goals[stoi(num)].get());
     			} else if (inputType == "criterion") {
+    				int criterionType;
+    				lineStream >> criterionType;
+    				cout << "criterionType is " << criterionType << endl;
       			students[1]->updateCriterion(criterion[stoi(num)].get());
+      			//this->td->notify(criterion[stoi(num)]);
+      			if (criterionType == 2) {
+      				(criterion[stoi(num)].get())->upgrade();
+      			} else if (criterionType == 3) {
+      				(criterion[stoi(num)].get())->upgrade();
+      				(criterion[stoi(num)].get())->upgrade();
+      			}
     			}
   			}
 			} else if (lineNumber == 4) {
   			stringstream lineStream;
   			lineStream << line;
-  			while (lineStream) {
-    			string inputType = "caffeine"; // either resource, goal or criterion
+  			string inputType = "caffeine"; // either resource, goal or criterion
+  			while (!lineStream.eof()) {
     			string num;
     			lineStream >> num;
     			if (inputType == "caffeine") {
@@ -401,6 +423,7 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
       			inputType = "tutorial";
     			} else if (inputType == "tutorial") {
     				students[2]->updateResources(Resource::Tutorial, stoi(num));
+    				inputType = "null";
     			} else if (num == "g") {
       			inputType = "goal";
     			} else if (num == "c") {
@@ -408,14 +431,26 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			} else if (inputType == "goal") {
       			students[2]->updateGoal(goals[stoi(num)].get());
     			} else if (inputType == "criterion") {
+    				int criterionType;
+    				lineStream >> criterionType;
+    				cout << "criterionType is " << criterionType << endl;
       			students[2]->updateCriterion(criterion[stoi(num)].get());
+      			//(criterion[stoi(num)].get())->upgrade();
+      			//this->td->notify(criterion[stoi(num)]);
+      			if (criterionType == 2) {
+      				(criterion[stoi(num)].get())->upgrade();
+      				(criterion[stoi(num)].get());
+      			} else if (criterionType == 3) {
+      				(criterion[stoi(num)].get())->upgrade();
+      				(criterion[stoi(num)].get())->upgrade();
+      			}
     			}
   			}
 			} else if (lineNumber == 5) {
   			stringstream lineStream;
   			lineStream << line;
-  			while (lineStream) {
-    			string inputType = "caffeine"; // either resource, goal or criterion
+  			string inputType = "caffeine"; // either resource, goal or criterion
+  			while (!lineStream.eof()) {
     			string num;
     			lineStream >> num;
     			if (inputType == "caffeine") {
@@ -432,6 +467,7 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
       			inputType = "tutorial";
     			} else if (inputType == "tutorial") {
     				students[3]->updateResources(Resource::Tutorial, stoi(num));
+    				inputType = "null";
     			} else if (num == "g") {
       			inputType = "goal";
     			} else if (num == "c") {
@@ -439,13 +475,23 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			} else if (inputType == "goal") {
       			students[3]->updateGoal(goals[stoi(num)].get());
     			} else if (inputType == "criterion") {
+    				int criterionType;
+    				lineStream >> criterionType;
+    				//cout << "criterionType is " << criterionType << endl;
       			students[3]->updateCriterion(criterion[stoi(num)].get());
+      			//this->td->notify(criterion[stoi(num)]);
+      			if (criterionType == 2) {
+      				(criterion[stoi(num)].get())->upgrade();
+      			} else if (criterionType == 3) {
+      				(criterion[stoi(num)].get())->upgrade();
+      				(criterion[stoi(num)].get())->upgrade();
+      			}
     			}
   			}
   		} else if (lineNumber == 6) {
 				stringstream lineStream;
 				lineStream << line;
-				while (lineStream) {
+				while (!lineStream.eof()) {
 					int type;
 					Resource resourceType;
 					int value;
