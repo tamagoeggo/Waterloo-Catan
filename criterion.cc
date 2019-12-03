@@ -12,6 +12,7 @@ Criterion::Criterion(int coordinate):coordinate{coordinate} {
 
 // dtor
  Criterion::~Criterion(){
+	 cout << "Criterion dtor" << endl;
 	occupiedBy = nullptr;
 	for(int i = 0; i < this->goals.size(); i++){
 		delete this->goals[i];

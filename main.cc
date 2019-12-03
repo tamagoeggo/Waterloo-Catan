@@ -383,7 +383,6 @@ int main(int argc, char* argv[]) {
 			// if play again (continue game from beginning of loop)
 			catch(const char* msg){
 				b.Reset(); // resets all player data
-				b = Board(enhance, board);
 				cout << "You chose to: "<< msg << endl;
 				load = "default";
 				board = "default";
