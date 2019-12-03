@@ -32,7 +32,7 @@ TextDisplay::TextDisplay(std::vector<int> *values, std::vector<Resource> *resour
 		//int valuePosn = 0;
 		string toEmplace;
 		if (i == netflixAt) {
-			toEmplace = "                 ";
+			toEmplace = "                ";
 			netflixAt = -1;
 		} else if ((*values)[i] < 10) {
 			toEmplace = "        " + to_string((*values)[i]) + "       ";
@@ -393,4 +393,3 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
 	}
 	return out;
 }
-

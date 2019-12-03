@@ -1,1 +1,0 @@
-type.o: type.cc
