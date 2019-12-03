@@ -175,7 +175,7 @@ int main(int argc, char* argv[]) {
 					}
 					if (command == "roll") {
 						rolled = true;
-						b.roll(); // rolls the dice and sends resources, printing dice roll and resources
+						b.roll(whoseTurn); // rolls the dice and sends resources, printing dice roll and resources
 					}
 				}
 
@@ -226,7 +226,7 @@ int main(int argc, char* argv[]) {
 						b.upgradeCriterion(criterion, whoseTurn);
 					} catch (const char *c) {
 						cout << c << endl;
-					}	
+					}
 				}
 				else if (command == "trade") {
 					Player tradeWith;

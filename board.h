@@ -65,7 +65,7 @@ class Board {
 	// adds goals to criterion and adds neighbors to goals
 	void update(const int n, std::vector<std::vector<std::unique_ptr<Criterion>>> &criterion, std::vector<std::vector<std::unique_ptr<Goal>>> &goal); // DONE
 	void setDice(std::string type); // DONE
-	void roll();
+	void roll(Player curTurn);
 	void print(); // DONE
 	std::string savePrint();
 	void status(); // DONE

@@ -44,3 +44,56 @@ bool Tile::sendResources() {
 void Tile::addCriterion(Criterion *c) {
 	criterion.emplace_back(c);
 }
+
+// returns a string of all the players on tile except for the parameter
+string Tile::playersToStealFrom(Player player){
+  // order is always Blue, Red, Orange, Yellow
+  string output = "";
+  string blueThere = "";
+  string redThere = "";
+  string orangeThere = "";
+  string yellowThere = "";
+  for(int i = 0; i < 6; i++){
+    if(criterion[i]->getStudent()->getPlayer() == Player::Blue
+    && player != Player::Blue
+    && criterion[i]->getStudent()->numResources() > 0){
+      blueThere = "Blue";
+    }
+    else if(criterion[i]->getStudent()->getPlayer() == Player::Red
+    && player != Player::Red
+    && criterion[i]->getStudent()->numResources() > 0){
+      redThere = "Red";
+    }
+    else if(criterion[i]->getStudent()->getPlayer() == Player::Orange
+    && player != Player::Orange
+    && criterion[i]->getStudent()->numResources() > 0){
+      orangeThere = "Orange";
+    }
+    else if(criterion[i]->getStudent()->getPlayer() == Player::Yellow
+    && player != Player::Yellow
+    && criterion[i]->getStudent()->numResources() > 0){
+      yellowThere = "Yellow";
+    }
+  }
+  vector<string> printOrder;
+  printOrder.emplace_back(blueThere);
+  printOrder.emplace_back(redThere);
+  printOrder.emplace_back(orangeThere);
+  printOrder.emplace_back(yellowThere);
+
+  for(int i = 0; i < 4; i++){
+    if(printOrder[i] == ""){
+      printOrder.erase(i);
+    }
+  }
+
+  // blue, orange, yellow
+  for(int j = 0; j < printOrder.size() - 1; j++){
+    output += printOrder[j];
+    output += ",";
+  }
+  if (!printOrder.empty()){
+    output += printOrder.back();
+  }
+  return output;
+}

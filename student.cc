@@ -219,7 +219,6 @@ int Student::getPoints(){
 // checking happens elsewhere
 void Student::stealResources(Student &student){
   // Student <colour1> steals <resource> from student <colour2>.
-  cout << "Student " << player << " steals " << "resource" << " from student " << student.player << endl;
   // probablity of being stolen from
   Resource steal = Resource::None;
   float probablity = 0.00;
