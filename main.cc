@@ -56,9 +56,10 @@ int main(int argc, char* argv[]) {
 			if(seed_set == false){
 				srand(time(NULL));
 			}
+			Board b;
 
 		while(playagain){
-			Board b = Board(board);
+			b = Board(board);
 			cout << endl;
 			cout << "===================================================================================" << endl;
 			cout << "===================================================================================" << endl;
