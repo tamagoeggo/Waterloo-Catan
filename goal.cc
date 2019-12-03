@@ -37,9 +37,9 @@ void Goal::addNeighbor(Criterion *c) {
 }
 
 bool Goal::canPlayerAchieveGoal(Student *s) {
-	if (neighbors[0]->getStudent() == s) { return true; }
-	else if (neighbors[1]->getStudent() == s) { return true; }
-	else if (neighbors[0]->goalsOccupancy(s->getPlayer())) { return true; }
-	else if (neighbors[1]->goalsOccupancy(s->getPlayer())) { return true; }
+	if (neighbors[0]->getStudent() == s) { return true; } 			// if adjacent criterion is occupied
+	else if (neighbors[1]->getStudent() == s) { return true; }		
+	else if (neighbors[0]->goalsOccupancy(s->getPlayer(), this->getCoordinate())) { return true; }	// if adjacent goal is occupied
+	else if (neighbors[1]->goalsOccupancy(s->getPlayer(), this->getCoordinate())) { return true; }
 	else { return false; }
 }
