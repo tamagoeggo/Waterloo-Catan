@@ -1,1 +1,0 @@
-observer.o: observer.cc

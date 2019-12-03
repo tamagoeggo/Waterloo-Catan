@@ -173,7 +173,7 @@ string Student::printResources(){
 // returns the number of criteria a student has completed
 string Student::printCriteria(){
   string output = "";
-  string num = std::to_string(criteria.size());
+  string num = std::to_string(this->getPoints());
   output += num + " course criteria, ";
   return output;
 }
@@ -188,10 +188,12 @@ void Student::printStatus(){// calls printResources, printGoals, printCriteria
 void Student::trade(Student *stud, Resource resource1, Resource resource2){
 //  <colour1> offers <colour2> one <resource1> for one <resource2>. Does <colour2> accept this offer?
   cout << this->player << " offers " << stud->player << " one " << resource1 << " for one " << resource2 << ". Does " << stud->player << " accept this offer?" << endl;
+  cout << ">";
   string answer;
   cin >> answer;
   while(answer != "no" && answer != "yes"){
     cout << "Please accept or decline the trade offer with yes or no." << endl;
+    cout << ">";
     cin >> answer;
   }
   if(answer == "no") {
