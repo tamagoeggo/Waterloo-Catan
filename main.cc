@@ -55,13 +55,21 @@ int main(int argc, char* argv[]) {
 			}
 
 			Player whoseTurn = Player::Blue;
-			Board b = Board(board);
-			b.loadGame(load, &whoseTurn);
+			if (load == "default" && board == "default") { 	// if it is a normal game
+				Board b = Board(load);
+			} else if (load != "default") {			// it it is a loaded game
+				Board b = Board(load);
+			} else {					// if it is a game with a set board
+				Board b = Board(board);
+			}
+			//Board b = Board(load);
+			b.loadGame(board, &whoseTurn);
 			bool rolled = false;
 			bool firstAssignment = true;
 
 			// FIRST PHASE
-			while (true) {
+			if (load == "default") {
+				while (true) {
 				b.print();
 				if (whoseTurn == Player::Blue) {
 					cout << "Student Blue, where do you want to complete an Assignment?" << endl;
@@ -109,6 +117,9 @@ int main(int argc, char* argv[]) {
 						whoseTurn = Player::Orange;
 					}
 				}
+				}
+			} else {
+				b.print();
 			}
 
 			// SECOND PHASE

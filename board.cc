@@ -4,7 +4,8 @@ using namespace std;
 // ctor with randomized resources and value, init textdisplay
 Board::Board(string board, int layer) {
 	if (board != "default") {
-			stringstream lineStream;
+		//board += ".txt";
+		stringstream lineStream;
 			lineStream << board;
 			while (lineStream) {
 				int type;
@@ -327,22 +328,25 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			} else if (num == "c") {
       			inputType = "criterion";
     			} else if (inputType == "goal") {
-      			students[0]->updateGoal(goals[stoi(num)].get());
+				goals[stoi(num)]->updateOccupant(students[0].get());
+				students[0]->updateGoal(goals[stoi(num)].get());
+				td->notify(goals[stoi(num)].get());
     			} else if (inputType == "criterion") {
     				int criterionType;
     				lineStream >> criterionType;
     				cout << "num is " << num << endl;
     				cout << "criterionType is " << criterionType << endl;
-      			students[0]->updateCriterion(criterion[stoi(num)].get());
-      			//this->td->notify(criterion[stoi(num)]);
-      			if (criterionType == 2) {
-      				(criterion[stoi(num)].get())->upgrade();
-      			} else if (criterionType == 3) {
-      				(criterion[stoi(num)].get())->upgrade();
-      				(criterion[stoi(num)].get())->upgrade();
-      			}
+				criterion[stoi(num)]->updateOccupant(students[0].get());
+				students[0]->updateCriterion(criterion[stoi(num)].get());
+      				td->notify(criterion[stoi(num)].get());
+				if (criterionType == 2) {
+					criterion[stoi(num)]->upgrade();
+      				} else if (criterionType == 3) {
+					criterion[stoi(num)]->upgrade();
+					criterion[stoi(num)]->upgrade();
+				}
     			}
-  			}
+			}
 			} else if (lineNumber == 3) {
 				cout << "lineNumber 3" << endl;
   			stringstream lineStream;
@@ -371,19 +375,22 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			} else if (num == "c") {
       			inputType = "criterion";
     			} else if (inputType == "goal") {
-      			students[1]->updateGoal(goals[stoi(num)].get());
+      				goals[stoi(num)]->updateOccupant(students[1].get());
+				students[1]->updateGoal(goals[stoi(num)].get());
+				td->notify(goals[stoi(num)].get());
     			} else if (inputType == "criterion") {
     				int criterionType;
     				lineStream >> criterionType;
     				cout << "criterionType is " << criterionType << endl;
-      			students[1]->updateCriterion(criterion[stoi(num)].get());
-      			//this->td->notify(criterion[stoi(num)]);
-      			if (criterionType == 2) {
-      				(criterion[stoi(num)].get())->upgrade();
-      			} else if (criterionType == 3) {
-      				(criterion[stoi(num)].get())->upgrade();
-      				(criterion[stoi(num)].get())->upgrade();
-      			}
+      				criterion[stoi(num)]->updateOccupant(students[1].get());
+				students[1]->updateCriterion(criterion[stoi(num)].get());
+				td->notify(criterion[stoi(num)].get());
+      				if (criterionType == 2) {
+					criterion[stoi(num)]->upgrade();
+      				} else if (criterionType == 3) {
+      					criterion[stoi(num)]->upgrade();
+      					criterion[stoi(num)]->upgrade();
+				}
     			}
   			}
 			} else if (lineNumber == 4) {
@@ -413,20 +420,23 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			} else if (num == "c") {
       			inputType = "criterion";
     			} else if (inputType == "goal") {
-      			students[2]->updateGoal(goals[stoi(num)].get());
-    			} else if (inputType == "criterion") {
+    				goals[stoi(num)]->updateOccupant(students[2].get());
+				students[2]->updateGoal(goals[stoi(num)].get());
+				td->notify(goals[stoi(num)].get());
+			} else if (inputType == "criterion") {
     				int criterionType;
     				lineStream >> criterionType;
     				cout << "criterionType is " << criterionType << endl;
-      			students[2]->updateCriterion(criterion[stoi(num)].get());
-      			//(criterion[stoi(num)].get())->upgrade();
-      			//this->td->notify(criterion[stoi(num)]);
+      				criterion[stoi(num)]->updateOccupant(students[2].get());
+				students[2]->updateCriterion(criterion[stoi(num)].get());
+      				//(criterion[stoi(num)].get())->upgrade();
+      				td->notify(criterion[stoi(num)].get());
       			if (criterionType == 2) {
-      				(criterion[stoi(num)].get())->upgrade();
-      				(criterion[stoi(num)].get());
+      				criterion[stoi(num)]->upgrade();
+      				//criterion[stoi(num)].get());
       			} else if (criterionType == 3) {
-      				(criterion[stoi(num)].get())->upgrade();
-      				(criterion[stoi(num)].get())->upgrade();
+      				criterion[stoi(num)]->upgrade();
+      				criterion[stoi(num)]->upgrade();
       			}
     			}
   			}
@@ -457,18 +467,21 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			} else if (num == "c") {
       			inputType = "criterion";
     			} else if (inputType == "goal") {
-      			students[3]->updateGoal(goals[stoi(num)].get());
+				goals[stoi(num)]->updateOccupant(students[3].get());
+				students[3]->updateGoal(goals[stoi(num)].get());
+				td->notify(goals[stoi(num)].get());
     			} else if (inputType == "criterion") {
     				int criterionType;
     				lineStream >> criterionType;
     				//cout << "criterionType is " << criterionType << endl;
-      			students[3]->updateCriterion(criterion[stoi(num)].get());
-      			//this->td->notify(criterion[stoi(num)]);
+      				criterion[stoi(num)]->updateOccupant(students[3].get());
+				students[3]->updateCriterion(criterion[stoi(num)].get());
+      				td->notify(criterion[stoi(num)].get());
       			if (criterionType == 2) {
-      				(criterion[stoi(num)].get())->upgrade();
+      				criterion[stoi(num)]->upgrade();
       			} else if (criterionType == 3) {
-      				(criterion[stoi(num)].get())->upgrade();
-      				(criterion[stoi(num)].get())->upgrade();
+      				criterion[stoi(num)]->upgrade();
+      				criterion[stoi(num)]->upgrade();
       			}
     			}
   			}
