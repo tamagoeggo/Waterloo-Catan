@@ -54,40 +54,41 @@ string Tile::playersToStealFrom(Player player){
   string orangeThere = "";
   string yellowThere = "";
   for(int i = 0; i < 6; i++){
-    if(criterion[i]->getStudent()->getPlayer() == Player::Blue
+    if(this->criterion[i]->getStudent()->getPlayer() == Player::Blue
     && player != Player::Blue
-    && criterion[i]->getStudent()->numResources() > 0){
+    && this->criterion[i]->getStudent()->numResources() > 0){
       blueThere = "Blue";
     }
-    else if(criterion[i]->getStudent()->getPlayer() == Player::Red
+    else if(this->criterion[i]->getStudent()->getPlayer() == Player::Red
     && player != Player::Red
     && criterion[i]->getStudent()->numResources() > 0){
       redThere = "Red";
     }
-    else if(criterion[i]->getStudent()->getPlayer() == Player::Orange
+    else if(this->criterion[i]->getStudent()->getPlayer() == Player::Orange
     && player != Player::Orange
-    && criterion[i]->getStudent()->numResources() > 0){
+    && this->criterion[i]->getStudent()->numResources() > 0){
       orangeThere = "Orange";
     }
-    else if(criterion[i]->getStudent()->getPlayer() == Player::Yellow
+    else if(this->criterion[i]->getStudent()->getPlayer() == Player::Yellow
     && player != Player::Yellow
-    && criterion[i]->getStudent()->numResources() > 0){
+    && this->criterion[i]->getStudent()->numResources() > 0){
       yellowThere = "Yellow";
     }
   }
   vector<string> printOrder;
-  printOrder.emplace_back(blueThere);
-  printOrder.emplace_back(redThere);
-  printOrder.emplace_back(orangeThere);
-  printOrder.emplace_back(yellowThere);
-
-  for(int i = 0; i < 4; i++){
-    if(printOrder[i] == ""){
-      printOrder.erase(printOrder.begin() + i);
-    }
+  if(blueThere != ""){
+    printOrder.emplace_back(blueThere);
   }
-
-  // blue, orange, yellow
+  if(redThere != ""){
+    printOrder.emplace_back(redThere);
+  }
+  if(orangeThere != ""){
+    printOrder.emplace_back(orangeThere);
+  }
+  if(yellowThere != ""){
+    printOrder.emplace_back(yellowThere);
+  }
+  
   for(int j = 0; j < printOrder.size() - 1; j++){
     output += printOrder[j];
     output += ",";

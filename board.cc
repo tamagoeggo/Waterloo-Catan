@@ -728,11 +728,9 @@ void Board::roll(Player curTurn) {
 			cout << "Please input an integer between 0 and 18 inclusive" << endl;
 			cin >> moveto;
 		}
-		this->moveGeese(moveto); // not seg faulting here
-		cout << "before sketch function" << endl;
+		this->moveGeese(moveto);
 		//Student <colour1> can choose to steal from [students].
 		string str = this->tiles[moveto]->playersToStealFrom(curTurn);
-		cout << "after str and sketch function" << endl;
 
 		if(str == ""){
 			cout << "Student " << curTurn << " has no students to steal from." << endl;
