@@ -284,6 +284,31 @@ void Board::saveGame(Player curTurn) {
 	saveFile.close();
 }
 
+void Board::saveGameEof(Player curTurn, string name) {
+  ofstream saveFile(name + ".txt"); // change this to date and time
+  if (curTurn == Player::Blue) {
+  	studentPrint = "blue";
+  } else if (curTurn == Player::Red) {
+  	studentPrint = "red";
+  } else if (curTurn == Player::Orange) {
+  	studentPrint = "orange";
+  } else { // curTurn == Player::Orange
+  	studentPrint = "yellow";
+  }
+	if (saveFile.is_open()) {
+		saveFile << studentPrint << endl;
+		saveFile << this->students[0]->printStudent() << endl;
+		saveFile << this->students[1]->printStudent() << endl;
+		saveFile << this->students[2]->printStudent() << endl;
+		saveFile << this->students[3]->printStudent() << endl;
+		saveFile << this->savePrint() << endl;
+		saveFile << this->geeseAt << endl;
+	}
+	saveFile.close();
+}
+
+
+
 // 0 3 1 10 3 5 1 4 5 7 3 10 2 11 0 3 3 8 0 2 0 6 1 8 4 12 1 5 4 11 2 4 4 6 2 9 2 9
 //  0 representing CAFFEINE, 1 representing LAB, 2 representing LECTURE, 3 representing STUDY, 4 representing TUTORIAL, and 5 representing NETFLIX
 

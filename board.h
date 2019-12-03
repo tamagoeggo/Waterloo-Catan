@@ -58,6 +58,7 @@ class Board {
 	Player whoWon();
 
 	void saveGame(Player curTurn); // takes in current player turn to save for next time
+	void saveGameEof(Player curTurn, std::string name); // save game version called when eof
 	void loadGame(std::string loadFile, Player *whoseTurn);
 
 	// constructs goals and criterions (coordinates) in vec of vec
