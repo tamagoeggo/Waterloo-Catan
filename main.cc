@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
 
 		  for (int i = 0; i < argc; ++i) {
 		    cout << argv[i] << "\n";
-		    if (i > 0 && i % 2 == 0) { // if it is a command line option
+		    if (i > 0 && i % 2 == 1) { // if it is a command line option
 		    	if (string(argv[i]).compare("-seed") == 0) {
 		    		try {
 		    			seed = stoi(argv[i + 1]);
@@ -37,9 +37,6 @@ int main(int argc, char* argv[]) {
 		    	} else if (string(argv[i]).compare("-load") == 0) {
 		    		try {
 		    			load = string(argv[i + 1]);
-		    			cout << "CHECKPOINT 1" << endl; // DEBUG
-		    			cout << load << endl; // DEBUG
-		    			cout << "CHECKPOINT 2" << endl; // DEBUG
 		    		} catch (...) {
 		    			cerr << "Missing Load File" << endl;
 		    		}
