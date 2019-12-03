@@ -7,7 +7,7 @@ Goal::Goal(int coordinate): coordinate{coordinate} {}
 
 // dtor
 Goal::~Goal(){
-	delete occupiedBy;
+	occupiedBy = nullptr;
 }
 
 void Goal::updateOccupant(Student *newOccupant) {

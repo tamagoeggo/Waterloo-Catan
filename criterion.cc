@@ -12,7 +12,7 @@ Criterion::Criterion(int coordinate):coordinate{coordinate} {
 
 // dtor
  Criterion::~Criterion(){
-	delete occupiedBy;
+	occupiedBy = nullptr;
 }
 
 void Criterion::updateOccupant(Student *newOccupant) {
