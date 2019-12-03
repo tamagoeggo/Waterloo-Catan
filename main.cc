@@ -58,7 +58,11 @@ int main(int argc, char* argv[]) {
 			}
 
 		while(playagain){
-			cout << "BEGINNING OF PLAYAGAIN LOOP" << endl;
+			cout << "===================================================================================" << endl;
+			cout << "===================================================================================" << endl;
+			cout << "===============												 WATAN				  			  			 =============" << endl;
+			cout << "===================================================================================" << endl;
+			cout << "===================================================================================" << endl;
 			Player whoseTurn = Player::Blue;
 			if (load == "default" && board == "default") {}
 			else {
@@ -371,10 +375,10 @@ int main(int argc, char* argv[]) {
 
 			// if play again (continue game from beginning of loop)
 			catch(const char* msg){
-				cout << msg << endl;
+				cout << "You chose to: "<< msg << endl;
 				load = "default";
 				board = "default";
-				continue; // seg fault here?
+				continue;
 			}
 			// if eof
 			catch(...){
