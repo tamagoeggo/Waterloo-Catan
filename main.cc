@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
 			cout << "BEGINNING OF PLAYAGAIN LOOP" << endl; */
 			int seed;
 			bool seed_set = false;
+		  bool enhance = false;
 			string load = "default";
 			string board = "default";
 
@@ -50,6 +51,9 @@ int main(int argc, char* argv[]) {
 		    			cerr << "Missing Board File" << endl;
 		    		}
 		    	}
+		    }
+		    if (string(argv[i]).compare("-enhance") == 0) {
+		    		enhance = true;
 		    }
 			}
 
@@ -83,7 +87,8 @@ int main(int argc, char* argv[]) {
 					getline(f, board);
 				}
 			}
-			Board b = Board(board);
+
+			Board b = Board(enhance, board);
 			b.loadGame(load, &whoseTurn);
 			bool rolled = false;
 			bool firstAssignment = true;
