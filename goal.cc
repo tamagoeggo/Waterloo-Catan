@@ -8,8 +8,8 @@ Goal::Goal(int coordinate): coordinate{coordinate} {}
 // dtor
 Goal::~Goal(){
 	occupiedBy = nullptr;
-	for(auto pn: this->neighbors){
-		delete pn;
+	for(int i = 0; i < this->neighbors.size(); i++){
+		delete this->neighbors[i];
 	}
 }
 

@@ -13,11 +13,11 @@ Criterion::Criterion(int coordinate):coordinate{coordinate} {
 // dtor
  Criterion::~Criterion(){
 	occupiedBy = nullptr;
-	for(auto pg: this->goals){
-		delete pg;
+	for(int i = 0; i < this->goals.size(); i++){
+		delete this->goals[i];
 	}
-	for(auto pn: this->neighbors){
-		delete pn;
+	for(int i = 0; i < this->neighbors.size(); i++){
+		delete this->neighbors[i];
 	}
 }
 
