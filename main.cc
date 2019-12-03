@@ -365,7 +365,7 @@ int main(int argc, char* argv[]) {
 		}
 		// if eof
 		catch(...){
-			b.saveGameEof(whoseTurn, backup);
+			b.saveGameEof(whoseTurn, "backup");
 			cout << "Game ended unexpectedly, saving game to backup.txt." << endl;
 		}
 		return 0;
