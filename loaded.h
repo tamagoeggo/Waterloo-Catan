@@ -6,7 +6,8 @@
 class Loaded: public Dice {
 	int value;
 	public:
-	Loaded(int); //ctor
+	Loaded(); //ctor
+	void setDie(int num);
 	int roll();
 };
 

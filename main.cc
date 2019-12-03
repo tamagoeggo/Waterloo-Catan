@@ -178,19 +178,15 @@ int main(int argc, char* argv[]) {
 						if (whoseTurn == Player::Blue) {
 							cout << "Student Blue's turn." << endl;
 							b.blueStatus();
-							cout << ">";
 						} else if (whoseTurn == Player::Red) {
 							cout << "Student Red's turn." << endl;
 							b.redStatus();
-							cout << ">";
 						} else if (whoseTurn == Player::Orange) {
 							cout << "Student Orange's turn." << endl;
 							b.orangeStatus();
-							cout << ">";
 						} else if (whoseTurn == Player::Yellow) {
 							cout << "Student Yellow's turn." << endl;
 							b.yellowStatus();
-							cout << ">";
 						}
 						// choose dice type
 						cout << "Choose a dice command: load or fair" << endl;

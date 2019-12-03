@@ -11,6 +11,8 @@ Fair::Fair() {
   dice2 = 0;
 }
 
+void Fair::setDie(int num) {}
+
 // roll dice
 int Fair::roll() {
   dice1 = rand() % 6 + 1;

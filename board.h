@@ -17,6 +17,7 @@
 #include "textdisplay.h"
 #include "player.h"
 #include "resource.h"
+#include "dice.h"
 #include "fair.h"
 #include "loaded.h"
 
