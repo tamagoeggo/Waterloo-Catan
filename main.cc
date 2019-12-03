@@ -156,6 +156,7 @@ int main(int argc, char* argv[]) {
 						if(command == "yes"){
 							playagain = true;
 							b.Reset(); // resets all player data
+							cout << b.whoWon() << endl; // DEBUG STATEMENT
 						}
 						else if(command == "no"){
 							playagain = false;
