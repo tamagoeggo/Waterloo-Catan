@@ -12,6 +12,7 @@
 
 class TextDisplay : public Observer {
 	int geeseAt = -1;
+	bool enhance = false;
 	std::vector<std::string> criteriaString = {" 0", " 1", " 2", " 3", " 4",
 		" 5", " 6", " 7", " 8", " 9", "10",
 		"11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
@@ -50,7 +51,7 @@ class TextDisplay : public Observer {
 		"      14     ", "      15     ", "      16     ",
 		"      17     ", "      18     "};
 	public:
-	TextDisplay(std::vector<int> *values, std::vector<Resource> *resources);
+	TextDisplay(bool enhance, std::vector<int> *values, std::vector<Resource> *resources);
 	void notify(Criterion *criterion) override;
 	void notify(Goal *goal) override;
 	void notify(int geeseAt);

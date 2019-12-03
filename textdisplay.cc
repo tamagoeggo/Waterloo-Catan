@@ -1,9 +1,10 @@
 #include "textdisplay.h"
 using namespace std;
 
-TextDisplay::TextDisplay(std::vector<int> *values, std::vector<Resource> *resources) {
+TextDisplay::TextDisplay(bool enhance, std::vector<int> *values, std::vector<Resource> *resources) {
 	//vector<string> newValuesString;
 	//vector<string> newResourcesString;
+	this->enhance = enhance;
 	int netflixAt = -1;
 	for(int i = 0; i <= 18; ++i) {
 		string toEmplace;
@@ -56,21 +57,40 @@ TextDisplay::TextDisplay(std::vector<int> *values, std::vector<Resource> *resour
 void TextDisplay::notify(Criterion *criterion) {
 	State state = criterion->getState();
 	string toReplace = "";
-	if (state.player == Player::Blue) {
-		toReplace += "\u001b[38;5;33;1mB";
-	} else if (state.player == Player::Red) {
-		toReplace += "\u001b[38;5;196;1mR";
-	} else if (state.player == Player::Orange) {
-		toReplace += "\u001b[38;5;208;1mO";
-	} else if (state.player == Player::Yellow) {
-		toReplace += "\u001b[38;5;11;1mY";
-	}
-	if (state.type == Type::Assignment) {
-		toReplace += "A\u001B[0m";
-	} else if (state.type == Type::Midterm) {
-		toReplace += "M\u001B[0m";
-	} else if (state.type == Type::Exam) {
-		toReplace += "E\u001B[0m";
+	if (enhance) {	
+		if (state.player == Player::Blue) {
+			toReplace += "\u001b[38;5;33;1mB";
+		} else if (state.player == Player::Red) {
+			toReplace += "\u001b[38;5;196;1mR";
+		} else if (state.player == Player::Orange) {
+			toReplace += "\u001b[38;5;208;1mO";
+		} else if (state.player == Player::Yellow) {
+			toReplace += "\u001b[38;5;11;1mY";
+		}
+		if (state.type == Type::Assignment) {
+			toReplace += "A\u001B[0m";
+		} else if (state.type == Type::Midterm) {
+			toReplace += "M\u001B[0m";
+		} else if (state.type == Type::Exam) {
+			toReplace += "E\u001B[0m";
+		}
+	} else {
+		if (state.player == Player::Blue) {
+			toReplace += "B";
+		} else if (state.player == Player::Red) {
+			toReplace += "R";
+		} else if (state.player == Player::Orange) {
+			toReplace += "O";
+		} else if (state.player == Player::Yellow) {
+			toReplace += "Y";
+		}
+		if (state.type == Type::Assignment) {
+			toReplace += "A";
+		} else if (state.type == Type::Midterm) {
+			toReplace += "M";
+		} else if (state.type == Type::Exam) {
+			toReplace += "E";
+		}
 	}
 	this->criteriaString[state.coordinate] = toReplace;
 }
@@ -78,17 +98,32 @@ void TextDisplay::notify(Criterion *criterion) {
 void TextDisplay::notify(Goal *goal) {
 	State state = goal->getState();
 	string toReplace = "";
-	if (state.player == Player::Blue) {
-		toReplace += "\u001b[38;5;33;1mB";
-	} else if (state.player == Player::Red) {
-		toReplace += "\u001b[38;5;196;1mR";
-	} else if (state.player == Player::Orange) {
-		toReplace += "\u001b[38;5;208;1mO";
-	} else if (state.player == Player::Yellow) {
-		toReplace += "\u001b[38;5;11;1mY";
-	}
-	if (state.type == Type::Achievement) {
-		toReplace += "A\u001B[0m";
+	if (enhance) {	
+		if (state.player == Player::Blue) {
+			toReplace += "\u001b[38;5;33;1mB";
+		} else if (state.player == Player::Red) {
+			toReplace += "\u001b[38;5;196;1mR";
+		} else if (state.player == Player::Orange) {
+			toReplace += "\u001b[38;5;208;1mO";
+		} else if (state.player == Player::Yellow) {
+			toReplace += "\u001b[38;5;11;1mY";
+		}
+		if (state.type == Type::Achievement) {
+			toReplace += "A\u001B[0m";
+		}
+	} else {
+		if (state.player == Player::Blue) {
+			toReplace += "B";
+		} else if (state.player == Player::Red) {
+			toReplace += "R";
+		} else if (state.player == Player::Orange) {
+			toReplace += "O";
+		} else if (state.player == Player::Yellow) {
+			toReplace += "Y";
+		}
+		if (state.type == Type::Achievement) {
+			toReplace += "A";
+		}
 	}
 	this->goalsString[state.coordinate] = toReplace;
 }
