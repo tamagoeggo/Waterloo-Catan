@@ -14,12 +14,13 @@ Criterion::Criterion(int coordinate):coordinate{coordinate} {
  Criterion::~Criterion(){
 	 cout << "Criterion dtor" << endl;
 	occupiedBy = nullptr;
-	for(int i = 0; i < this->goals.size(); i++){
+/*	for(int i = 0; i < this->goals.size(); i++){
 		delete this->goals[i];
 	}
 	for(int i = 0; i < this->neighbors.size(); i++){
 		delete this->neighbors[i];
 	}
+	*/
 }
 
 void Criterion::updateOccupant(Student *newOccupant) {
