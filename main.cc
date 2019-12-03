@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
 			}
 
 			Player whoseTurn = Player::Blue;
-			if (load == "default" && board == "default") {} 
+			if (load == "default" && board == "default") {}
 			else {
 				//string resourceList;
 				ifstream f;
@@ -82,12 +82,16 @@ int main(int argc, char* argv[]) {
 				b.print();
 				if (whoseTurn == Player::Blue) {
 					cout << "Student Blue, where do you want to complete an Assignment?" << endl;
+					cout << ">";
 				} else if (whoseTurn == Player::Red) {
 					cout << "Student Red, where do you want to complete an Assignment?" << endl;
+					cout << ">";
 				} else if (whoseTurn == Player::Orange) {
 					cout << "Student Orange, where do you want to complete an Assignment?" << endl;
+					cout << ">";
 				} else if (whoseTurn == Player::Yellow) {
 					cout << "Student Yellow, where do you want to complete an Assignment?" << endl;
+					cout << ">";
 				}
 
 				bool validArg = true;
@@ -156,26 +160,28 @@ int main(int argc, char* argv[]) {
 				if (!rolled) {
 					if (whoseTurn == Player::Blue) {
 						cout << "Student Blue's turn." << endl;
-						// status of student
 						b.blueStatus();
+						cout << ">";
 					} else if (whoseTurn == Player::Red) {
 						cout << "Student Red's turn." << endl;
-						// status of student
 						b.redStatus();
+						cout << ">";
 					} else if (whoseTurn == Player::Orange) {
 						cout << "Student Orange's turn." << endl;
-						// status of student
 						b.orangeStatus();
+						cout << ">";
 					} else if (whoseTurn == Player::Yellow) {
 						cout << "Student Yellow's turn." << endl;
-						// status of student
 						b.yellowStatus();
+						cout << ">";
 					}
 					// choose dice type
 					cout << "Choose a dice command: load or fair" << endl;
+					cout << ">";
 					cin >> command;
 					while(command != "load" && command != "fair"){
 						cout << "Invalid command" << endl;
+						cout << ">";
 						cin >> command;
 					}
 					if (command == "load") {
@@ -185,9 +191,11 @@ int main(int argc, char* argv[]) {
 					}
 					// roll chosen dice
 					cout << "Roll the dice: roll" << endl;
+					cout << ">";
 					cin >> command;
 					while(command != "roll"){
 						cout << "Invalid command" << endl;
+						cout << ">";
 						cin >> command;
 					}
 					if (command == "roll") {
@@ -199,6 +207,7 @@ int main(int argc, char* argv[]) {
 				// PHASE 3
 				// gameplay 4.3
 				cout << "Enter a command." << endl;
+				cout << ">";
 
 				cin >> command;
 				while(command != "board" && command != "status" && command != "criteria"
@@ -207,6 +216,7 @@ int main(int argc, char* argv[]) {
 							&& command != "help"){
 					cout << "Invalid command" << endl;
 					cout << "(help: prints out the list of commands)" << endl;
+					cout << ">";
 					cin >> command;
 				}
 				if (command == "board") {

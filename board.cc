@@ -259,6 +259,7 @@ Player Board::whoWon() {
 
 void Board::saveGame(Player curTurn) {
   cout << "Please name your save file:" << endl;
+	cout << ">";
   string name, studentPrint;
   cin >> name;
   ofstream saveFile(name + ".txt"); // change this to date and time
@@ -698,9 +699,11 @@ void Board::roll(Player curTurn) {
 		int toLoad;
 		while (true) {
 			cout << "Input a roll between 2 and 12:" << endl;
+			cout << ">";
 			cin >> toLoad;
 			if (toLoad < 2 || toLoad > 12) {
 				cout << "Invalid roll." << endl;
+				cout << ">";
 				continue;
 			}
 			break;
@@ -727,10 +730,12 @@ void Board::roll(Player curTurn) {
 		}
 
 		cout << "Choose where to place the Geese." << endl;
+		cout << ">";
 		int moveto;
 		cin >> moveto;
 		while((moveto == geeseAt) || (moveto > 18) || (moveto < 0)){
 			cout << "Please input an integer between 0 and 18 inclusive" << endl;
+			cout << ">";
 			cin >> moveto;
 		}
 		this->moveGeese(moveto);
@@ -753,6 +758,7 @@ void Board::roll(Player curTurn) {
 
 			cout << "Student " << curTurn <<" can choose to steal from " << str << "." << endl;
 			cout << "Choose a student to steal from." << endl;
+			cout << ">";
 
 			string stealFrom;
 			bool isvalid = false;
@@ -765,6 +771,7 @@ void Board::roll(Player curTurn) {
 				}
 				if(!isvalid){
 					cout << "Invalid input. " << "Student " << curTurn <<" can choose to steal from " << str << "." << endl;
+					cout << ">";
 				}
 			}
 
