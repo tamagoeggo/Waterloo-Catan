@@ -729,9 +729,9 @@ void Board::setDice(string type) {
 // check if 7 is rolled and sets geese
 void Board::roll(Player curTurn) {
 	int rolledval;
+	Dice *die = Dice::make_dice(dice);
 	if (dice == "fair") {
-		Fair die = Fair();
-		rolledval = die.roll();
+		//rolledval = die.roll();
 	}
 	else if (dice == "load") {
 		int toLoad;
@@ -746,10 +746,10 @@ void Board::roll(Player curTurn) {
 			}
 			break;
 		}
-		Loaded die = Loaded(toLoad);
-		rolledval = die.roll();
+		die->setDie(toLoad);
+		//rolledval = die.roll();
 	}
-
+	rolledval = die->roll();
 	// checks if 7 is rolled
 	// if it is, call geese
 	if(rolledval == 7){

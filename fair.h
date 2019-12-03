@@ -8,6 +8,7 @@ class Fair: public Dice {
 	int dice2;
 	public:
 	Fair(); //ctor
+	void setDie(int num);
 	int roll();
 };
 
