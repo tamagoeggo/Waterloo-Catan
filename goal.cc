@@ -7,13 +7,7 @@ Goal::Goal(int coordinate): coordinate{coordinate} {}
 
 // dtor
 Goal::~Goal(){
-	cout << "Goal dtor" << endl;
 	occupiedBy = nullptr;
-	/*
-	for(int i = 0; i < this->neighbors.size(); i++){
-		delete this->neighbors[i];
-	}
-	*/
 }
 
 void Goal::updateOccupant(Student *newOccupant) {
