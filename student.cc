@@ -25,7 +25,7 @@ void Student::updateResources(Resource resource, int amount) {
 
 // updates the vector of criterion a student has completed
 void Student::updateCriterion(Criterion *crit) {
-  crit->updateOccupant(*this);
+  //crit->updateOccupant(*this);
   criteria.emplace_back(crit);
 }
 
