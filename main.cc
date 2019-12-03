@@ -55,13 +55,30 @@ int main(int argc, char* argv[]) {
 			}
 
 			Player whoseTurn = Player::Blue;
+			if (load == "default" && board == "default") {} 
+			else {
+				//string resourceList;
+				ifstream f;
+				int lineNo;
+				if (load != "default") {			// it it is a loaded game
+					f.open(load + ".txt");
+					lineNo = 6;
+				} else {					// if it is a game with a set board
+					f.open(board + ".txt");
+					lineNo = 1;
+				}
+				for (int i = 1; i <= lineNo; i++) {
+					getline(f, board);
+				}
+			}
 			Board b = Board(board);
 			b.loadGame(load, &whoseTurn);
 			bool rolled = false;
 			bool firstAssignment = true;
 
 			// FIRST PHASE
-			while (true) {
+			if (load == "default") {
+				while (true) {
 				b.print();
 				if (whoseTurn == Player::Blue) {
 					cout << "Student Blue, where do you want to complete an Assignment?" << endl;
@@ -109,6 +126,9 @@ int main(int argc, char* argv[]) {
 						whoseTurn = Player::Orange;
 					}
 				}
+				}
+			} else {
+				b.print();
 			}
 
 			// SECOND PHASE

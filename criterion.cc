@@ -43,15 +43,11 @@ void Criterion::sendResources(Resource resource) {
 }
 
 void Criterion::upgrade() {
-	cout << "upgrade called" << endl;
 	if (this->type == Type::None) {
-		cout << "none" << endl;
 		type = Type::Assignment;
 	} else if (this->type == Type::Assignment) {
-		cout << "assignment" << endl;
 		type = Type::Midterm;
 	} else if (this->type == Type::Midterm) {
-		cout << "midterm" << endl;
 		type = Type::Exam;
 	}
 	else {
