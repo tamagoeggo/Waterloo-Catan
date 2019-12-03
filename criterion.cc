@@ -11,15 +11,10 @@ Criterion::Criterion(int coordinate):coordinate{coordinate} {
 }
 
 // dtor
-/* Criterion::~Criterion(){
-	for(auto p : this->goals){
-		delete p;
-	}
-	for(auto p : this->neighbors){
-		delete p;
-	}
+ Criterion::~Criterion(){
 	delete occupiedBy;
-} */
+	occupiedBy = nullptr;
+}
 
 void Criterion::updateOccupant(Student *newOccupant) {
 	occupiedBy = move(newOccupant);

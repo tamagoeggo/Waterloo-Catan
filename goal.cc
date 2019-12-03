@@ -6,12 +6,10 @@ using namespace std;
 Goal::Goal(int coordinate): coordinate{coordinate} {}
 
 // dtor
-/* Goal::~Goal(){
-	for(auto p: this->neighbors){
-		delete p;
-	}
+Goal::~Goal(){
 	delete occupiedBy;
-} */
+	occupiedBy = nullptr;
+}
 
 void Goal::updateOccupant(Student *newOccupant) {
 	occupiedBy = move(newOccupant);
