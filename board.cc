@@ -3,117 +3,117 @@ using namespace std;
 
 // ctor with randomized resources and value, init textdisplay
 Board::Board(string board, int layer) {
-	if (board != "default") {
-		//board += ".txt";
-		stringstream lineStream;
-			lineStream << board;
-			while (lineStream) {
-				int type;
-				Resource resourceType;
-				int value;
-				int location = 0;
-				lineStream >> type;
-				lineStream >> value;
-				if (type == 0) {
-					resourceType = Resource::Caffeine;
-				} else if (type == 1) {
-					resourceType = Resource::Lab;
-				} else if (type == 2) {
-					resourceType = Resource::Lecture;
-				} else if (type == 3) {
-					resourceType = Resource::Study;
-				} else if (type == 4) {
-					resourceType = Resource::Tutorial;
-				} else {
-					resourceType = Resource::Netflix;
-				}
-				tiles[location] = make_unique<Tile>(value, resourceType);
-				++location;
-			}
-	}
-
-  //srand(time(NULL)); // seed
-  vector<vector<unique_ptr<Criterion>>> criterionv;
-  vector<vector<unique_ptr<Goal>>> goalv;
-  rowSetup(layer, criterionv, goalv);
-  update(layer, criterionv, goalv);
-
-  // init Criterion
-  size_t total_size{ 0 };
-  for (auto const& row: criterionv) {
-      total_size += row.size();
-  }
-  criterion.reserve(total_size);
-
-  for (unsigned int i = 0; i < criterionv.size(); ++i) {
-	  unsigned int size = criterionv[i].size();
-	  for (unsigned int j = 0; j < size; ++j) {
-		  criterion.emplace_back(move(criterionv[i][j]));
-	  }
-  }
-
-  updateCriterionsNeighbor();
-
-  // init  goals
-  total_size = 0;
-  for (auto const& row: goalv) {
-      total_size += row.size();
-  }
-  goals.reserve(total_size);
-
-  for (unsigned int i = 0; i < goalv.size(); ++i) {
-	  unsigned int size = goalv[i].size();
-	  for (unsigned int j = 0; j < size; ++j) {
-		  goals.emplace_back(move(goalv[i][j]));
-	  }
-  }
-
-  // num = (rand() % (upper – lower + 1)) + lower
-  // The board will consist of the following values: one 2, one 12, two 3-6, and two 8-11.
+	
+	// num = (rand() % (upper – lower + 1)) + lower
+  	// The board will consist of the following values: one 2, one 12, two 3-6, and two 8-11.
 	vector<int> values ={2,3,3,4,4,5,5,6,6,8,8,9,9,10,10,11,11,12};
-  random_shuffle(values.begin(), values.end());
-  //  The board consists of the following resources: 3 TUTORIAL, 3 STUDY, 4 CAFFEINE, 4 LAB, 4 LECTURE, and 1 NETFLIX
+  	random_shuffle(values.begin(), values.end());
+  	//  The board consists of the following resources: 3 TUTORIAL, 3 STUDY, 4 CAFFEINE, 4 LAB, 4 LECTURE, and 1 NETFLIX
 	vector<Resource> resourcetype = {
 		Resource::Tutorial,Resource::Tutorial,Resource::Tutorial,
-    Resource::Study,Resource::Study,Resource::Study,
+		Resource::Study,Resource::Study,Resource::Study,
 		Resource::Caffeine,Resource::Caffeine,Resource::Caffeine,Resource::Caffeine,
-    Resource::Lab,Resource::Lab,Resource::Lab,Resource::Lab,
-    Resource::Lecture,Resource::Lecture,Resource::Lecture,Resource::Lecture,
-    Resource::Netflix
-  };
+    		Resource::Lab,Resource::Lab,Resource::Lab,Resource::Lab,
+    		Resource::Lecture,Resource::Lecture,Resource::Lecture,Resource::Lecture,
+    		Resource::Netflix
+	};
 	random_shuffle(resourcetype.begin(), resourcetype.end());
+	
+	if (board != "default") {
+		stringstream lineStream;
+		lineStream << board;
+		vector<int> values2;
+		vector<Resource> resourceType2vec;
+		while (lineStream) {
+			int type;
+			Resource resourceType2;
+			int value;
+			lineStream >> type;
+			lineStream >> value;
+			if (type == 0) {
+				resourceType2 = Resource::Caffeine;
+			} else if (type == 1) {
+				resourceType2 = Resource::Lab;
+			} else if (type == 2) {
+				resourceType2 = Resource::Lecture;
+			} else if (type == 3) {
+				resourceType2 = Resource::Study;
+			} else if (type == 4) {
+				resourceType2 = Resource::Tutorial;
+			} else {
+				resourceType2 = Resource::Netflix;
+			}
+			tiles.emplace_back(make_unique<Tile>(value, resourceType2));
+			values2.emplace_back(value);
+			resourceType2vec.emplace_back(resourceType2);
+		}
+		td = make_unique<TextDisplay>(&values2, &resourceType2vec);
+	} else {	
+		// init TextDisplay
+  		td = make_unique<TextDisplay>(&values, &resourcetype);
 
-  // init TextDisplay
-  td = make_unique<TextDisplay>(&values, &resourcetype);
+		// init tiles
+		unique_ptr<Tile> newtile;
+  		for (int i = 0; i < 19; i++) {
+			if(resourcetype.front() == Resource::Netflix){
+				newtile = make_unique<Tile>(7, resourcetype.front());
+			} else {
+      				newtile = make_unique<Tile>(values.front(), resourcetype.front());
+      				values.erase(values.begin());
+			}
+			resourcetype.erase(resourcetype.begin());
+    			tiles.emplace_back(move(newtile));
+		}
+	}
+	//srand(time(NULL)); // seed
+  	vector<vector<unique_ptr<Criterion>>> criterionv;
+  	vector<vector<unique_ptr<Goal>>> goalv;
+  	rowSetup(layer, criterionv, goalv);
+  	update(layer, criterionv, goalv);
 
-  // init tiles
-	unique_ptr<Tile> newtile;
-  for (int i = 0; i < 19; i++) {
-    if(resourcetype.front() == Resource::Netflix){
-      newtile = make_unique<Tile>(7, resourcetype.front());
-    }
-    else{
-      newtile = make_unique<Tile>(values.front(), resourcetype.front());
-      values.erase(values.begin());
-    }
-    resourcetype.erase(resourcetype.begin());
-    tiles.emplace_back(move(newtile));
-  }
+  	// init Criterion
+  	size_t total_size{ 0 };
+  	for (auto const& row: criterionv) {
+		total_size += row.size();
+  	}
+  	criterion.reserve(total_size);
 
-  // The assignments will be chosen by students in the order Blue, Red, Orange, Yellow, Yellow, Orange, Red, Blue.
-  // 4.1
-  // init students
-  unique_ptr<Student> newstud1 = make_unique<Student>(Player::Blue);
-  students.emplace_back(move(newstud1));
-  unique_ptr<Student> newstud2 = make_unique<Student>(Player::Red);
-  students.emplace_back(move(newstud2));
-  unique_ptr<Student> newstud3 = make_unique<Student>(Player::Orange);
-  students.emplace_back(move(newstud3));
-  unique_ptr<Student> newstud4 = make_unique<Student>(Player::Yellow);
-  students.emplace_back(move(newstud4));
+  	for (unsigned int i = 0; i < criterionv.size(); ++i) {
+		unsigned int size = criterionv[i].size();
+		for (unsigned int j = 0; j < size; ++j) {
+			criterion.emplace_back(move(criterionv[i][j]));
+		}
+	}
+
+	updateCriterionsNeighbor();
+
+  	// init Goals
+  	total_size = 0;
+  	for (auto const& row: goalv) {
+		total_size += row.size();
+	}
+  	goals.reserve(total_size);
+	
+	for (unsigned int i = 0; i < goalv.size(); ++i) {
+		unsigned int size = goalv[i].size();
+		for (unsigned int j = 0; j < size; ++j) {
+			goals.emplace_back(move(goalv[i][j]));
+		}
+	}
+
+      	// The assignments will be chosen by students in the order Blue, Red, Orange, Yellow, Yellow, Orange, Red, Blue.
+  	// 4.1
+  	// init students
+  	unique_ptr<Student> newstud1 = make_unique<Student>(Player::Blue);
+  	students.emplace_back(move(newstud1));
+  	unique_ptr<Student> newstud2 = make_unique<Student>(Player::Red);
+  	students.emplace_back(move(newstud2));
+  	unique_ptr<Student> newstud3 = make_unique<Student>(Player::Orange);
+  	students.emplace_back(move(newstud3));
+  	unique_ptr<Student> newstud4 = make_unique<Student>(Player::Yellow);
+  	students.emplace_back(move(newstud4));
 
 	updateCriterionsInTile(layer);
-
 }
 
 void Board::completeCriterion(const int coordinate, const Player player) {
@@ -334,9 +334,7 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			} else if (inputType == "criterion") {
     				int criterionType;
     				lineStream >> criterionType;
-    				cout << "num is " << num << endl;
-    				cout << "criterionType is " << criterionType << endl;
-				criterion[stoi(num)]->updateOccupant(students[0].get());
+    				criterion[stoi(num)]->updateOccupant(students[0].get());
 				students[0]->updateCriterion(criterion[stoi(num)].get());
       				td->notify(criterion[stoi(num)].get());
 				if (criterionType == 2) {
@@ -348,7 +346,6 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			}
 			}
 			} else if (lineNumber == 3) {
-				cout << "lineNumber 3" << endl;
   			stringstream lineStream;
   			lineStream << line;
 				string inputType = "caffeine"; // either resource, goal or criterion
@@ -381,8 +378,7 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			} else if (inputType == "criterion") {
     				int criterionType;
     				lineStream >> criterionType;
-    				cout << "criterionType is " << criterionType << endl;
-      				criterion[stoi(num)]->updateOccupant(students[1].get());
+     				criterion[stoi(num)]->updateOccupant(students[1].get());
 				students[1]->updateCriterion(criterion[stoi(num)].get());
 				td->notify(criterion[stoi(num)].get());
       				if (criterionType == 2) {
@@ -426,14 +422,11 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
 			} else if (inputType == "criterion") {
     				int criterionType;
     				lineStream >> criterionType;
-    				cout << "criterionType is " << criterionType << endl;
       				criterion[stoi(num)]->updateOccupant(students[2].get());
 				students[2]->updateCriterion(criterion[stoi(num)].get());
-      				//(criterion[stoi(num)].get())->upgrade();
       				td->notify(criterion[stoi(num)].get());
       			if (criterionType == 2) {
       				criterion[stoi(num)]->upgrade();
-      				//criterion[stoi(num)].get());
       			} else if (criterionType == 3) {
       				criterion[stoi(num)]->upgrade();
       				criterion[stoi(num)]->upgrade();
@@ -473,7 +466,6 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
     			} else if (inputType == "criterion") {
     				int criterionType;
     				lineStream >> criterionType;
-    				//cout << "criterionType is " << criterionType << endl;
       				criterion[stoi(num)]->updateOccupant(students[3].get());
 				students[3]->updateCriterion(criterion[stoi(num)].get());
       				td->notify(criterion[stoi(num)].get());
