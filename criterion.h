@@ -18,7 +18,7 @@ class Criterion : public Subject { // Vertex
 	std::vector<Criterion *> neighbors;
 	public:
 	Criterion(int coordinate); // ctor
-	//~Criterion(); // dtor
+	~Criterion(); // dtor
 	void updateOccupant(Student *newOccupant); // updates occupiedBy
 	Student *getStudent();
 	void sendResources(Resource resource);

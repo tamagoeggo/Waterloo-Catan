@@ -15,7 +15,7 @@ class Goal : public Subject { // Road
 	std::vector<Criterion *> neighbors;
 	public:
 	Goal(int coordinate); // ctor
-//	~Goal(); // dtor
+	~Goal(); // dtor
 	void updateOccupant(Student *); // updates occupiedBy
 	Student *getStudent();
 	State getState() override; // overrides subject function
