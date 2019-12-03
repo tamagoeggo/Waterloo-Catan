@@ -5,6 +5,13 @@ using namespace std;
 
 Goal::Goal(int coordinate): coordinate{coordinate} {}
 
+Goal::~Goal(){
+	for(auto p: this->neighbors){
+		delete p;
+	}
+	delete occupiedBy;
+}
+
 void Goal::updateOccupant(Student *newOccupant) {
 	occupiedBy = move(newOccupant);
 }

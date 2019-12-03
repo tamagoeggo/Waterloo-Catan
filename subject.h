@@ -5,6 +5,8 @@
 
 class Subject {
 	virtual State getState() = 0;
+	public:
+	virtual ~Subject() = 0; //dtor
 };
 
 

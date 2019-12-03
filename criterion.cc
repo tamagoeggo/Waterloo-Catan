@@ -7,6 +7,18 @@ using namespace std;
 Criterion::Criterion(int coordinate):coordinate{coordinate} {
 	// init goals
 	// init neighbors
+	// in board ctor
+}
+
+// dtor
+Criterion::~Criterion(){
+	for(auto p : this->goals){
+		delete p;
+	}
+	for(auto p : this->neighbors){
+		delete p;
+	}
+	delete occupiedBy;
 }
 
 void Criterion::updateOccupant(Student *newOccupant) {
