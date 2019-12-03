@@ -15,6 +15,8 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
+	cin.exceptions(ios::eofbit);
+	try{
 		bool playagain = true;
 		while(playagain){
 			int seed;
@@ -360,4 +362,10 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		return 0;
+	}
+	// if eof at anytime
+	catch (ios::failure &){
+		b.saveGame(whoseTurn);
+		cout << "Game ended suddenly, saving game." << endl;
+	}
 }
