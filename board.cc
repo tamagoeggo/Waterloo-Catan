@@ -682,6 +682,7 @@ void Board::setDice(string type) {
 }
 
 // rolls either fair or loaded die
+// check if 7 is rolled and sets geese
 void Board::roll(Player curTurn) {
 	int rolledval;
 	if (dice == "fair") {
@@ -727,6 +728,7 @@ void Board::roll(Player curTurn) {
 			cout << "Please input an integer between 0 and 18 inclusive" << endl;
 			cin >> moveto;
 		}
+		cout << moveto << endl; //////////////////////////DEBUG STATEMENT/////////////////////////////////////////
 		this->moveGeese(moveto);
 
 		//Student <colour1> can choose to steal from [students].
