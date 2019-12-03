@@ -55,7 +55,10 @@ string Tile::playersToStealFrom(Player player){
   string yellowThere = "";
   for(int i = 0; i < 6; i++){
     cout << "looping through criterion" << endl;
-    if(this->criterion[i]->getStudent()->getPlayer() == Player::Blue
+    if(this->criterion[i]->getStudent() == nullptr){
+      continue;
+    }
+    else if(this->criterion[i]->getStudent()->getPlayer() == Player::Blue
     && player != Player::Blue
     && this->criterion[i]->getStudent()->numResources() > 0){
       blueThere = "Blue";
