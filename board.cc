@@ -1,4 +1,5 @@
 #include "board.h"
+#include <sstream>
 using namespace std;
 
 // ctor with randomized resources and value, init textdisplay
@@ -228,13 +229,14 @@ void Board::loseResourcesGeese() {
 // updating geeseAt
 void Board::moveGeese(int coordinates) {
   if(geeseAt != -1){
-    tiles[geeseAt]->toggleGeese();
+    this->tiles[geeseAt]->toggleGeese();
   }
   if(coordinates == geeseAt || coordinates > 18 || coordinates < 0){
     throw std::invalid_argument("Invalid coordinates");
   }
   geeseAt = coordinates;
   tiles[coordinates]->toggleGeese();
+	td->notify(coordinates); // textdisplay
 }
 
 Player Board::whoWon() {
@@ -261,13 +263,13 @@ void Board::saveGame(Player curTurn) {
   cin >> name;
   ofstream saveFile(name + ".txt"); // change this to date and time
   if (curTurn == Player::Blue) {
-  	string studentPrint = "blue";
+  	studentPrint = "blue";
   } else if (curTurn == Player::Red) {
-  	string studentPrint = "red";
+  	studentPrint = "red";
   } else if (curTurn == Player::Orange) {
-  	string studentPrint = "orange";
+  	studentPrint = "orange";
   } else { // curTurn == Player::Orange
-  	string studentPrint = "yellow";
+  	studentPrint = "yellow";
   }
 	if (saveFile.is_open()) {
 		saveFile << studentPrint << endl;
@@ -685,7 +687,8 @@ void Board::setDice(string type) {
 }
 
 // rolls either fair or loaded die
-void Board::roll() {
+// check if 7 is rolled and sets geese
+void Board::roll(Player curTurn) {
 	int rolledval;
 	if (dice == "fair") {
 		Fair die = Fair();
@@ -705,18 +708,116 @@ void Board::roll() {
 		Loaded die = Loaded(toLoad);
 		rolledval = die.roll();
 	}
-	// checking tiles that have same value as rolled value
-	// and sending resources
-	bool sent = false;
-	for(int i = 0; i < 19; i++){
-		if(tiles[i]->getValue() == rolledval){
-			if(tiles[i]->sendResources()) {
-				sent = true;
+
+	// checks if 7 is rolled
+	// if it is, call geese
+	if(rolledval == 7){
+		bool lost = false;
+		for(int i = 0; i < 4; i++){
+			if(this->students[i]->numResources() >= 10){
+				lost = true;
 			}
 		}
+
+		if(!lost){
+			cout << "No resources were lost to the Geese." << endl;
+		}
+		else{
+			this->loseResourcesGeese();
+		}
+
+		cout << "Choose where to place the Geese." << endl;
+		int moveto;
+		cin >> moveto;
+		while((moveto == geeseAt) || (moveto > 18) || (moveto < 0)){
+			cout << "Please input an integer between 0 and 18 inclusive" << endl;
+			cin >> moveto;
+		}
+		this->moveGeese(moveto);
+		//Student <colour1> can choose to steal from [students].
+
+		string str = this->tiles[moveto]->playersToStealFrom(curTurn);
+	//	cout << "after sketch function" << endl; // DEBUG STATEMENT
+
+		if(str == ""){
+			cout << "Student " << curTurn << " has no students to steal from." << endl;
+		}
+		else{
+			vector<string> onTile;
+			istringstream ss(str);
+			string token;
+
+			while(getline(ss, token, ',')) {
+			  onTile.emplace_back(token); // filling onTile
+			}
+
+			cout << "Student " << curTurn <<" can choose to steal from " << str << "." << endl;
+			cout << "Choose a student to steal from." << endl;
+
+			string stealFrom;
+			bool isvalid = false;
+			while(!isvalid) {
+				cin >> stealFrom;
+				for(int i = 0; i < onTile.size(); i++){
+					if(onTile[i] == stealFrom){
+						isvalid = true;
+					}
+				}
+				if(!isvalid){
+					cout << "Invalid input. " << "Student " << curTurn <<" can choose to steal from " << str << "." << endl;
+				}
+			}
+
+			int stealerIndex;
+			int stolenfromIndex;
+
+			if(curTurn == Player::Blue){
+				stealerIndex = 0;
+			}
+			else if(curTurn == Player::Red){
+				stealerIndex = 1;
+			}
+			else if(curTurn == Player::Orange){
+				stealerIndex = 2;
+			}
+			else if(curTurn == Player::Yellow){
+				stealerIndex = 3;
+			}
+
+			if(stealFrom == "Blue"){
+				stolenfromIndex = 0;
+			}
+			else if(stealFrom == "Red"){
+				stolenfromIndex = 1;
+			}
+			else if(stealFrom == "Orange"){
+				stolenfromIndex = 2;
+			}
+			else if(stealFrom == "Yellow"){
+				stolenfromIndex = 3;
+			}
+
+			// steal resources
+			students[stealerIndex]->stealResources(*students[stolenfromIndex]);
+		}
 	}
-	if(!sent){
-		cout << "No students gained resources." << endl;
+
+
+	// if 7 IS NOT rolled
+	// checking tiles that have same value as rolled value
+	// and sending resources
+	else{
+		bool sent = false;
+		for(int i = 0; i < 19; i++){
+			if(tiles[i]->getValue() == rolledval){
+				if(tiles[i]->sendResources()) {
+					sent = true;
+				}
+			}
+		}
+		if(!sent){
+			cout << "No students gained resources." << endl;
+		}
 	}
 }
 
@@ -726,7 +827,7 @@ void Board::print() {
 
 string Board::savePrint() {
 	string toPrint = "";
-	for (int i = 0; i <= 19; ++i) {
+	for (int i = 0; i < 19; ++i) {
 		if (toPrint != "") {
 			toPrint += " "; // {Caffeine, Lab, Lecture, Study, Tutorial, Netflix, None};
 		}
@@ -958,4 +1059,3 @@ void Board::updateCriterionsNeighbor() {
 		criterion[i]->addNeighbor();
 	}
 }
-

@@ -6,6 +6,7 @@
 #include <algorithm>    // std::random_shuffle
 #include <ctime>
 #include <cstdlib>      // std::rand, std::srand
+#include "goal.h"
 #include "criterion.h"
 using namespace std;
 
@@ -79,8 +80,14 @@ string Student::returnResources() {
 // returns the number of gaols the student has
 string Student::returnGoals(){
   string output = "";
-  string num = to_string(goals.size());
-  output += num;
+  //string num = to_string(goals.size());
+  //output += num;
+  for (unsigned int i = 0; i < goals.size(); ++i) {
+    if (output != "") {
+      output += " ";
+    }
+    output += to_string((goals[i])->getCoordinate());
+  }
   return output;
 }
 
@@ -90,8 +97,22 @@ string Student::returnGoals(){
 // returns the number of criteria a student has
 string Student::returnCriteria(){
   string output = "";
-  string num = to_string(criteria.size());
-  output += num;
+  //string num = to_string(criteria.size());
+  //output += num;
+  for (unsigned int i = 0; i < criteria.size(); ++i) {
+    if (output != "") {
+      output += " ";
+    }
+    output += to_string((criteria[i])->getCoordinate());
+    output += " ";
+    if (criteria[i]->getState().type == Type::Assignment) {
+      output += "1";
+    } else if (criteria[i]->getState().type == Type::Midterm) {
+      output += "2";
+    } else if (criteria[i]->getState().type == Type::Exam) {
+      output += "3";
+    }
+  }
   return output;
 }
 
@@ -219,7 +240,6 @@ int Student::getPoints(){
 // checking happens elsewhere
 void Student::stealResources(Student &student){
   // Student <colour1> steals <resource> from student <colour2>.
-  cout << "Student " << player << " steals " << "resource" << " from student " << student.player << endl;
   // probablity of being stolen from
   Resource steal = Resource::None;
   float probablity = 0.00;

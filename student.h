@@ -1,11 +1,17 @@
 #ifndef _STUDENT_H_
 #define _STUDENT_H_
 
+#include <iostream>   // std::cout
+#include <string>     // std::string, std::to_string
+#include <algorithm>    // std::random_shuffle
+#include <ctime>
+#include <cstdlib>      // std::rand, std::srand
+#include <map>
+#include <vector>
 #include "player.h"
 #include "resource.h"
 #include "type.h"
-#include <map>
-#include <vector>
+#include "state.h"
 
 class Criterion;
 class Goal;
@@ -43,3 +49,4 @@ class Student {
 };
 
 #endif
+

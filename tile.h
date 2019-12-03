@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "resource.h"
+#include "player.h"
 
 class Criterion;
 
@@ -19,6 +20,7 @@ class Tile {
 	void toggleGeese(); // changes bool value to true or false if geese is on tile
 	bool sendResources(); // updates student’s resources if criteria of the tile is occupied
 	void addCriterion(Criterion *c);
+	std::string playersToStealFrom(Player); // returns a string of all the players on tile except for the parameter
 };
 
 #endif
