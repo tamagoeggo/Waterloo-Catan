@@ -202,7 +202,7 @@ void Board::achieveGoal(const int coordinate, Player player) {
 		throw "You cannot build here because this Goal is already achieved.";
 	}
 	else if (!goals[coordinate]->canPlayerAchieveGoal(students[iter].get())) {
-		throw "You cannot build here because you have not completed any adjacent Criterion(s).";
+		throw "You cannot build here because you have not completed any adjacent Goal(s) or Criterion(s).";
 	}
 	else if (!students[iter]->resourcesCheck(Type::Achievement)) {
 		throw "You cannot build here because you do not have the necessary Resources. The cost of an achievement is one Study and one Tutorial resource";

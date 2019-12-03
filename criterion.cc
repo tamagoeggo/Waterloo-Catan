@@ -87,6 +87,7 @@ bool Criterion::areNeighborsUnoccupied() {
 bool Criterion::goalsOccupancy(Player player) {
 	int size = goals.size();
 	for (int i = 0; i < size; ++i) {
+		if (!goals[i]->getStudent()) return false;
 		if (goals[i]->getStudent()->getPlayer() == player) return true;
 	}
 	return false;
