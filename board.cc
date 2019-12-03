@@ -118,6 +118,7 @@ Board::Board(bool enhance, string board, int layer) {
 }
 
 // dtor
+/*
 Board::~Board(){
 	this->tiles.clear();
 	this->criterion.clear();
@@ -125,6 +126,7 @@ Board::~Board(){
 	this->students.clear();
 	this->td = nullptr;
 }
+*/
 
 void Board::completeCriterion(const int coordinate, const Player player) {
 	int iter;
