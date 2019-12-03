@@ -788,7 +788,7 @@ void Board::roll(Player curTurn) {
 			}
 
 			// steal resources
-			students[stealerIndex]->stealResources(students[stolenfromIndex].get());
+			students[stealerIndex]->stealResources(*students[stolenfromIndex]);
 		}
 	}
 
