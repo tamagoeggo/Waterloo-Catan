@@ -252,6 +252,7 @@ void Student::stealResources(Student &student){
   }
   for (auto const& x : student.resources){
     temp = x.second / total;
+    cout << x.second << "/" << total << endl;
     cout << temp << endl;
     cout << probablity << endl;
       if(temp > probablity){
