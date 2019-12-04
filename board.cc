@@ -339,192 +339,191 @@ void Board::loadGame(string loadFile, Player *whoseTurn) {
 	if (saveFile.is_open()) {
 		while (getline(saveFile, line)) {
 			if (lineNumber == 1) {
-				if (line == "blue") {
-					*whoseTurn = Player::Blue;
-				} else if (line == "red") {
-					*whoseTurn = Player::Red;
-				} else if (line == "orange") {
-					*whoseTurn = Player::Orange;
-				} else { // line == "yellow"
+				if (line == "blue") { *whoseTurn = Player::Blue; } 
+				else if (line == "red") { *whoseTurn = Player::Red; } 
+				else if (line == "orange") { *whoseTurn = Player::Orange; } 
+				else { // line == "yellow" 
 					*whoseTurn = Player::Yellow;
 				}
 			} else if (lineNumber == 2) {
-  			stringstream lineStream;
-  			lineStream << line;
-  			string inputType = "caffeine"; // either resource, goal or criterion
-  			while (!lineStream.eof()) {
-    			string num;
-    			lineStream >> num;
-    			if (inputType == "caffeine") {
-    				students[0]->updateResources(Resource::Caffeine, stoi(num));
-      			inputType = "lab";
-    			} else if (inputType == "lab") {
-    				students[0]->updateResources(Resource::Lab, stoi(num));
-      			inputType = "lecture";
-    			} else if (inputType == "lecture") {
-    				students[0]->updateResources(Resource::Lecture, stoi(num));
-      			inputType = "study";
-    			} else if (inputType == "study") {
-    				students[0]->updateResources(Resource::Study, stoi(num));
-      			inputType = "tutorial";
-    			} else if (inputType == "tutorial") {
-    				students[0]->updateResources(Resource::Tutorial, stoi(num));
-    				inputType = "null";
-    			} else if (num == "g") {
-      			inputType = "goal";
-    			} else if (num == "c") {
-      			inputType = "criterion";
-    			} else if (inputType == "goal") {
-				goals[stoi(num)]->updateOccupant(students[0].get());
-				students[0]->updateGoal(goals[stoi(num)].get());
-				td->notify(goals[stoi(num)].get());
-    			} else if (inputType == "criterion") {
-    				int criterionType;
-    				lineStream >> criterionType;
-    				criterion[stoi(num)]->updateOccupant(students[0].get());
-				students[0]->updateCriterion(criterion[stoi(num)].get());
-      				td->notify(criterion[stoi(num)].get());
-				if (criterionType == 2) {
-					criterion[stoi(num)]->upgrade();
-      				} else if (criterionType == 3) {
-					criterion[stoi(num)]->upgrade();
-					criterion[stoi(num)]->upgrade();
+				stringstream lineStream;
+  				lineStream << line;
+  				string inputType = "caffeine"; // either resource, goal or criterion
+  				while (!lineStream.eof()) {
+					string num;
+    					lineStream >> num;
+    					if (inputType == "caffeine") {
+						students[0]->updateResources(Resource::Caffeine, stoi(num));
+      						inputType = "lab";
+    					} else if (inputType == "lab") {
+    						students[0]->updateResources(Resource::Lab, stoi(num));
+      						inputType = "lecture";
+    					} else if (inputType == "lecture") {
+    						students[0]->updateResources(Resource::Lecture, stoi(num));
+      						inputType = "study";
+    					} else if (inputType == "study") {
+    						students[0]->updateResources(Resource::Study, stoi(num));
+      						inputType = "tutorial";
+    					} else if (inputType == "tutorial") {
+    						students[0]->updateResources(Resource::Tutorial, stoi(num));
+    						inputType = "null";
+    					} else if (num == "g") {
+      						inputType = "goal";
+    					} else if (num == "c") {
+      						inputType = "criterion";
+    					} else if (inputType == "goal") {
+						goals[stoi(num)]->updateOccupant(students[0].get());
+						students[0]->updateGoal(goals[stoi(num)].get());
+						td->notify(goals[stoi(num)].get());
+    					} else if (inputType == "criterion") {
+						int criterionType;
+    						lineStream >> criterionType;
+    						criterion[stoi(num)]->updateOccupant(students[0].get());
+						students[0]->updateCriterion(criterion[stoi(num)].get());
+						if (criterionType == 2) {
+							criterion[stoi(num)]->upgrade();
+      						} else if (criterionType == 3) {
+							criterion[stoi(num)]->upgrade();
+							criterion[stoi(num)]->upgrade();
+						}
+						td->notify(criterion[stoi(num)].get());
+
+					}
 				}
-    			}
-			}
 			} else if (lineNumber == 3) {
-  			stringstream lineStream;
-  			lineStream << line;
+				stringstream lineStream;
+  				lineStream << line;
 				string inputType = "caffeine"; // either resource, goal or criterion
-  			while (!lineStream.eof()) {
-    			string num;
-    			lineStream >> num;
-    			if (inputType == "caffeine") {
-    				students[1]->updateResources(Resource::Caffeine, stoi(num));
-      			inputType = "lab";
-    			} else if (inputType == "lab") {
-    				students[1]->updateResources(Resource::Lab, stoi(num));
-      			inputType = "lecture";
-    			} else if (inputType == "lecture") {
-    				students[1]->updateResources(Resource::Lecture, stoi(num));
-      			inputType = "study";
-    			} else if (inputType == "study") {
-    				students[1]->updateResources(Resource::Study, stoi(num));
-      			inputType = "tutorial";
-    			} else if (inputType == "tutorial") {
-    				students[1]->updateResources(Resource::Tutorial, stoi(num));
-    				inputType = "null";
-    			} else if (num == "g") {
-      			inputType = "goal";
-    			} else if (num == "c") {
-      			inputType = "criterion";
-    			} else if (inputType == "goal") {
-      				goals[stoi(num)]->updateOccupant(students[1].get());
-				students[1]->updateGoal(goals[stoi(num)].get());
-				td->notify(goals[stoi(num)].get());
-    			} else if (inputType == "criterion") {
-    				int criterionType;
-    				lineStream >> criterionType;
-     				criterion[stoi(num)]->updateOccupant(students[1].get());
-				students[1]->updateCriterion(criterion[stoi(num)].get());
-				td->notify(criterion[stoi(num)].get());
-      				if (criterionType == 2) {
-					criterion[stoi(num)]->upgrade();
-      				} else if (criterionType == 3) {
-      					criterion[stoi(num)]->upgrade();
-      					criterion[stoi(num)]->upgrade();
+  				while (!lineStream.eof()) {
+					string num;
+    					lineStream >> num;
+    					if (inputType == "caffeine") {
+						students[1]->updateResources(Resource::Caffeine, stoi(num));
+      						inputType = "lab";
+					} else if (inputType == "lab") {
+    						students[1]->updateResources(Resource::Lab, stoi(num));
+      						inputType = "lecture";
+    					} else if (inputType == "lecture") {
+    						students[1]->updateResources(Resource::Lecture, stoi(num));
+      						inputType = "study";
+    					} else if (inputType == "study") {
+    						students[1]->updateResources(Resource::Study, stoi(num));
+      						inputType = "tutorial";
+    					} else if (inputType == "tutorial") {
+    						students[1]->updateResources(Resource::Tutorial, stoi(num));
+    						inputType = "null";
+    					} else if (num == "g") {
+      						inputType = "goal";
+    					} else if (num == "c") {
+      						inputType = "criterion";
+    					} else if (inputType == "goal") {
+      						goals[stoi(num)]->updateOccupant(students[1].get());
+						students[1]->updateGoal(goals[stoi(num)].get());
+						td->notify(goals[stoi(num)].get());
+    					} else if (inputType == "criterion") {
+    						int criterionType;
+    						lineStream >> criterionType;
+     						criterion[stoi(num)]->updateOccupant(students[1].get());
+						students[1]->updateCriterion(criterion[stoi(num)].get());
+						td->notify(criterion[stoi(num)].get());
+      						if (criterionType == 2) {
+							criterion[stoi(num)]->upgrade();
+      						} else if (criterionType == 3) {
+      							criterion[stoi(num)]->upgrade();
+      							criterion[stoi(num)]->upgrade();
+						}
+						td->notify(criterion[stoi(num)].get());
+					}
 				}
-    			}
-  			}
 			} else if (lineNumber == 4) {
-  			stringstream lineStream;
-  			lineStream << line;
-  			string inputType = "caffeine"; // either resource, goal or criterion
-  			while (!lineStream.eof()) {
-    			string num;
-    			lineStream >> num;
-    			if (inputType == "caffeine") {
-    				students[2]->updateResources(Resource::Caffeine, stoi(num));
-      			inputType = "lab";
-    			} else if (inputType == "lab") {
-    				students[2]->updateResources(Resource::Lab, stoi(num));
-      			inputType = "lecture";
-    			} else if (inputType == "lecture") {
-    				students[2]->updateResources(Resource::Lecture, stoi(num));
-      			inputType = "study";
-    			} else if (inputType == "study") {
-    				students[2]->updateResources(Resource::Study, stoi(num));
-      			inputType = "tutorial";
-    			} else if (inputType == "tutorial") {
-    				students[2]->updateResources(Resource::Tutorial, stoi(num));
-    				inputType = "null";
-    			} else if (num == "g") {
-      			inputType = "goal";
-    			} else if (num == "c") {
-      			inputType = "criterion";
-    			} else if (inputType == "goal") {
-    				goals[stoi(num)]->updateOccupant(students[2].get());
-				students[2]->updateGoal(goals[stoi(num)].get());
-				td->notify(goals[stoi(num)].get());
-			} else if (inputType == "criterion") {
-    				int criterionType;
-    				lineStream >> criterionType;
-      				criterion[stoi(num)]->updateOccupant(students[2].get());
-				students[2]->updateCriterion(criterion[stoi(num)].get());
-      				td->notify(criterion[stoi(num)].get());
-      			if (criterionType == 2) {
-      				criterion[stoi(num)]->upgrade();
-      			} else if (criterionType == 3) {
-      				criterion[stoi(num)]->upgrade();
-      				criterion[stoi(num)]->upgrade();
-      			}
-    			}
-  			}
+				stringstream lineStream;
+  				lineStream << line;
+  				string inputType = "caffeine"; // either resource, goal or criterion
+  				while (!lineStream.eof()) {
+					string num;
+    					lineStream >> num;
+    					if (inputType == "caffeine") {
+						students[2]->updateResources(Resource::Caffeine, stoi(num));
+      						inputType = "lab";
+    					} else if (inputType == "lab") {
+    						students[2]->updateResources(Resource::Lab, stoi(num));
+      						inputType = "lecture";
+    					} else if (inputType == "lecture") {
+    						students[2]->updateResources(Resource::Lecture, stoi(num));
+      						inputType = "study";
+    					} else if (inputType == "study") {
+    						students[2]->updateResources(Resource::Study, stoi(num));
+      						inputType = "tutorial";
+    					} else if (inputType == "tutorial") {
+    						students[2]->updateResources(Resource::Tutorial, stoi(num));
+    						inputType = "null";
+    					} else if (num == "g") {
+      						inputType = "goal";
+    					} else if (num == "c") {
+     			 			inputType = "criterion";
+    					} else if (inputType == "goal") {
+    						goals[stoi(num)]->updateOccupant(students[2].get());
+						students[2]->updateGoal(goals[stoi(num)].get());
+						td->notify(goals[stoi(num)].get());
+					} else if (inputType == "criterion") {
+    						int criterionType;
+    						lineStream >> criterionType;
+      						criterion[stoi(num)]->updateOccupant(students[2].get());
+						students[2]->updateCriterion(criterion[stoi(num)].get());
+      						if (criterionType == 2) {
+							criterion[stoi(num)]->upgrade();
+      						} else if (criterionType == 3) {
+      							criterion[stoi(num)]->upgrade();
+      							criterion[stoi(num)]->upgrade();
+						}
+						td->notify(criterion[stoi(num)].get());
+					}
+				}
 			} else if (lineNumber == 5) {
-  			stringstream lineStream;
-  			lineStream << line;
-  			string inputType = "caffeine"; // either resource, goal or criterion
-  			while (!lineStream.eof()) {
-    			string num;
-    			lineStream >> num;
-    			if (inputType == "caffeine") {
-    				students[3]->updateResources(Resource::Caffeine, stoi(num));
-      			inputType = "lab";
-    			} else if (inputType == "lab") {
-    				students[3]->updateResources(Resource::Lab, stoi(num));
-      			inputType = "lecture";
-    			} else if (inputType == "lecture") {
-    				students[3]->updateResources(Resource::Lecture, stoi(num));
-      			inputType = "study";
-    			} else if (inputType == "study") {
-    				students[3]->updateResources(Resource::Study, stoi(num));
-      			inputType = "tutorial";
-    			} else if (inputType == "tutorial") {
-    				students[3]->updateResources(Resource::Tutorial, stoi(num));
-    				inputType = "null";
-    			} else if (num == "g") {
-      			inputType = "goal";
-    			} else if (num == "c") {
-      			inputType = "criterion";
-    			} else if (inputType == "goal") {
-				goals[stoi(num)]->updateOccupant(students[3].get());
-				students[3]->updateGoal(goals[stoi(num)].get());
-				td->notify(goals[stoi(num)].get());
-    			} else if (inputType == "criterion") {
-    				int criterionType;
-    				lineStream >> criterionType;
-      				criterion[stoi(num)]->updateOccupant(students[3].get());
-				students[3]->updateCriterion(criterion[stoi(num)].get());
-      				td->notify(criterion[stoi(num)].get());
-      			if (criterionType == 2) {
-      				criterion[stoi(num)]->upgrade();
-      			} else if (criterionType == 3) {
-      				criterion[stoi(num)]->upgrade();
-      				criterion[stoi(num)]->upgrade();
-      			}
-    			}
-  			}
-  		} else if (lineNumber == 6) {
+				stringstream lineStream;
+  				lineStream << line;
+  				string inputType = "caffeine"; // either resource, goal or criterion
+  				while (!lineStream.eof()) {
+					string num;
+    					lineStream >> num;
+    					if (inputType == "caffeine") {
+						students[3]->updateResources(Resource::Caffeine, stoi(num));
+      						inputType = "lab";
+    					} else if (inputType == "lab") {
+    						students[3]->updateResources(Resource::Lab, stoi(num));
+      						inputType = "lecture";
+    					} else if (inputType == "lecture") {
+    						students[3]->updateResources(Resource::Lecture, stoi(num));
+      						inputType = "study";
+    					} else if (inputType == "study") {
+    						students[3]->updateResources(Resource::Study, stoi(num));
+      						inputType = "tutorial";
+    					} else if (inputType == "tutorial") {
+    						students[3]->updateResources(Resource::Tutorial, stoi(num));
+    						inputType = "null";
+    					} else if (num == "g") {
+      						inputType = "goal";
+    					} else if (num == "c") {
+      						inputType = "criterion";
+    					} else if (inputType == "goal") {
+						goals[stoi(num)]->updateOccupant(students[3].get());
+						students[3]->updateGoal(goals[stoi(num)].get());
+						td->notify(goals[stoi(num)].get());
+    					} else if (inputType == "criterion") {
+    						int criterionType;
+    						lineStream >> criterionType;
+      						criterion[stoi(num)]->updateOccupant(students[3].get());
+						students[3]->updateCriterion(criterion[stoi(num)].get());
+      						if (criterionType == 2) {
+							criterion[stoi(num)]->upgrade();
+      						} else if (criterionType == 3) {
+      							criterion[stoi(num)]->upgrade();
+      							criterion[stoi(num)]->upgrade();
+						}
+						td->notify(criterion[stoi(num)].get());
+					}
+				}
+			} else if (lineNumber == 6) {
 				stringstream lineStream;
 				lineStream << line;
 				while (!lineStream.eof()) {
