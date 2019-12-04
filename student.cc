@@ -243,8 +243,8 @@ void Student::trade(Resource resource1, Resource resource2) {
       return;
     }
 
-    else{
-      if(this->resources[resource1] < 4){
+    else {
+      if(this->resources[resource1] < 4) {
         cout << this->player << " does not have enough " << resource1 << " to trade. Trade unsuccessful." << endl;
         return;
       }
@@ -254,6 +254,7 @@ void Student::trade(Resource resource1, Resource resource2) {
   this->resources[resource1] -= 4;
   cout << "Trade successful" << endl;
   return;
+  }
 }
 
 // returns the points, which is the number of completed criterions a student has
