@@ -252,14 +252,11 @@ void Student::stealResources(Student &student){
   }
   for (auto const& x : student.resources){
     temp = static_cast<float>(x.second) / static_cast<float>(total);
-    //cout << x.second << "/" << total << endl;
-    //cout << temp << endl;
-    //cout << probablity << endl;
       if(temp > probablity){
         probablity = temp;
         steal = x.first;
       }
-    }
+  }
 
   if(steal == Resource::None){
     cout << student.getPlayer() << " has no resources to steal." << endl;
