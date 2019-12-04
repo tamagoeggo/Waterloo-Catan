@@ -223,7 +223,7 @@ void Student::trade(Student *stud, Resource resource1, Resource resource2){
 
 // trades with the bank
 void Student::trade(Resource resource1, Resource resource2) {
-  cout << this->player << " wants to trade four " << resource1 << " for one " << resource2 << ". Confirm this trade?" << endl;
+  cout << this->player << " wants to trade four " << resource1 << " for one " << resource2 << " with the bank. Confirm this trade?" << endl;
   cout << ">";
   string answer;
   cin >> answer;
