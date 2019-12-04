@@ -961,8 +961,12 @@ void Board::trade(Player tradeFrom, Player tradeWith, Resource give, Resource ta
 		player2 = students[1].get();
 	} else if (tradeWith == Player::Orange) {
 		player2 = students[2].get();
-	} else { // player == Player::Yellow
+	} else if (tradeWith == Player::Yellow) {
 		player2 = students[3].get();
+	}
+	else {
+		player1->trade(give, take);
+		return;
 	}
 	player1->trade(player2, give, take);
 }

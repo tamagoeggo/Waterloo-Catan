@@ -22,7 +22,8 @@ int main(int argc, char* argv[]) {
 			cout << "BEGINNING OF PLAYAGAIN LOOP" << endl; */
 			int seed;
 			bool seed_set = false;
-		  bool enhance = false;
+			bool enhance = false;
+			bool bank = false;
 			string load = "default";
 			string board = "default";
 
@@ -55,6 +56,9 @@ int main(int argc, char* argv[]) {
 		    if (string(argv[i]).compare("-enhance") == 0) {
 		    		enhance = true;
 		    }
+			if (string(argv[i]).compare("-bank") == 0) {
+				bank = true;
+			}
 			}
 
 			if(seed_set == false){
@@ -289,7 +293,10 @@ int main(int argc, char* argv[]) {
 							tradeWith = Player::Orange;
 						} else if (colourInput == "Yellow") {
 							tradeWith = Player::Yellow;
-						} else {
+						} else if (bank) {
+							tradeWith = Player::Bank;
+						}
+						else {
 							cerr << "Invalid player. Valid players: Blue, Red, Orange, Yellow"<< endl;
 							continue;
 						}

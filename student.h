@@ -40,6 +40,7 @@ class Student {
 	std::string printCriteria();
 	void printStatus(); // calls printResources, printCriteria for 2.7
 	void trade(Student *, Resource, Resource); // trades between 2 students
+	void trade(Resource, Resource); // trades with the bank
 	int getPoints();
 	void stealResources(Student &student);
 	void loseResources();

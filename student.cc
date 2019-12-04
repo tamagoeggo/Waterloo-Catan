@@ -220,6 +220,13 @@ void Student::trade(Student *stud, Resource resource1, Resource resource2){
   }
 }
 
+void Student::trade(Resource resource1, Resource resource2) { // trades with the bank
+  this->resources[resource2] += 1; // 
+  this->resources[resource1] -= 4;
+  cout << "Trade successful" << endl;
+  return;
+} 
+
 // returns the points, which is the number of completed criterions a student has
 int Student::getPoints(){
   int points = 0;

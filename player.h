@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-enum class Player {Blue, Red, Orange, Yellow, None};
+enum class Player {Blue, Red, Orange, Yellow, Bank, None};
 
 inline std::ostream &operator<<(std::ostream &out, const Player &player) {
     if (player == Player::Blue) {
@@ -18,6 +18,9 @@ inline std::ostream &operator<<(std::ostream &out, const Player &player) {
     }
     else if (player == Player::Yellow) {
         return out << "Yellow";
+    }
+    else if (player == Player::Bank) {
+        return out << "Bank";
     }
     else {
         return out << "None";
