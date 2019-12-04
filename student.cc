@@ -197,6 +197,7 @@ void Student::trade(Student *stud, Resource resource1, Resource resource2){
     cin >> answer;
   }
   if(answer == "no") {
+    cout << "Trade unsuccessful." << endl;
     return;
   }
   else if(answer == "yes") {
@@ -220,12 +221,40 @@ void Student::trade(Student *stud, Resource resource1, Resource resource2){
   }
 }
 
-void Student::trade(Resource resource1, Resource resource2) { // trades with the bank
-  this->resources[resource2] += 1; // 
+// trades with the bank
+void Student::trade(Resource resource1, Resource resource2) {
+  cout << this->player << " wants to trade four " << resource1 << " for one " << resource2 << ". Confirm this trade?" << endl;
+  cout << ">";
+  string answer;
+  cin >> answer;
+  while(answer != "no" && answer != "yes"){
+    cout << "Please confirm with yes or no." << endl;
+    cout << ">";
+    cin >> answer;
+  }
+  if(answer == "no") {
+    cout << "Trade unsuccessful." << endl;
+    return;
+  }
+  else if(answer == "yes") {
+    // resource1 does not exist
+    if(!(this->resources.count(resource1))) {
+      cout << this->player << " does not have enough " << resource1 << " to trade. Trade unsuccessful." << endl;
+      return;
+    }
+
+    else{
+      if(this->resources[resource1] < 4){
+        cout << this->player << " does not have enough " << resource1 << " to trade. Trade unsuccessful." << endl;
+        return;
+      }
+    }
+
+  this->resources[resource2] += 1; //
   this->resources[resource1] -= 4;
   cout << "Trade successful" << endl;
   return;
-} 
+}
 
 // returns the points, which is the number of completed criterions a student has
 int Student::getPoints(){
