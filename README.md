@@ -29,5 +29,5 @@ Makefile is included. Use the command `make` in unix environment. It will compil
 * `save <file>`: saves the current game state to <file>
 * `help`: prints out the list of commands
   
-<!-- ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1") -->
+![alt text](https://github.com/tamagoeggo/Waterloo-Catan/blob/master/Watan_screenshot.png "Watan Screenshot")
   
